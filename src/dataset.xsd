@@ -1,0 +1,271 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="note">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="author">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="affiliation">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="address">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="email">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sectionHeader">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+          <xs:attribute type="xs:string" name="genericHeader"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bodyText">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="subsectionHeader">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="page">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reference">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="table">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tableCaption">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="figure">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variant">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="note"/>
+        <xs:element ref="title"/>
+        <xs:element ref="author"/>
+        <xs:element ref="affiliation"/>
+        <xs:element ref="address"/>
+        <xs:element ref="email"/>
+        <xs:element ref="sectionHeader"/>
+        <xs:element ref="bodyText"/>
+        <xs:element ref="subsectionHeader"/>
+        <xs:element ref="page"/>
+        <xs:element ref="reference"/>
+        <xs:element ref="table"/>
+        <xs:element ref="tableCaption"/>
+        <xs:element ref="figure"/>
+        <xs:element ref="phone"/>
+        <xs:element ref="abstract"/>
+        <xs:element ref="degree"/>
+        <xs:element ref="pubnum"/>
+        <xs:element ref="date"/>
+        <xs:element ref="intro"/>
+      </xs:choice>
+      <xs:attribute type="xs:byte" name="no" use="optional"/>
+      <xs:attribute type="xs:float" name="confidence" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phone">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="abstract">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="degree">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pubnum">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="date">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="intro">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:float" name="confidence"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="authors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="author" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="institution" type="xs:string"/>
+  <xs:element name="location" type="xs:string"/>
+  <xs:element name="marker" type="xs:string"/>
+  <xs:element name="rawString" type="xs:string"/>
+  <xs:element name="pages" type="xs:string"/>
+  <xs:element name="booktitle" type="xs:string"/>
+  <xs:element name="journal" type="xs:string"/>
+  <xs:element name="publisher" type="xs:string"/>
+  <xs:element name="tech" type="xs:string"/>
+  <xs:element name="citation">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="authors"/>
+        <xs:element ref="title"/>
+        <xs:element ref="institution"/>
+        <xs:element ref="date"/>
+        <xs:element ref="location"/>
+        <xs:element ref="pages"/>
+        <xs:element ref="booktitle"/>
+        <xs:element ref="journal"/>
+        <xs:element ref="marker"/>
+        <xs:element ref="rawString"/>
+        <xs:element ref="publisher"/>
+        <xs:element ref="tech"/>
+      </xs:choice>
+      <xs:attribute type="xs:string" name="valid" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="citationList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="citation" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="algorithm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="variant" minOccurs="0"/>
+        <xs:element ref="citationList" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="name" use="optional"/>
+      <xs:attribute type="xs:int" name="version" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="algorithms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="algorithm" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:int" name="version"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
