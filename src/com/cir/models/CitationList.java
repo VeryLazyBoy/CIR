@@ -66,7 +66,7 @@ public class CitationList {
      * 
      * 
      */
-    public List<Citation> getCitation() {
+    public List<Citation> getCitations() {
         if (citation == null) {
             citation = new ArrayList<Citation>();
         }

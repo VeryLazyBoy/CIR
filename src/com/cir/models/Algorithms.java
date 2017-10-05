@@ -60,7 +60,7 @@ public class Algorithms {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAlgorithm().add(newItem);
+     *    getAlgorithms().add(newItem);
      * </pre>
      * 
      * 
@@ -70,7 +70,7 @@ public class Algorithms {
      * 
      * 
      */
-    public List<Algorithm> getAlgorithm() {
+    public List<Algorithm> getAlgorithms() {
         if (algorithm == null) {
             algorithm = new ArrayList<Algorithm>();
         }

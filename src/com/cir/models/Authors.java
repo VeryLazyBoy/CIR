@@ -56,7 +56,7 @@ public class Authors {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAuthor().add(newItem);
+     *    getAuthors().add(newItem);
      * </pre>
      * 
      * 
@@ -66,7 +66,7 @@ public class Authors {
      * 
      * 
      */
-    public List<Author> getAuthor() {
+    public List<Author> getAuthors() {
         if (author == null) {
             author = new ArrayList<Author>();
         }
