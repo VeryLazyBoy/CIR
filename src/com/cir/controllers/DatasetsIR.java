@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.cir.models.Algorithm;
+import com.cir.models.Alias;
 import com.cir.models.Citation;
 import com.cir.models.CitationList;
 import com.cir.models.Dataset;
@@ -52,11 +53,6 @@ public class DatasetsIR {
 
 	public Collection<Citation> getAllCitations() {
 		return datasets.getCitationsInDatasets(allDatasets);
-	}
-
-	public Collection<Citation> getAllUniqueCitations() {
-		Set<Citation> uniqueCitations = new HashSet<>();
-		return allCitations;
 	}
 
 	public Collection<Citation> getCitationsFromConference(String confCode) {
