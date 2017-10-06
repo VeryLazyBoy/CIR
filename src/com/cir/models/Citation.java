@@ -50,10 +50,16 @@ import javax.xml.bind.annotation.XmlType;
     "authors",
     "title",
     "date",
+    "note",
+    "tech",
+    "Institution",
     "booktitle",
+    "pages",
+    "editors",
     "location",
     "journal",
     "volume",
+    "issue",
     "publisher",
     "contexts",
     "marker",
@@ -66,10 +72,17 @@ public class Citation {
     @XmlElement(required = true)
     protected String title;
     protected short date;
+    protected String note;
+    protected String tech;
+    protected String Institution;
+    @XmlElement(required = true)
     protected String booktitle;
+    protected String pages;
+    protected String editors;
     protected String location;
     protected String journal;
     protected Short volume;
+    protected Short issue;
     protected String publisher;
     protected Contexts contexts;
     @XmlElement(required = true)
@@ -77,7 +90,7 @@ public class Citation {
     @XmlElement(required = true)
     protected String rawString;
     @XmlAttribute(name = "valid")
-    protected String valid;
+    protected boolean valid;
 
     /**
      * Gets the value of the authors property.
@@ -144,6 +157,54 @@ public class Citation {
     }
 
     /**
+     * Gets the value of the note property.
+     * 
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * Sets the value of the note property.
+     * 
+     */
+    public void setNote(String value) {
+        this.note = value;
+    }
+
+    /**
+     * Gets the value of the tech property.
+     * 
+     */
+    public String getTech() {
+        return tech;
+    }
+
+    /**
+     * Sets the value of the tech property.
+     * 
+     */
+    public void setTech(String value) {
+        this.tech = value;
+    }
+    
+    /**
+     * Gets the value of the institution property.
+     * 
+     */
+    public String getInstitution() {
+        return Institution;
+    }
+
+    /**
+     * Sets the value of the institution property.
+     * 
+     */
+    public void setInstitution(String value) {
+        this.Institution = value;
+    }
+
+    /**
      * Gets the value of the booktitle property.
      * 
      * @return
@@ -167,6 +228,54 @@ public class Citation {
         this.booktitle = value;
     }
 
+    /**
+     * Gets the value of the pages property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRawPages() {
+        return pages;
+    }
+
+    /**
+     * Sets the value of the pages property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRawPages(String value) {
+        this.pages = value;
+    }
+
+    /**
+     * Gets the value of the pages property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEditors() {
+        return editors;
+    }
+
+    /**
+     * Sets the value of the pages property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEditors(String value) {
+        this.editors = value;
+    }
+    
     /**
      * Gets the value of the location property.
      * 
@@ -237,6 +346,30 @@ public class Citation {
      */
     public void setVolume(Short value) {
         this.volume = value;
+    }
+    
+    /**
+     * Gets the value of the issue property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Short }
+     *     
+     */
+    public Short getIssue() {
+        return issue;
+    }
+
+    /**
+     * Sets the value of the issue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Short }
+     *     
+     */
+    public void setIssue(Short value) {
+        this.issue = value;
     }
 
     /**
@@ -340,10 +473,10 @@ public class Citation {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link boolean }
      *     
      */
-    public String getValid() {
+    public boolean getValid() {
         return valid;
     }
 
@@ -352,11 +485,36 @@ public class Citation {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link boolean }
      *     
      */
-    public void setValid(String value) {
+    public void setValid(boolean value) {
         this.valid = value;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Citation) {
+          Citation c = (Citation) o;
+          int identifier = this.hashCode();
+          int toCompare = c.hashCode();
+          if (identifier == toCompare) {
+              return true; 
+          }
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        String identifier;
+        if (this.title != null) {
+            identifier = this.marker + this.title.toLowerCase();
+        } else if (this.booktitle != null){
+            identifier = this.marker + this.booktitle.toLowerCase();
+        } else {
+            identifier = this.rawString.toLowerCase();
+        }
+        return identifier.hashCode();
+    }
 }

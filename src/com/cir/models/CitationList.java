@@ -10,6 +10,8 @@ package com.cir.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -68,7 +70,7 @@ public class CitationList {
         if (citation == null) {
             citation = new ArrayList<Citation>();
         }
-        return this.citation;
+        return this.citation.stream().filter(c->c.getValid()).collect(Collectors.toList());
     }
 
 }
