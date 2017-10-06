@@ -274,4 +274,16 @@ public class DatasetsIR {
 		return result;
 	}
 
+	public String printCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames, ArrayList<String> confCodes) {
+		String result = "";
+		for (String confCode : confCodes) {
+			Collection<Citation> citations = getCitationsFromConference(confCode);
+			HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames,
+					citations);
+			result += printMap_perConference(confCode, matchingCitations);
+		}
+		
+		return result;
+	}
+
 }

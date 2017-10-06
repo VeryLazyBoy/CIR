@@ -25,12 +25,18 @@ public class Logic {
 //		authorNames.add(new Alias("Yoshua Bengio","Y. Bengio"));
 //		System.out.println("\nQ8: For an author ‘Yoshua Bengio’ (also check for Y. Bengio) the number of times he is cited for his work authored in each of the years 2000 to 2015.\n" + dIR.printCitationsWithAuthorBetweenYears(authorNames, "2000", "2015"));
 //		
-		ArrayList<String> confCodes = new ArrayList<>();
-		confCodes.add("J14");
-		confCodes.add("W14");
+//		ArrayList<String> confCodes = new ArrayList<>();
+//		confCodes.add("J14");
+//		confCodes.add("W14");
+//		System.out.println("\nQ9: For the conference J14,W14 find number of cited documents published in each of the years from 2010 to 2015.\n" + dIR.printCitationsBetweenYears(confCodes, "2010", "2015"));
 		
-		System.out.println("\nQ9: For the conference J14,W14 find number of cited documents published in each of the years from 2010 to 2015.\n" + dIR.printCitationsBetweenYears(confCodes, "2010", "2015"));
-		System.out.println("\nQ10: Repeat the above step for conference ‘NAACL’ for conference Q14,D14\n");
+		ArrayList<Alias> conferenceNames2 = new ArrayList<Alias>();
+		conferenceNames2.add(new Alias("North American Chapter of the Association for Computational Linguistics","NAACL"));
+		
+		ArrayList<String> confCodes2 = new ArrayList<>();
+		confCodes2.add("Q14");
+		confCodes2.add("D14");
+		System.out.println("\nQ10: Repeat the above step for conference ‘NAACL’ for conference Q14,D14\n" + dIR.printCitationsWhoseTitlesContain(conferenceNames2, confCodes2));
 
 
 	}
