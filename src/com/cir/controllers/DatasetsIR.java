@@ -2,8 +2,11 @@ package com.cir.controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.cir.models.*;
@@ -61,11 +64,7 @@ public class DatasetsIR {
 		for (int i = 0; i < citationsByYear.size(); i++) {
 			int yearToPrint = Short.valueOf(startYear) + i;
 			int numOfCitations = citationsByYear.get(i).size();
-			if (i < citationsByYear.size() - 1) {
-				print += yearToPrint + " " + numOfCitations + ", ";
-			} else {
-				print += yearToPrint + " " + numOfCitations;
-			}
+				print += yearToPrint + " " + numOfCitations + "\n";
 		}
 		return print;
 	}
@@ -107,7 +106,7 @@ public class DatasetsIR {
 		}
 		return results;
 	}
-	
+
 	private Collection<Citation> getCitationsByYear(String confCode, String year) {
 		Collection<Citation> citations = getCitationsFromConference(confCode);
 		Collection<Citation> results = new ArrayList<>();
@@ -117,6 +116,50 @@ public class DatasetsIR {
 
 			if (date == inputYear) {
 				results.add(c);
+			}
+		}
+		return results;
+	}
+
+	public String printCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames, String confCode) {
+		Collection<Citation> citations = getCitationsFromConference(confCode);
+		HashMap<String, Collection<Citation>> matchingCitations = new HashMap<>();
+		matchingCitations = getCitationsWhoseTitlesContain(conferenceNames, citations);
+		return printMap_String_CollectionSize(matchingCitations);
+	}
+
+	private String printMap_String_CollectionSize(HashMap<String, Collection<Citation>> matchingCitations) {
+		String print = "";
+		Iterator<Entry<String, Collection<Citation>>> it = matchingCitations.entrySet().iterator();
+		while (it.hasNext()) {
+			HashMap.Entry<String, Collection<Citation>> pair = (HashMap.Entry<String, Collection<Citation>>) it.next();
+			print += pair.getKey() + " " + pair.getValue().size() + "\n";
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+		return print;
+	}
+
+	private HashMap<String, Collection<Citation>> getCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames,
+			Collection<Citation> citations) {
+		HashMap<String, Collection<Citation>> results = new HashMap<String, Collection<Citation>>();
+		for (Citation c : citations) {
+			if (c.getBooktitle() != null) {
+				for (Alias alias : conferenceNames) {
+					String fullname = alias.getFullName().toUpperCase();
+					String shortname = alias.getShortName().toUpperCase();
+					// If book title matches short or long form of the name, add to hashmap
+					if (c.getBooktitle().toUpperCase().contains(fullname)
+							|| c.getBooktitle().toUpperCase().contains(shortname)) {
+						// if not added before, create entry
+						if (!results.containsKey(shortname)) {
+							Collection<Citation> citationsForThisName = new ArrayList<>();
+							citationsForThisName.add(c);
+							results.put(shortname, citationsForThisName);
+						} else {
+							results.get(shortname).add(c);
+						}
+					}
+				}
 			}
 		}
 		return results;
