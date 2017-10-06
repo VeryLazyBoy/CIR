@@ -11,7 +11,7 @@ public class Datasets {
 
 	Collection<Dataset> datasets = new ArrayList<Dataset>();
 
-	private File DIRECTORY = new File("src/com/cir/datasets");
+	private File DIRECTORY = new File("resources/datasets");
 
 	public Datasets() {
 		populate();

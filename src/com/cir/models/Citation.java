@@ -5,7 +5,6 @@
 // Generated on: 2017.10.04 at 06:05:06 PM SGT 
 //
 
-
 package com.cir.models;
 
 import java.util.ArrayList;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -52,92 +53,93 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "authorsOrTitleOrInstitution"
-})
+@XmlType(name = "", propOrder = { "authorsOrTitleOrInstitution" })
 @XmlRootElement(name = "citation")
 public class Citation {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "institution", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "authors", type = Authors.class, required = false),
-        @XmlElementRef(name = "marker", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "rawString", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "date", type = Date.class, required = false),
-        @XmlElementRef(name = "title", type = Title.class, required = false),
-        @XmlElementRef(name = "booktitle", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "publisher", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "tech", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "pages", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "location", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "journal", type = JAXBElement.class, required = false)
-    })
-    protected List<Object> authorsOrTitleOrInstitution;
-    @XmlAttribute(name = "valid")
-    protected String valid;
+	@XmlElementRefs({ @XmlElementRef(name = "institution", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "authors", type = Authors.class, required = false),
+			@XmlElementRef(name = "marker", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "rawString", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "date", type = Date.class, required = false),
+			@XmlElementRef(name = "title", type = Title.class, required = false),
+			@XmlElementRef(name = "booktitle", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "publisher", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "tech", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "pages", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "location", type = JAXBElement.class, required = false),
+			@XmlElementRef(name = "journal", type = JAXBElement.class, required = false) })
+	protected List<Object> authorsOrTitleOrInstitution;
+	@XmlAttribute(name = "valid")
+	protected String valid;
 
-    /**
-     * Gets the value of the authorsOrTitleOrInstitution property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the authorsOrTitleOrInstitution property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAuthorsOrTitleOrInstitution().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link Authors }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link Date }
-     * {@link Title }
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * 
-     */
-    public List<Object> getAuthorsOrTitleOrInstitution() {
-        if (authorsOrTitleOrInstitution == null) {
-            authorsOrTitleOrInstitution = new ArrayList<Object>();
-        }
-        return this.authorsOrTitleOrInstitution;
-    }
+	/**
+	 * Gets the value of the authorsOrTitleOrInstitution property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a snapshot.
+	 * Therefore any modification you make to the returned list will be present
+	 * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+	 * for the authorsOrTitleOrInstitution property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getAuthorsOrTitleOrInstitution().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link JAXBElement
+	 * }{@code <}{@link String }{@code >} {@link Authors } {@link JAXBElement
+	 * }{@code <}{@link String }{@code >} {@link JAXBElement }{@code <}{@link String
+	 * }{@code >} {@link Date } {@link Title } {@link JAXBElement
+	 * }{@code <}{@link String }{@code >} {@link JAXBElement }{@code <}{@link String
+	 * }{@code >} {@link JAXBElement }{@code <}{@link String }{@code >}
+	 * {@link JAXBElement }{@code <}{@link String }{@code >} {@link JAXBElement
+	 * }{@code <}{@link String }{@code >} {@link JAXBElement }{@code <}{@link String
+	 * }{@code >}
+	 * 
+	 * 
+	 */
+	public List<Object> getAuthorsOrTitleOrInstitution() {
+		if (authorsOrTitleOrInstitution == null) {
+			authorsOrTitleOrInstitution = new ArrayList<>();
+		}
+		return this.authorsOrTitleOrInstitution;
+	}
 
-    /**
-     * Gets the value of the valid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getValid() {
-        return valid;
-    }
+	/**
+	 * Gets the value of the valid property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getValid() {
+		return valid;
+	}
 
-    /**
-     * Sets the value of the valid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setValid(String value) {
-        this.valid = value;
-    }
+	/**
+	 * Sets the value of the valid property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setValid(String value) {
+		this.valid = value;
+	}
 
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((this.authorsOrTitleOrInstitution == null) ? 0 : id.hashCode());
+//		return result;
+//	}
+//	@Override
+//	public int equals() {
+//		return 0;
+//	}
 }
