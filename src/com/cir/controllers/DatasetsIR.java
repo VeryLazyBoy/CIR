@@ -122,7 +122,8 @@ public class DatasetsIR {
 
 	public String printCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames, String confCode) {
 		Collection<Citation> citations = getCitationsFromConference(confCode);
-		HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames, citations);
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames,
+				citations);
 		return printMap_String_CollectionSize(matchingCitations);
 	}
 
@@ -196,12 +197,12 @@ public class DatasetsIR {
 
 	public String printCitationsWithAuthorBetweenYears(ArrayList<Alias> authorNames, String startYear, String endYear) {
 		Collection<Citation> citationsBetweenYears = this.getCitationsBetweenYears(startYear, endYear);
-		HashMap<String, Collection<Citation>> matchingCitations = getCitationsByAuthors(citationsBetweenYears,
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsByAuthorsByYear(citationsBetweenYears,
 				authorNames);
 		return this.printMap_String_CollectionSize(matchingCitations);
 	}
 
-	private HashMap<String, Collection<Citation>> getCitationsByAuthors(Collection<Citation> citations,
+	private HashMap<String, Collection<Citation>> getCitationsByAuthorsByYear(Collection<Citation> citations,
 			ArrayList<Alias> authorNames) {
 		HashMap<String, Collection<Citation>> results = new HashMap<String, Collection<Citation>>();
 
@@ -242,6 +243,35 @@ public class DatasetsIR {
 			}
 		}
 		return results;
+	}
+
+	public String printCitationsBetweenYears(ArrayList<String> confCodes, String startYear, String endYear) {
+		String result = "";
+		for (String confCode : confCodes) {
+			Collection<Citation> confCitations = this.getCitationsBetweenYears(confCode, startYear, endYear);
+			HashMap<String, Collection<Citation>> map = this.groupCitationsByYear(confCitations, startYear, endYear);
+			result += printMap_perConference(confCode, map);
+		}
+		return result;
+	}
+
+	private String printMap_perConference(String confCode, HashMap<String, Collection<Citation>> map) {
+		List<String> printList = new ArrayList<String>();
+
+		Iterator<Entry<String, Collection<Citation>>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			HashMap.Entry<String, Collection<Citation>> pair = (HashMap.Entry<String, Collection<Citation>>) it.next();
+			printList.add(confCode + " " + pair.getKey() + " " + pair.getValue().size() + "\n");
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
+		Collections.sort(printList);
+
+		String result = "";
+		for (String s : printList) {
+			result += s;
+		}
+		return result;
 	}
 
 }
