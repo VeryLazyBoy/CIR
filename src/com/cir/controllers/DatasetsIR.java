@@ -112,7 +112,8 @@ public class DatasetsIR {
 
 	public String printCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames, String confCode) {
 		Collection<Citation> citations = getCitationsFromConference(confCode);
-		HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames, citations);
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames,
+				citations);
 		return printMap_String_CollectionSize(matchingCitations);
 	}
 
@@ -180,7 +181,7 @@ public class DatasetsIR {
 						String fullname = alias.getFullName().toUpperCase();
 						String shortname = alias.getShortName().toUpperCase();
 						if (auth.toUpperCase().contains(fullname) || auth.toUpperCase().contains(shortname)) {
-							
+
 							if (!results.containsKey(date)) {
 								Collection<Citation> citationsForThisYear = new ArrayList<>();
 								citationsForThisYear.add(c);
@@ -209,6 +210,35 @@ public class DatasetsIR {
 			}
 		}
 		return results;
+	}
+
+	public String printCitationsBetweenYears(ArrayList<String> confCodes, String startYear, String endYear) {
+		String result = "";
+		for (String confCode : confCodes) {
+			Collection<Citation> confCitations = this.getCitationsBetweenYears(confCode, startYear, endYear);
+			HashMap<String, Collection<Citation>> map = this.groupCitationsByYear(confCitations, startYear, endYear);
+			result += printMap_perConference(confCode, map);
+		}
+		return result;
+	}
+
+	private String printMap_perConference(String confCode, HashMap<String, Collection<Citation>> map) {
+		List<String> printList = new ArrayList<String>();
+
+		Iterator<Entry<String, Collection<Citation>>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			HashMap.Entry<String, Collection<Citation>> pair = (HashMap.Entry<String, Collection<Citation>>) it.next();
+			printList.add(confCode + " " + pair.getKey() + " " + pair.getValue().size() + "\n");
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
+		Collections.sort(printList);
+
+		String result = "";
+		for (String s : printList) {
+			result += s;
+		}
+		return result;
 	}
 
 }
