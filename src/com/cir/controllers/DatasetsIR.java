@@ -163,12 +163,12 @@ public class DatasetsIR {
 
 	public String printCitationsWithAuthorBetweenYears(ArrayList<Alias> authorNames, String startYear, String endYear) {
 		Collection<Citation> citationsBetweenYears = this.getCitationsBetweenYears(startYear, endYear);
-		HashMap<String, Collection<Citation>> matchingCitations = getCitationsByAuthors(citationsBetweenYears,
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsByAuthorsByYear(citationsBetweenYears,
 				authorNames);
 		return this.printMap_String_CollectionSize(matchingCitations);
 	}
 
-	private HashMap<String, Collection<Citation>> getCitationsByAuthors(Collection<Citation> citations,
+	private HashMap<String, Collection<Citation>> getCitationsByAuthorsByYear(Collection<Citation> citations,
 			ArrayList<Alias> authorNames) {
 		HashMap<String, Collection<Citation>> results = new HashMap<String, Collection<Citation>>();
 
