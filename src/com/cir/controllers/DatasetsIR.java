@@ -107,5 +107,19 @@ public class DatasetsIR {
 		}
 		return results;
 	}
+	
+	private Collection<Citation> getCitationsByYear(String confCode, String year) {
+		Collection<Citation> citations = getCitationsFromConference(confCode);
+		Collection<Citation> results = new ArrayList<>();
+		for (Citation c : citations) {
+			short inputYear = Short.valueOf(year);
+			short date = c.getDate();
+
+			if (date == inputYear) {
+				results.add(c);
+			}
+		}
+		return results;
+	}
 
 }
