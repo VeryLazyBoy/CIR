@@ -14,7 +14,7 @@ public class Datasets {
 	Collection<Dataset> allDatasets = new ArrayList<>();
 
 //	private File DIRECTORY = new File("resources/dummy");
-	private File DIRECTORY = new File("resources/datasets");
+	private File directory = new File("resources/datasets");
 
 	public Datasets() {
 		populate();
