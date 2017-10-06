@@ -60,7 +60,7 @@ public class DatasetsIR {
 
 		citations = getCitationsBetweenYears(confCode, startYear, endYear);
 		citationsByYear = groupCitationsByYear(citations, startYear, endYear);
-		
+
 		return this.printMap_String_CollectionSize(citationsByYear);
 	}
 
@@ -112,25 +112,24 @@ public class DatasetsIR {
 
 	public String printCitationsWhoseTitlesContain(ArrayList<Alias> conferenceNames, String confCode) {
 		Collection<Citation> citations = getCitationsFromConference(confCode);
-		HashMap<String, Collection<Citation>> matchingCitations = new HashMap<>();
-		matchingCitations = getCitationsWhoseTitlesContain(conferenceNames, citations);
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsWhoseTitlesContain(conferenceNames, citations);
 		return printMap_String_CollectionSize(matchingCitations);
 	}
 
 	private String printMap_String_CollectionSize(HashMap<String, Collection<Citation>> matchingCitations) {
 		List<String> printList = new ArrayList<String>();
-		
+
 		Iterator<Entry<String, Collection<Citation>>> it = matchingCitations.entrySet().iterator();
 		while (it.hasNext()) {
 			HashMap.Entry<String, Collection<Citation>> pair = (HashMap.Entry<String, Collection<Citation>>) it.next();
 			printList.add(pair.getKey() + " " + pair.getValue().size() + "\n");
 			it.remove(); // avoids a ConcurrentModificationException
 		}
-		
+
 		Collections.sort(printList);
-		
+
 		String print = "";
-		for(String s:printList) {
+		for (String s : printList) {
 			print += s;
 		}
 		return print;
@@ -148,15 +147,65 @@ public class DatasetsIR {
 					if (c.getBooktitle().toUpperCase().contains(fullname)
 							|| c.getBooktitle().toUpperCase().contains(shortname)) {
 						// if not added before, create entry
-						if (!results.containsKey(shortname)) {
+						if (!results.containsKey(alias.getShortName())) {
 							Collection<Citation> citationsForThisName = new ArrayList<>();
 							citationsForThisName.add(c);
-							results.put(shortname, citationsForThisName);
+							results.put(alias.getShortName(), citationsForThisName);
 						} else {
-							results.get(shortname).add(c);
+							results.get(alias.getShortName()).add(c);
 						}
 					}
 				}
+			}
+		}
+		return results;
+	}
+
+	public String printCitationsWithAuthorBetweenYears(ArrayList<Alias> authorNames, String startYear, String endYear) {
+		Collection<Citation> citationsBetweenYears = this.getCitationsBetweenYears(startYear, endYear);
+		HashMap<String, Collection<Citation>> matchingCitations = getCitationsByAuthors(citationsBetweenYears,
+				authorNames);
+		return this.printMap_String_CollectionSize(matchingCitations);
+	}
+
+	private HashMap<String, Collection<Citation>> getCitationsByAuthors(Collection<Citation> citations,
+			ArrayList<Alias> authorNames) {
+		HashMap<String, Collection<Citation>> results = new HashMap<String, Collection<Citation>>();
+
+		for (Citation c : citations) {
+			String date = Short.toString(c.getDate());
+			if (c.getAuthors() != null) {
+				for (String auth : c.getAuthors().getAuthor()) {
+					for (Alias alias : authorNames) {
+						String fullname = alias.getFullName().toUpperCase();
+						String shortname = alias.getShortName().toUpperCase();
+						if (auth.toUpperCase().contains(fullname) || auth.toUpperCase().contains(shortname)) {
+							
+							if (!results.containsKey(date)) {
+								Collection<Citation> citationsForThisYear = new ArrayList<>();
+								citationsForThisYear.add(c);
+								results.put(date, citationsForThisYear);
+							} else {
+								results.get(date).add(c);
+							}
+						}
+					}
+				}
+			}
+		}
+		return results;
+	}
+
+	private Collection<Citation> getCitationsBetweenYears(String startYear, String endYear) {
+		Collection<Citation> citations = this.allCitations;
+		Collection<Citation> results = new ArrayList<>();
+		for (Citation c : citations) {
+			short startDate = Short.valueOf(startYear);
+			short endDate = Short.valueOf(endYear);
+			short date = c.getDate();
+
+			if (date >= startDate && date <= endDate) {
+				results.add(c);
 			}
 		}
 		return results;
