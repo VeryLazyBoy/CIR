@@ -3,6 +3,8 @@ package com.cir.models;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -15,10 +17,10 @@ public class Datasets {
 
 	public Datasets() {
 		populate();
-		//DEBUGGING
-		//this.getDatasetsFromConferenceName("D");
-		//this.getDatasetsFromConferenceYear("14");
-		//this.getDatasetsFromConferenceCode("D14");
+		// DEBUGGING
+		// this.getDatasetsFromConferenceName("D");
+		// this.getDatasetsFromConferenceYear("14");
+		// this.getDatasetsFromConferenceCode("D14");
 	}
 
 	private void populate() {
@@ -64,40 +66,39 @@ public class Datasets {
 	}
 
 	public Collection<Dataset> getDatasetsFromConferenceName(String conferenceName) {
-		File confDirectory = new File(directory.getPath() +"/"+ conferenceName.trim().toUpperCase());
+		File confDirectory = new File(directory.getPath() + "/" + conferenceName.trim().toUpperCase());
 		return unmarshalDatasetsInDirectory(confDirectory);
 	}
-	
-	
-	public Collection<Dataset> getDatasetsFromConferenceYear(String year){
+
+	public Collection<Dataset> getDatasetsFromConferenceYear(String year) {
 		Collection<File> allDirectories = listDirectoryTree(directory);
 		Collection<File> directoriesFromYear = new ArrayList<>();
-		for(File dir:allDirectories) {
+		for (File dir : allDirectories) {
 			String dirYear = dir.getName().substring(1);
-			if(year.equalsIgnoreCase(dirYear)) {
+			if (year.equalsIgnoreCase(dirYear)) {
 				directoriesFromYear.add(dir);
 			}
 		}
-		
+
 		Collection<Dataset> datasetsFromYear = new ArrayList<>();
-		for(File dirYear: directoriesFromYear) {
+		for (File dirYear : directoriesFromYear) {
 			datasetsFromYear.addAll(this.unmarshalDatasetsInDirectory(dirYear));
 		}
 		return datasetsFromYear;
 	}
 
-	public Collection<Dataset> getDatasetsFromConferenceCode(String conferenceCode){
+	public Collection<Dataset> getDatasetsFromConferenceCode(String conferenceCode) {
 		Collection<File> allDirectories = listDirectoryTree(directory);
 		Collection<Dataset> datasetsFromConference = new ArrayList<>();
-		for(File dir: allDirectories) {
-			if(dir.getName().equalsIgnoreCase(conferenceCode)) {
+		for (File dir : allDirectories) {
+			if (dir.getName().equalsIgnoreCase(conferenceCode)) {
 				datasetsFromConference = this.unmarshalDatasetsInDirectory(dir);
 				break;
 			}
 		}
-		return datasetsFromConference;		
+		return datasetsFromConference;
 	}
-	
+
 	public Collection<File> listDirectoryTree(File dir) {
 		Collection<File> fileTree = new ArrayList<>();
 
@@ -114,7 +115,7 @@ public class Datasets {
 
 		return fileTree;
 	}
-	
+
 	public Collection<File> listXMLFileTree(File dir) {
 		Collection<File> fileTree = new ArrayList<>();
 
@@ -143,5 +144,19 @@ public class Datasets {
 		}
 
 		return extension.equalsIgnoreCase("xml");
+	}
+
+	public Collection<Citation> getCitationsInDatasets(Collection<Dataset> datasets) {
+		Collection<Citation> citations = new ArrayList<>();
+		for (Dataset ds : datasets) {
+			List<Algorithm> algos = ds.getAlgos().getAlgorithm();
+			for (Algorithm algo : algos) {
+				CitationList citLs = algo.getCitationList();
+				if (citLs != null && !citLs.getCitation().isEmpty()) {
+					citations.addAll(citLs.getCitation());
+				}
+			}
+		}
+		return citations;
 	}
 }
