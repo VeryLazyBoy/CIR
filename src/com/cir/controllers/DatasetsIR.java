@@ -2,6 +2,7 @@ package com.cir.controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -55,39 +56,27 @@ public class DatasetsIR {
 
 	public String printCitationsBetweenYears(String confCode, String startYear, String endYear) {
 		Collection<Citation> citations = new ArrayList<>();
-		ArrayList<ArrayList<Citation>> citationsByYear = new ArrayList<>();
+		HashMap<String, Collection<Citation>> citationsByYear = new HashMap<>();
 
 		citations = getCitationsBetweenYears(confCode, startYear, endYear);
 		citationsByYear = groupCitationsByYear(citations, startYear, endYear);
-
-		String print = "";
-		for (int i = 0; i < citationsByYear.size(); i++) {
-			int yearToPrint = Short.valueOf(startYear) + i;
-			int numOfCitations = citationsByYear.get(i).size();
-				print += yearToPrint + " " + numOfCitations + "\n";
-		}
-		return print;
+		
+		return this.printMap_String_CollectionSize(citationsByYear);
 	}
 
-	private ArrayList<ArrayList<Citation>> groupCitationsByYear(Collection<Citation> citations, String startYear,
+	private HashMap<String, Collection<Citation>> groupCitationsByYear(Collection<Citation> citations, String startYear,
 			String endYear) {
 
-		ArrayList<ArrayList<Citation>> results = new ArrayList<ArrayList<Citation>>();
-
-		int numOfYears = Short.valueOf(endYear) - Short.valueOf(startYear) + 1;
-
-		// intialize initial lists
-		for (int i = 0; i < numOfYears; i++) {
-			results.add(new ArrayList<Citation>());
-		}
-
-		// add citations into lists according to their year. The indexes serve as the
-		// year
-		// first year will be index 0, second year index 1 and so on.
+		HashMap<String, Collection<Citation>> results = new HashMap<>();
 		for (Citation c : citations) {
-			short date = c.getDate();
-			int indexToPush = date - Short.valueOf(startYear);
-			results.get(indexToPush).add(c);
+			String date = Short.toString(c.getDate());
+			if (results.containsKey(date)) {
+				results.get(date).add(c);
+			} else {
+				Collection<Citation> citationsForThisYear = new ArrayList<>();
+				citationsForThisYear.add(c);
+				results.put(date, citationsForThisYear);
+			}
 		}
 		return results;
 	}
@@ -129,12 +118,20 @@ public class DatasetsIR {
 	}
 
 	private String printMap_String_CollectionSize(HashMap<String, Collection<Citation>> matchingCitations) {
-		String print = "";
+		List<String> printList = new ArrayList<String>();
+		
 		Iterator<Entry<String, Collection<Citation>>> it = matchingCitations.entrySet().iterator();
 		while (it.hasNext()) {
 			HashMap.Entry<String, Collection<Citation>> pair = (HashMap.Entry<String, Collection<Citation>>) it.next();
-			print += pair.getKey() + " " + pair.getValue().size() + "\n";
+			printList.add(pair.getKey() + " " + pair.getValue().size() + "\n");
 			it.remove(); // avoids a ConcurrentModificationException
+		}
+		
+		Collections.sort(printList);
+		
+		String print = "";
+		for(String s:printList) {
+			print += s;
 		}
 		return print;
 	}
