@@ -16,16 +16,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for authors complex type.
+ * <p>Java class for contexts complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="authors">
+ * &lt;complexType name="contexts">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="author" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="context" type="{}contextType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,40 +35,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "authors", propOrder = {
-    "author"
+@XmlType(name = "contexts", propOrder = {
+    "context"
 })
-public class Authors {
+public class Contexts {
 
-    protected List<String> author;
+    protected List<Context> context;
 
     /**
-     * Gets the value of the author property.
+     * Gets the value of the context property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the author property.
+     * This is why there is not a <CODE>set</CODE> method for the context property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAuthor().add(newItem);
+     *    getContext().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
+     * {@link Context }
      * 
      * 
      */
-    public List<String> getAuthor() {
-        if (author == null) {
-            author = new ArrayList<String>();
+    public List<Context> getContext() {
+        if (context == null) {
+            context = new ArrayList<Context>();
         }
-        return this.author;
+        return this.context;
     }
 
 }

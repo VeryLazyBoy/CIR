@@ -39,12 +39,13 @@ public class DatasetsIR {
 	public Collection<Citation> getAllCitations() {
 		Collection<Citation> citations = new ArrayList<>();
 		for (Dataset ds : allDatasets) {
-			List<Algorithm> algos = ds.getAlgos().getAlgorithms();
+			List<Algorithm> algos = ds.getAlgos().getAlgorithm();
 			for (Algorithm algo : algos) {
 				CitationList citLs = algo.getCitationList();
-				if (citLs != null && !citLs.getCitations().isEmpty()) {
-					citations.addAll(citLs.getCitations());
+				if (citLs != null && !citLs.getCitation().isEmpty()) {
+					citations.addAll(citLs.getCitation());
 				}
+				
 			}
 		}
 		return citations;

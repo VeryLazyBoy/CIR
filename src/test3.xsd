@@ -1,0 +1,220 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="algorithms" type="algorithmsType"/>
+  <xs:complexType name="titleType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="authorType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="affiliationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="emailType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="sectionHeaderType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="bodyTextType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="pageType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="noteType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="figureCaptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="listItemType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="equationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="figureType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="subsectionHeaderType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="footnoteType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="tableCaptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="tableType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="referenceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence" use="optional"/>
+        <xs:attribute type="xs:string" name="genericHeader" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="variantType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="titleType" name="title"/>
+      <xs:element type="authorType" name="author"/>
+      <xs:element type="affiliationType" name="affiliation"/>
+      <xs:element type="emailType" name="email"/>
+      <xs:element type="sectionHeaderType" name="sectionHeader"/>
+      <xs:element type="bodyTextType" name="bodyText"/>
+      <xs:element type="pageType" name="page"/>
+      <xs:element type="noteType" name="note"/>
+      <xs:element type="figureCaptionType" name="figureCaption"/>
+      <xs:element type="listItemType" name="listItem"/>
+      <xs:element type="equationType" name="equation"/>
+      <xs:element type="figureType" name="figure"/>
+      <xs:element type="subsectionHeaderType" name="subsectionHeader"/>
+      <xs:element type="footnoteType" name="footnote"/>
+      <xs:element type="tableCaptionType" name="tableCaption"/>
+      <xs:element type="tableType" name="table"/>
+      <xs:element type="referenceType" name="reference"/>
+      <xs:element type="abstractType" name="abstract"/>
+    </xs:choice>
+    <xs:attribute type="xs:byte" name="no" use="optional"/>
+    <xs:attribute type="xs:float" name="confidence" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="algorithmType">
+    <xs:sequence>
+      <xs:element type="variantType" name="variant" minOccurs="0"/>
+      <xs:element type="citationListType" name="citationList" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name" use="optional"/>
+    <xs:attribute type="xs:int" name="version" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="abstractType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:float" name="confidence"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="authorsType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="author" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="contextType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:short" name="position" use="optional"/>
+        <xs:attribute type="xs:string" name="citStr" use="optional"/>
+        <xs:attribute type="xs:short" name="startWordPosition" use="optional"/>
+        <xs:attribute type="xs:short" name="endWordPosition" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="contextsType">
+    <xs:sequence>
+      <xs:element type="contextType" name="context" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="citationType">
+    <xs:sequence>
+      <xs:element type="authorsType" name="authors"/>
+      <xs:element type="xs:string" name="title"/>
+      <xs:element type="xs:short" name="date"/>
+      <xs:element type="xs:string" name="booktitle" minOccurs="0"/>
+      <xs:element type="xs:string" name="location" minOccurs="0"/>
+      <xs:element type="xs:string" name="journal" minOccurs="0"/>
+      <xs:element type="xs:short" name="volume" minOccurs="0"/>
+      <xs:element type="xs:string" name="publisher" minOccurs="0"/>
+      <xs:element type="contextsType" name="contexts" minOccurs="0"/>
+      <xs:element type="xs:string" name="marker"/>
+      <xs:element type="xs:string" name="rawString"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="valid" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="citationListType">
+    <xs:sequence>
+      <xs:element type="citationType" name="citation" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="algorithmsType">
+    <xs:sequence>
+      <xs:element type="algorithmType" name="algorithm" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:int" name="version"/>
+  </xs:complexType>
+</xs:schema>

@@ -18,7 +18,7 @@ public class Datasets {
 	}
 
 	private void populate() {
-		// Loop through the datasets and add the algorithms to the dataset
+		// Loop through the datasets and add the AlgorithmsType to the dataset
 		Collection<File> files = listXMLFileTree(DIRECTORY);
 		int counter = 0;
 		for (File f : files) {
@@ -76,9 +76,6 @@ public class Datasets {
 			extension = fileName.substring(i + 1);
 		}
 
-		if (extension.equalsIgnoreCase("xml")) {
-			return true;
-		}
-		return false;
+		return extension.equalsIgnoreCase("xml");
 	}
 }
