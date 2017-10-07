@@ -6,18 +6,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import com.cir.models.Algorithm;
 import com.cir.models.Alias;
 import com.cir.models.Citation;
-import com.cir.models.CitationList;
 import com.cir.models.Dataset;
 import com.cir.models.Datasets;
 
@@ -174,12 +174,19 @@ public class DatasetsIR {
 	}
 
 	public int getTotalNumOfUniqueCitations() {
-	    List<String> dummy = uniqueCitations.stream().map(c->c.getRawString()).collect(Collectors.toList());
-	    Collections.sort(dummy);
+	    return uniqueCitations.size();
+	}
+
+	public int getTotalNumOfUniqueAuthorsInCitation() {
+	    Comparator<String> comp = Comparator.comparingInt(String::hashCode);
+	    List<String> authors = uniqueCitations.stream()
+	                                          .flatMap(c->c.getAllAuthorIdentifiers().stream())
+	                                          .collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(comp)), ArrayList::new));
 	    BufferedWriter writer;
+	    Collections.sort(authors);
         try {
             writer = new BufferedWriter(new FileWriter("123.txt"));
-            for(String s: dummy) {
+            for(String s: authors) {
                 writer.write(s);
                 writer.write("\n");
             }
@@ -187,8 +194,9 @@ public class DatasetsIR {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+	    return authors.size();
+	}
 
-	    return uniqueCitations.size();
 	}
 
 	public String printCitationsWithAuthorBetweenYears(ArrayList<Alias> authorNames, String startYear, String endYear) {

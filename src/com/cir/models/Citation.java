@@ -8,6 +8,13 @@
 
 package com.cir.models;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.function.ToIntFunction;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -490,6 +497,28 @@ public class Citation {
      */
     public void setValid(boolean value) {
         this.valid = value;
+    }
+
+    public String getAuthorIdentifier(String author) {
+        String[] names = author.trim().split(" ");
+        String identifier = names[names.length - 1];
+        for (int i = names.length - 1; i > 0; i--) {
+            identifier = names[i].charAt(0) + " " + identifier;
+        }
+        return identifier.toLowerCase();
+    }
+
+    public List<String> getAllAuthorIdentifiers() {
+        Authors a = this.authors;
+        if (a == null) {
+            return new ArrayList<String>();
+        } else {
+            return a.getAuthor().stream().map(name->getAuthorIdentifier(name)).collect(Collectors.toList());
+        }
+    }
+
+    public boolean hasDate() {
+        return this.date != 0;
     }
     
     @Override
