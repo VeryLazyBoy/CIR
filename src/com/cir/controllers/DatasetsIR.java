@@ -197,6 +197,25 @@ public class DatasetsIR {
 	    return authors.size();
 	}
 
+	private List<Citation> getSortedCitationListByYear() {
+	    Comparator<Citation> comp = Comparator.comparingInt(Citation::getDate);
+        List<Citation> result = allCitations.stream().filter(Citation::hasDate).sorted(comp).collect(Collectors.toList());
+        return result;
+	}
+
+	public int getEarliestCitationYear() {
+	    return getSortedCitationListByYear().get(0).getDate();
+	}
+
+	public int getLatestCitationYear() {
+	    List<Citation> sortedCL = getSortedCitationListByYear();
+	    System.out.println("Earlist: " + sortedCL.get(0).getDate());
+	    System.out.println("Latest: " + sortedCL.get(sortedCL.size() - 1).getDate());
+	    return sortedCL.get(sortedCL.size() - 1).getDate();
+	}
+
+	public int getCitationYearRange() {
+	    return getLatestCitationYear() - getEarliestCitationYear();
 	}
 
 	public String printCitationsWithAuthorBetweenYears(ArrayList<Alias> authorNames, String startYear, String endYear) {
