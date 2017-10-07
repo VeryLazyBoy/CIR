@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,12 +16,12 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for figure complex type.
+ * <p>Java class for title complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="figure">
+ * &lt;complexType name="title">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="confidence" type="{http://www.w3.org/2001/XMLSchema}float" />
@@ -33,10 +33,10 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "figure", propOrder = {
+@XmlType(name = "title", propOrder = {
     "value"
 })
-public class Figure {
+public class Title {
 
     @XmlValue
     protected String value;

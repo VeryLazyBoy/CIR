@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.citation;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.cir.models.basepaper.Contexts;
 
 
 /**

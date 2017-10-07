@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

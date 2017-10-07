@@ -6,12 +6,18 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+
+import com.cir.models.Algorithm;
+import com.cir.models.Algorithms;
+import com.cir.models.citation.Authors;
+import com.cir.models.citation.Citation;
+import com.cir.models.citation.CitationList;
 
 
 /**

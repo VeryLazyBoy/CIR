@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,12 +16,12 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for reference complex type.
+ * <p>Java class for tableCaption complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="reference">
+ * &lt;complexType name="tableCaption">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="confidence" type="{http://www.w3.org/2001/XMLSchema}float" />
@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "reference", propOrder = {
+@XmlType(name = "tableCaption", propOrder = {
     "value"
 })
-public class Reference {
+public class TableCaption {
 
     @XmlValue
     protected String value;

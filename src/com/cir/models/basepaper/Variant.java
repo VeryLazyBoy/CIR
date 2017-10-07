@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import java.util.ArrayList;
 import java.util.List;

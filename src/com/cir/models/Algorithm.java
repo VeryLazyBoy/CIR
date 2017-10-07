@@ -13,6 +13,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.cir.models.basepaper.Variant;
+import com.cir.models.citation.CitationList;
+
 
 /**
  * <p>Java class for algorithm complex type.

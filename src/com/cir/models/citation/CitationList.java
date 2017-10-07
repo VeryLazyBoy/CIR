@@ -6,26 +6,28 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.citation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for authors complex type.
+ * <p>Java class for citationList complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="authors">
+ * &lt;complexType name="citationList">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="author" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="citation" type="{}citationType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,40 +37,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "authors", propOrder = {
-    "author"
+@XmlType(name = "citationList", propOrder = {
+    "citation"
 })
-public class Authors {
+public class CitationList {
 
-    protected List<String> author;
+    protected List<Citation> citation;
 
     /**
-     * Gets the value of the author property.
+     * Gets the value of the citation property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the author property.
+     * This is why there is not a <CODE>set</CODE> method for the citation property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAuthor().add(newItem);
+     *    getCitation().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
+     * {@link Citation }
      * 
      * 
      */
-    public List<String> getAuthor() {
-        if (author == null) {
-            author = new ArrayList<String>();
+    public List<Citation> getCitation() {
+        if (citation == null) {
+            citation = new ArrayList<Citation>();
         }
-        return this.author;
+        return this.citation.stream().filter(c->c.getValid()).collect(Collectors.toList());
     }
 
 }

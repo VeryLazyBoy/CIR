@@ -6,7 +6,7 @@
 //
 
 
-package com.cir.models;
+package com.cir.models.basepaper;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,15 +16,16 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for title complex type.
+ * <p>Java class for note complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="title">
+ * &lt;complexType name="note">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="confidence" type="{http://www.w3.org/2001/XMLSchema}float" />
+ *       &lt;attribute name="genericHeader" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -33,15 +34,17 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "title", propOrder = {
+@XmlType(name = "note", propOrder = {
     "value"
 })
-public class Title {
+public class Note {
 
     @XmlValue
     protected String value;
     @XmlAttribute(name = "confidence")
     protected Float confidence;
+    @XmlAttribute(name = "genericHeader")
+    protected String genericHeader;
 
     /**
      * Gets the value of the value property.
@@ -89,6 +92,30 @@ public class Title {
      */
     public void setConfidence(Float value) {
         this.confidence = value;
+    }
+
+    /**
+     * Gets the value of the genericHeader property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getGenericHeader() {
+        return genericHeader;
+    }
+
+    /**
+     * Sets the value of the genericHeader property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGenericHeader(String value) {
+        this.genericHeader = value;
     }
 
 }

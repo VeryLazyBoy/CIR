@@ -9,6 +9,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import com.cir.models.citation.Citation;
+import com.cir.models.citation.CitationList;
+
+//TODO Only unmarshal the xml files once
+//TODO Unmarshalling files done in a new Storage component
 public class Datasets {
 
 	Collection<Dataset> allDatasets = new ArrayList<>();

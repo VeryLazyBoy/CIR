@@ -17,9 +17,9 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.cir.models.Alias;
-import com.cir.models.Citation;
 import com.cir.models.Dataset;
 import com.cir.models.Datasets;
+import com.cir.models.citation.Citation;
 
 public class DatasetsIR {
 
