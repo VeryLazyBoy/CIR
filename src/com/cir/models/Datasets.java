@@ -33,15 +33,15 @@ public class Datasets {
 		Collection<Dataset> resultingDatasets = new ArrayList<>();
 		Collection<File> files = listXMLFileTree(dir);
 
-		System.out.println("Unmarshalling from: " + dir.getAbsolutePath());
+//		System.out.println("Unmarshalling from: " + dir.getAbsolutePath());
 		int counter = 0;
 		for (File f : files) {
 			Dataset ds = unmarshal(f);
 			resultingDatasets.add(ds);
 			counter++;
-			System.out.println("Unmarshalling Dataset: " + counter + "/" + files.size());
+//			System.out.println("Unmarshalling Dataset: " + counter + "/" + files.size());
 		}
-		System.out.println("Finished unmarshalling from: " + dir.getAbsolutePath());
+//		System.out.println("Finished unmarshalling from: " + dir.getAbsolutePath());
 
 		return resultingDatasets;
 	}
