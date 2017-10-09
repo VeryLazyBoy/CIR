@@ -9,10 +9,8 @@
 package com.cir.models.citation;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,6 +19,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.cir.models.Alias;
 import com.cir.models.basepaper.Contexts;
 
 
@@ -521,6 +520,53 @@ public class Citation {
 
     public boolean hasDate() {
         return this.date != 0;
+    }
+
+    public boolean isDateEqual(String year) {
+        return hasDate() ? date == Short.valueOf(year) : false;
+    }
+
+    public boolean hasBookTitle() {
+        return this.booktitle != null;
+    }
+
+    public boolean isBookTitleContainingIgnoreCase(Alias keywordPair) {
+        if (hasBookTitle()) {
+            String shortKeyword = keywordPair.getShortName();
+            String longKeyword = keywordPair.getLongName();
+            boolean isContainingShort = booktitle.toUpperCase().contains(shortKeyword.toUpperCase());
+            boolean isContainingLong = booktitle.toUpperCase().contains(longKeyword.toUpperCase());
+            return isContainingLong || isContainingShort;
+        }
+        return false;
+    }
+
+    public boolean isWrittenBetweenYear(String startYear, String endYear) {
+        if (hasDate()) {
+            short startDate = Short.valueOf(startYear);
+            short endDate = Short.valueOf(endYear);
+            if (date >= startDate && date <= endDate) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean hasAnyAuthor() {
+        return authors != null;
+    }
+
+    public boolean isWrittenByAnyAuthor(Collection<Alias> allAuthors) {
+        assert allAuthors != null;
+        if (hasAnyAuthor()) {
+            return authors.isContainingAnyIgnoreCase(allAuthors);
+        } else {
+            return false;
+        }
+        
     }
     
     @Override

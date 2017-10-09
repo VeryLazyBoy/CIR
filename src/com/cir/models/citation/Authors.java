@@ -9,10 +9,18 @@
 package com.cir.models.citation;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+
+import com.cir.models.Alias;
 
 
 /**
@@ -69,6 +77,16 @@ public class Authors {
             author = new ArrayList<String>();
         }
         return this.author;
+    }
+
+    public boolean isContainingAnyIgnoreCase(Collection<Alias> allAuthors) {
+        assert allAuthors != null;
+        Set<String> allNames = Stream.concat(allAuthors.stream().map(Alias::getLongName),
+                                             allAuthors.stream().map(Alias::getShortName)).map(String::toUpperCase)
+                                                                                          .collect(Collectors.toSet());
+        Set<String> existingNames = author.stream().map(String::toUpperCase).collect(Collectors.toSet());
+        allNames.retainAll(existingNames);
+        return !allNames.isEmpty();
     }
 
 }
