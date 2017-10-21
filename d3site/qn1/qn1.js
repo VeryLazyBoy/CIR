@@ -83,6 +83,15 @@ var xScale = d3.scale.ordinal()
 .domain(d3.range(0, results.length))
 .rangeBands([0, width])
 
+//Tooltip
+var tooltip = d3.select('#bar-chart')
+.append('div')
+.attr('class', 'tooltip');
+tooltip.append('div')
+.attr('class', 'label');
+tooltip.append('div')
+.attr('class', 'count');
+
 //Build graph
 d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 .attr('width', width + horizontalMargin) // width + horizontal margins
@@ -108,11 +117,24 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 .on('mouseover', function(data) { // hover changes the color of the bars
   barColor = this.style.fill;
   d3.select(this)
-  .style('fill', hoverColor)
+  .style('fill', hoverColor);
+
+  var currentAuthor = data.author;
+  var currentPublications = data.publications;
+  tooltip.select('.label').html("Author: "+currentAuthor);
+  tooltip.select('.count').html("Publications: "+currentPublications);
+  tooltip.style('display','block');
 })
 .on('mouseout', function(data) { // mouse out changes the color back to the original color
   d3.select(this)
   .style('fill', barColor)
+
+  tooltip.style('display', 'none')
+
+})
+.on('mousemove', function(data){
+  tooltip.style('top', (d3.event.layerY + 10) + 'px')
+  .style('left', (d3.event.layerX + 10)+'px')
 });
 
 //Y axis range breakpoints.
