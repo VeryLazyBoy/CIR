@@ -45,7 +45,15 @@
   }
   ];
   
-
+ //   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  // $.getJSON( flickerAPI, {
+  //   tags: "mount rainier",
+  //   tagmode: "any",
+  //   format: "json"
+  //   })
+  //   .done(function( data ) {
+  //     alert(data);
+  //   });
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 50}
 var verticalMargin = margin.top + margin.bottom;
