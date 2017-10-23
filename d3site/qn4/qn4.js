@@ -72,22 +72,19 @@
       ]
     };
 
-  //   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-  // $.getJSON( flickerAPI, {
-  //   tags: "mount rainier",
-  //   tagmode: "any",
-  //   format: "json"
-  //   })
-  //   .done(function( data ) {
-  //     alert(data);
-  //   });
+   // $.ajax({
+ //        url: "http://rest-service.guides.spring.io/greeting"
+ //    }).then(function(data) {
+ //       $('.greeting-id').append(data.id);
+ //       $('.greeting-content').append(data.content);
+ //    });
     var svg = d3.select("#network").append('svg'),
     width = 900,
     height = 560;
 
     svg.attr('width', width).attr('height', height);
 
-    var color = ["#000000", "#86DDB2", "#F8C58C", "#E57661"];
+    var color = d3.scaleOrdinal(["#000000", "#86DDB2", "#F8C58C", "#E57661"]);
 
     var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody().strength(-330))
@@ -134,7 +131,7 @@ node = node
 .enter().append("circle")
 .attr("class", "node")
 .attr("r", 10) //radius of the circle
-.style("fill", function(d) { return color[d.level-1]; })
+.style("fill", function(d) { return color(d.level); })
 .on('mouseover', function(data) {
   var currentTitle = data.title;
   var currentAuthors = authorsToString(data.authors);
@@ -155,7 +152,7 @@ text = text
 .data(results.articles)
 .enter().append("text")
 .attr("class", "label")
-.style("fill", function(d) { return color[d.level-1]; })
+.style("fill", function(d) { return color(d.level); })
 .text(function(d) {return d.title;});
 
 

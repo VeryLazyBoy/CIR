@@ -21,26 +21,6 @@
   {
     'title': 'Paper5',
     'citations':6576
-  },
-  {
-    'title': 'Paper6',
-    'citations':13414
-  },
-  {
-    'title': 'Paper7',
-    'citations':43577
-  },
-  {
-    'title': 'Paper8',
-    'citations':4422
-  },
-  {
-    'title': 'Paper9',
-    'citations':65234
-  },
-  {
-    'title': 'Paper10',
-    'citations':12348
   }
   ];
   // $.ajax({
