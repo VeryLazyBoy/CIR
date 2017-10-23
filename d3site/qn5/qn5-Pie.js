@@ -3,24 +3,24 @@
 
   var dataset = [
   {
-    'title': 'Paper1',
-    'citations':2134
+    'venue': 'Earth',
+    'publications':2134
   },
   {
-    'title': 'Paper2',
-    'citations':4352
+    'venue': 'Mars',
+    'publications':4352
   },
   {
-    'title': 'Paper3',
-    'citations':45645
+    'venue': 'Venus',
+    'publications':45645
   },
   {
-    'title': 'Paper4',
-    'citations':3242
+    'venue': 'Jupiter',
+    'publications':3242
   },
   {
-    'title': 'Paper5',
-    'citations':6576
+    'venue': 'Saturn',
+    'publications':6576
   }
   ];
   
@@ -54,7 +54,7 @@
   .outerRadius(radius);
 
   var pie = d3.pie()
-  .value(function(d) { return d.citations; })
+  .value(function(d) { return d.publications; })
   .sort(null);
 
   var tooltip = d3.select('#chart')
@@ -62,16 +62,16 @@
   .attr('class', 'tooltip');
 
   tooltip.append('div')
-  .attr('class', 'title');
+  .attr('class', 'venue');
 
   tooltip.append('div')
-  .attr('class', 'citations');
+  .attr('class', 'publications');
 
   tooltip.append('div')
   .attr('class', 'percent');
 
   dataset.forEach(function(d){
-    d.citations = +d.citations;
+    d.publications = +d.publications;
     d.enabled = true;
   });
 
@@ -81,18 +81,18 @@
   .append('path')
   .attr('d', arc)
   .attr('fill', function(d) {
-    return color(d.data.title);
+    return color(d.data.venue);
   })
   .each(function(d){this._current=d;});
 
   path.on('mouseover', function(d){
     var total=d3.sum(dataset.map(function(d){
-      return (d.enabled)?d.citations:0;
+      return (d.enabled)?d.publications:0;
     }));
 
-    var percent = Math.round(1000*d.data.citations/total)/10;
-    tooltip.select('.title').html("Title: "+d.data.title);
-    tooltip.select('.citations').html("Citations: "+d.data.citations);
+    var percent = Math.round(1000*d.data.publications/total)/10;
+    tooltip.select('.venue').html("venue: "+d.data.venue);
+    tooltip.select('.publications').html("publications: "+d.data.publications);
     tooltip.select('.percent').html(percent+'%');
     tooltip.style('display', 'block');
   });
@@ -124,7 +124,7 @@
   .attr('height', legendRectSize)
   .style('fill', color)
   .style('stroke', color)
-  .on('click', function(title){
+  .on('click', function(venue){
     var rect=d3.select(this);
     var enabled=true;
     var totalEnabled = d3.sum(dataset.map(function(d){
@@ -140,8 +140,8 @@
     }
 
     pie.value(function(d){
-      if(d.title===title)d.enabled=enabled;
-      return(d.enabled)?d.citations:0;
+      if(d.venue===venue)d.enabled=enabled;
+      return(d.enabled)?d.publications:0;
     })
 
     path = path.data(pie(dataset));

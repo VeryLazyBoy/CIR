@@ -3,24 +3,24 @@
   //data from API
   var results = [
   {
-    'title': 'Paper1',
-    'citations':2134
+    'venue': 'Earth',
+    'publications':2134
   },
   {
-    'title': 'Paper2',
-    'citations':4352
+    'venue': 'Mars',
+    'publications':4352
   },
   {
-    'title': 'Paper3',
-    'citations':45645
+    'venue': 'Jupiter',
+    'publications':45645
   },
   {
-    'title': 'Paper4',
-    'citations':3242
+    'venue': 'Saturn',
+    'publications':3242
   },
   {
-    'title': 'Paper5',
-    'citations':6576
+    'venue': 'Venus',
+    'publications':6576
   }
   ];
   // $.ajax({
@@ -50,8 +50,8 @@ var backgroundColor = '#F2EBBF'
 var maxY = function(results){
   var highest = -1;
   for(var i=0; i<results.length; i++){
-    if(results[i].citations > highest){
-      highest = results[i].citations;
+    if(results[i].publications > highest){
+      highest = results[i].publications;
     }
   }
   return highest;
@@ -88,24 +88,24 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 // .attr('width', barWidth)
 .attr('width', xScale.rangeBand()) //use x axis rangeBand to determine width of each bar
 .attr('height', function (data) {
-  return yScale(data.citations); //use y axis range to determine height of each bar. The tallest value takes up all the height
+  return yScale(data.publications); //use y axis range to determine height of each bar. The tallest value takes up all the height
 })
 .attr('x', function (data, i) {
   // return i * (barWidth + barOffset);
   return xScale(i); //use x axis rangeband to determine position of the respective bar
 })
 .attr('y', function (data) {
-  return height - yScale(data.citations); // use y axis range to determine height of each bar. 
+  return height - yScale(data.publications); // use y axis range to determine height of each bar. 
 })
 .on('mouseover', function(data) { // hover changes the color of the bars
   barColor = this.style.fill;
   d3.select(this)
   .style('fill', hoverColor);
 
-  var currentTitle = data.title;
-  var currentCitations = data.citations;
-  tooltip.select('.label').html("title: "+currentTitle);
-  tooltip.select('.count').html("citations: "+currentCitations);
+  var currentvenue = data.venue;
+  var currentpublications = data.publications;
+  tooltip.select('.label').html("venue: "+currentvenue);
+  tooltip.select('.count').html("publications: "+currentpublications);
   tooltip.style('display','block');
 })
 .on('mouseout', function(data) { // mouse out changes the color back to the original color
@@ -142,8 +142,8 @@ verticalGuide.selectAll('line')
 var hAxis = d3.svg.axis()
 .scale(xScale)
 .orient('bottom')
-.tickFormat(function(i){ //X axis title names
-  return results[i].title;
+.tickFormat(function(i){ //X axis venue names
+  return results[i].venue;
 });
 
 var horizontalGuide = d3.select('svg').append('g')
