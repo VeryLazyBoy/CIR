@@ -1,62 +1,65 @@
 (function(d3) {
   'use strict';
   //data from API
-  var results = [
-  {
-    'title': 'Paper1',
-    'citations':2134
-  },
-  {
-    'title': 'Paper2',
-    'citations':4352
-  },
-  {
-    'title': 'Paper3',
-    'citations':45645
-  },
-  {
-    'title': 'Paper4',
-    'citations':3242
-  },
-  {
-    'title': 'Paper5',
-    'citations':6576
-  },
-  {
-    'title': 'Paper6',
-    'citations':13414
-  },
-  {
-    'title': 'Paper7',
-    'citations':43577
-  },
-  {
-    'title': 'Paper8',
-    'citations':4422
-  },
-  {
-    'title': 'Paper9',
-    'citations':65234
-  },
-  {
-    'title': 'Paper10',
-    'citations':12348
-  }
-  ];
+  // var results = [
+  // {
+  //   'title': 'Paper1',
+  //   'citations':2134
+  // },
+  // {
+  //   'title': 'Paper2',
+  //   'citations':4352
+  // },
+  // {
+  //   'title': 'Paper3',
+  //   'citations':45645
+  // },
+  // {
+  //   'title': 'Paper4',
+  //   'citations':3242
+  // },
+  // {
+  //   'title': 'Paper5',
+  //   'citations':6576
+  // },
+  // {
+  //   'title': 'Paper6',
+  //   'citations':13414
+  // },
+  // {
+  //   'title': 'Paper7',
+  //   'citations':43577
+  // },
+  // {
+  //   'title': 'Paper8',
+  //   'citations':4422
+  // },
+  // {
+  //   'title': 'Paper9',
+  //   'citations':65234
+  // },
+  // {
+  //   'title': 'Paper10',
+  //   'citations':12348
+  // }
+  // ];
   // $.ajax({
- //        url: "http://rest-service.guides.spring.io/greeting"
- //    }).then(function(data) {
- //       $('.greeting-id').append(data.id);
- //       $('.greeting-content').append(data.content);
- //    });
+  //       url: "http://rest-service.guides.spring.io/greeting"
+  //   }).then(function(data) {
+  //      $('.greeting-id').append(data.id);
+  //      $('.greeting-content').append(data.content);
+  //   });
+
+d3.json("../json/article_bar.json", function(results) {
+
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 100}
 var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 400 - verticalMargin;
-var width = 800 - horizontalMargin;
+var height = 800 - verticalMargin;
+var width = 1600 - horizontalMargin;
 var barWidth = 40;
 var barOffset = 20;
 
@@ -124,8 +127,8 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 
   var currentTitle = data.title;
   var currentCitations = data.citations;
-  tooltip.select('.label').html("title: "+currentTitle);
-  tooltip.select('.count').html("citations: "+currentCitations);
+  tooltip.select('.label').html("Title: "+currentTitle);
+  tooltip.select('.count').html("Citations: "+currentCitations);
   tooltip.style('display','block');
 })
 .on('mouseout', function(data) { // mouse out changes the color back to the original color
@@ -173,4 +176,5 @@ horizontalGuide.selectAll('path')
 .style({fill: 'none', stroke: barColor})
 horizontalGuide.selectAll('line')
 .style({stroke: barColor});
+})
 })(window.d3);

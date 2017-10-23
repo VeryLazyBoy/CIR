@@ -1,28 +1,28 @@
  (function(d3) {
   'use strict';
 
-  var dataset = [
-  {
-    'venue': 'Earth',
-    'publications':2134
-  },
-  {
-    'venue': 'Mars',
-    'publications':4352
-  },
-  {
-    'venue': 'Venus',
-    'publications':45645
-  },
-  {
-    'venue': 'Jupiter',
-    'publications':3242
-  },
-  {
-    'venue': 'Saturn',
-    'publications':6576
-  }
-  ];
+  // var dataset = [
+  // {
+  //   'venue': 'Earth',
+  //   'publications':2134
+  // },
+  // {
+  //   'venue': 'Mars',
+  //   'publications':4352
+  // },
+  // {
+  //   'venue': 'Venus',
+  //   'publications':45645
+  // },
+  // {
+  //   'venue': 'Jupiter',
+  //   'publications':3242
+  // },
+  // {
+  //   'venue': 'Saturn',
+  //   'publications':6576
+  // }
+  // ];
   
   // $.ajax({
  //        url: "http://rest-service.guides.spring.io/greeting"
@@ -30,14 +30,15 @@
  //       $('.greeting-id').append(data.id);
  //       $('.greeting-content').append(data.content);
  //    });
-  
-  var width = 600;
-  var height = 600;
+  d3.json("../json/venue_sector.json", function(dataset) {
+
+  var width = 16000;
+  var height = 16000;
   var radius = Math.min(width, height) / 2;
 
-  var color = d3.scaleOrdinal(["#7B2A3B", "#E57661", "#F8C58C", "#F8E7A2", "#86DDB2"]);
+  var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-  var donutWidth = 150; 
+  var donutWidth = 15000; 
   var legendRectSize = 18;
   var legendSpacing = 4;
 
@@ -119,47 +120,47 @@
     return 'translate(' + horz + ',' + vert + ')';
   });
 
-  legend.append('rect')
-  .attr('width', legendRectSize)
-  .attr('height', legendRectSize)
-  .style('fill', color)
-  .style('stroke', color)
-  .on('click', function(venue){
-    var rect=d3.select(this);
-    var enabled=true;
-    var totalEnabled = d3.sum(dataset.map(function(d){
-      return (d.enabled)?1:0;
-    }));
+  // legend.append('rect')
+  // .attr('width', legendRectSize)
+  // .attr('height', legendRectSize)
+  // .style('fill', color)
+  // .style('stroke', color)
+  // .on('click', function(venue){
+  //   var rect=d3.select(this);
+  //   var enabled=true;
+  //   var totalEnabled = d3.sum(dataset.map(function(d){
+  //     return (d.enabled)?1:0;
+  //   }));
 
-    if(rect.attr('class')==='disabled'){
-      rect.attr('class','');
-    }else{
-      if(totalEnabled < 2) return;
-      rect.attr('class', 'disabled');
-      enabled = false;
-    }
+  //   if(rect.attr('class')==='disabled'){
+  //     rect.attr('class','');
+  //   }else{
+  //     if(totalEnabled < 2) return;
+  //     rect.attr('class', 'disabled');
+  //     enabled = false;
+  //   }
 
-    pie.value(function(d){
-      if(d.venue===venue)d.enabled=enabled;
-      return(d.enabled)?d.publications:0;
-    })
+  //   pie.value(function(d){
+  //     if(d.venue===venue)d.enabled=enabled;
+  //     return(d.enabled)?d.publications:0;
+  //   })
 
-    path = path.data(pie(dataset));
+  //   path = path.data(pie(dataset));
 
-    path.transition()
-    .duration(750)
-    .attrTween('d', function(d){
-      var interpolate = d3.interpolate(this._current,d);
-      this._current = interpolate(0);
-      return function(t){
-        return arc(interpolate(t));
-      };
-    });
-  });
+  //   path.transition()
+  //   .duration(750)
+  //   .attrTween('d', function(d){
+  //     var interpolate = d3.interpolate(this._current,d);
+  //     this._current = interpolate(0);
+  //     return function(t){
+  //       return arc(interpolate(t));
+  //     };
+  //   });
+  // });
 
-  legend.append('text')
-  .attr('x', legendRectSize + legendSpacing)
-  .attr('y', legendRectSize - legendSpacing)
-  .text(function(d) { return d; });
-
+  // legend.append('text')
+  // .attr('x', legendRectSize + legendSpacing)
+  // .attr('y', legendRectSize - legendSpacing)
+  // .text(function(d) { return d; });
+})
 })(window.d3);

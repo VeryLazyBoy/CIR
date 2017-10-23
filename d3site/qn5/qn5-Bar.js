@@ -1,42 +1,44 @@
 (function(d3) {
   'use strict';
   //data from API
-  var results = [
-  {
-    'venue': 'Earth',
-    'publications':2134
-  },
-  {
-    'venue': 'Mars',
-    'publications':4352
-  },
-  {
-    'venue': 'Jupiter',
-    'publications':45645
-  },
-  {
-    'venue': 'Saturn',
-    'publications':3242
-  },
-  {
-    'venue': 'Venus',
-    'publications':6576
-  }
-  ];
+  // var results = [
+  // {
+  //   'venue': 'Earth',
+  //   'publications':2134
+  // },
+  // {
+  //   'venue': 'Mars',
+  //   'publications':4352
+  // },
+  // {
+  //   'venue': 'Jupiter',
+  //   'publications':45645
+  // },
+  // {
+  //   'venue': 'Saturn',
+  //   'publications':3242
+  // },
+  // {
+  //   'venue': 'Venus',
+  //   'publications':6576
+  // }
+  // ];
   // $.ajax({
  //        url: "http://rest-service.guides.spring.io/greeting"
  //    }).then(function(data) {
  //       $('.greeting-id').append(data.id);
  //       $('.greeting-content').append(data.content);
  //    });
+d3.json("../json/venue_sector.json", function(results) {
+
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 100}
 var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 400 - verticalMargin;
-var width = 800 - horizontalMargin;
+var height = 2000 - verticalMargin;
+var width = 100000 - horizontalMargin;
 var barWidth = 40;
 var barOffset = 20;
 
@@ -104,8 +106,8 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 
   var currentvenue = data.venue;
   var currentpublications = data.publications;
-  tooltip.select('.label').html("venue: "+currentvenue);
-  tooltip.select('.count').html("publications: "+currentpublications);
+  tooltip.select('.label').html("Venue: "+currentvenue);
+  tooltip.select('.count').html("Publications: "+currentpublications);
   tooltip.style('display','block');
 })
 .on('mouseout', function(data) { // mouse out changes the color back to the original color
@@ -128,7 +130,7 @@ var verticalGuideScale = d3.scale.linear()
 var vAxis = d3.svg.axis()
 .scale(verticalGuideScale)
 .orient('left')
-.ticks(10);
+.ticks(30);
 
 var verticalGuide = d3.select('svg').append('g')
 vAxis(verticalGuide)
@@ -153,4 +155,5 @@ horizontalGuide.selectAll('path')
 .style({fill: 'none', stroke: barColor})
 horizontalGuide.selectAll('line')
 .style({stroke: barColor});
+})
 })(window.d3);

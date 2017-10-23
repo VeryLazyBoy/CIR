@@ -2,48 +2,48 @@
   'use strict';
   //var chartdata = [40, 60, 80, 100, 70, 200, 100, 60, 70, 150, 120, 140];
   //data from API
-  var results = [
-  {
-    'author': 'Shawn',
-    'publications':20
-  },
-  {
-    'author': 'Ben',
-    'publications':40
-  },
-  {
-    'author': 'Caren',
-    'publications':90
-  },
-  {
-    'author': 'Dave',
-    'publications':110
-  },
-  {
-    'author': 'Zack',
-    'publications':60
-  },
-  {
-    'author': 'Frank',
-    'publications':70
-  },
-  {
-    'author': 'Batista',
-    'publications':300
-  },
-  {
-    'author': 'Barney',
-    'publications':233
-  },
-  {
-    'author': 'Oscar',
-    'publications':1
-  },
-  {
-    'author': 'Nick',
-    'publications':10
-  }
-  ];
+  // var results = [
+  // {
+  //   'author': 'Shawn',
+  //   'publications':20
+  // },
+  // {
+  //   'author': 'Ben',
+  //   'publications':40
+  // },
+  // {
+  //   'author': 'Caren',
+  //   'publications':90
+  // },
+  // {
+  //   'author': 'Dave',
+  //   'publications':110
+  // },
+  // {
+  //   'author': 'Zack',
+  //   'publications':60
+  // },
+  // {
+  //   'author': 'Frank',
+  //   'publications':70
+  // },
+  // {
+  //   'author': 'Batista',
+  //   'publications':300
+  // },
+  // {
+  //   'author': 'Barney',
+  //   'publications':233
+  // },
+  // {
+  //   'author': 'Oscar',
+  //   'publications':1
+  // },
+  // {
+  //   'author': 'Nick',
+  //   'publications':10
+  // }
+  // ];
   
  //   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
   // $.getJSON( flickerAPI, {
@@ -54,14 +54,17 @@
   //   .done(function( data ) {
   //     alert(data);
   //   });
+d3.json("../json/author_bar.json", function(results) {
+
+
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 50}
 var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 400 - verticalMargin;
-var width = 800 - horizontalMargin;
+var height = 800 - verticalMargin;
+var width = 1600 - horizontalMargin;
 var barWidth = 40;
 var barOffset = 20;
 
@@ -178,4 +181,5 @@ horizontalGuide.selectAll('path')
 .style({fill: 'none', stroke: barColor})
 horizontalGuide.selectAll('line')
 .style({stroke: barColor});
+})
 })(window.d3);

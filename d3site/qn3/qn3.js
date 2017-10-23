@@ -1,48 +1,48 @@
 (function(d3) {
   'use strict';
   //data from API
-  var results = [
-  {
-    'year': 2000,
-    'publications':2134
-  },
-  {
-    'year': 2001,
-    'publications':4352
-  },
-  {
-    'year': 2002,
-    'publications':45645
-  },
-  {
-    'year': 2003,
-    'publications':3242
-  },
-  {
-    'year': 2004,
-    'publications':6576
-  },
-  {
-    'year': 2005,
-    'publications':13414
-  },
-  {
-    'year': 2006,
-    'publications':43577
-  },
-  {
-    'year': 2007,
-    'publications':4422
-  },
-  {
-    'year': 2008,
-    'publications':65234
-  },
-  {
-    'year': 2009,
-    'publications':12348
-  }
-  ];
+  // var results = [
+  // {
+  //   'year': 2000,
+  //   'publications':2134
+  // },
+  // {
+  //   'year': 2001,
+  //   'publications':4352
+  // },
+  // {
+  //   'year': 2002,
+  //   'publications':45645
+  // },
+  // {
+  //   'year': 2003,
+  //   'publications':3242
+  // },
+  // {
+  //   'year': 2004,
+  //   'publications':6576
+  // },
+  // {
+  //   'year': 2005,
+  //   'publications':13414
+  // },
+  // {
+  //   'year': 2006,
+  //   'publications':43577
+  // },
+  // {
+  //   'year': 2007,
+  //   'publications':4422
+  // },
+  // {
+  //   'year': 2008,
+  //   'publications':65234
+  // },
+  // {
+  //   'year': 2009,
+  //   'publications':12348
+  // }
+  // ];
 
  // $.ajax({
  //        url: "http://rest-service.guides.spring.io/greeting"
@@ -50,14 +50,17 @@
  //       $('.greeting-id').append(data.id);
  //       $('.greeting-content').append(data.content);
  //    });
+
+d3.json("../json/year_line.json", function(results) {
+
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 100, bottom: 30, left: 100}
 var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 400 - verticalMargin;
-var width = 800 - horizontalMargin;
+var height = 800 - verticalMargin;
+var width = 1400 - horizontalMargin;
 var lineWidth = 40;
 var lineOffset = 20;
 
@@ -154,4 +157,5 @@ horizontalGuide.selectAll('path')
 .style({stroke: 'none', stroke: lineColor})
 horizontalGuide.selectAll('line')
 .style({stroke: lineColor});
+})
 })(window.d3);
