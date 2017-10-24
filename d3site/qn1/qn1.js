@@ -45,15 +45,11 @@
   // }
   // ];
   
- //   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-  // $.getJSON( flickerAPI, {
-  //   tags: "mount rainier",
-  //   tagmode: "any",
-  //   format: "json"
-  //   })
-  //   .done(function( data ) {
-  //     alert(data);
-  //   });
+    // $.ajax({
+ //        url: "http://localhost:8080/json/authors?venue=arXiv&top=10"
+ //    }).then(function(results) {
+ //       alert(results);
+ 
 d3.json("../json/author_bar.json", function(results) {
 
 
@@ -63,8 +59,8 @@ var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 800 - verticalMargin;
-var width = 1600 - horizontalMargin;
+var height = 500 - verticalMargin;
+var width = 800 - horizontalMargin;
 var barWidth = 40;
 var barOffset = 20;
 
@@ -171,7 +167,8 @@ var hAxis = d3.svg.axis()
 .scale(xScale)
 .orient('bottom')
 .tickFormat(function(i){ //X axis author names
-  return results[i].author;
+  // return results[i].author;
+  return "";
 });
 
 var horizontalGuide = d3.select('svg').append('g')

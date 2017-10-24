@@ -23,12 +23,11 @@
   //   'publications':6576
   // }
   // ];
+  
   // $.ajax({
- //        url: "http://rest-service.guides.spring.io/greeting"
- //    }).then(function(data) {
- //       $('.greeting-id').append(data.id);
- //       $('.greeting-content').append(data.content);
- //    });
+ //        url: "http://localhost:8080/json/venues?year=2016"
+ //    }).then(function(results) {
+ //       alert(results);
 d3.json("../json/venue_sector.json", function(results) {
 
 //Margins to accommodate X and Y axis labels

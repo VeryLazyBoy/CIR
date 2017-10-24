@@ -43,12 +43,11 @@
   //   'citations':12348
   // }
   // ];
+   
   // $.ajax({
-  //       url: "http://rest-service.guides.spring.io/greeting"
-  //   }).then(function(data) {
-  //      $('.greeting-id').append(data.id);
-  //      $('.greeting-content').append(data.content);
-  //   });
+ //        url: "http://localhost:8080/json/articles?venue=arXiv&top=5"
+ //    }).then(function(results) {
+ //       alert(results);
 
 d3.json("../json/article_bar.json", function(results) {
 
@@ -58,8 +57,8 @@ var verticalMargin = margin.top + margin.bottom;
 var horizontalMargin = margin.left + margin.right;
 
 //Sizes and Offsets
-var height = 800 - verticalMargin;
-var width = 1600 - horizontalMargin;
+var height = 500 - verticalMargin;
+var width = 800 - horizontalMargin;
 var barWidth = 40;
 var barOffset = 20;
 
@@ -166,7 +165,8 @@ var hAxis = d3.svg.axis()
 .scale(xScale)
 .orient('bottom')
 .tickFormat(function(i){ //X axis title names
-  return results[i].title;
+  // return results[i].title;
+  return "";
 });
 
 var horizontalGuide = d3.select('svg').append('g')

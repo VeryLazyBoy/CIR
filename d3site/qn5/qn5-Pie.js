@@ -32,8 +32,8 @@
  //    });
   d3.json("../json/venue_sector.json", function(dataset) {
 
-  var width = 16000;
-  var height = 16000;
+  var width = 1000;
+  var height = 1000;
   var radius = Math.min(width, height) / 2;
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
