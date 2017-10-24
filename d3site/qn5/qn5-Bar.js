@@ -118,7 +118,7 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
 
 })
 .on('mousemove', function(data){
-  tooltip.style('top', (d3.event.layerY + 10) + 'px')
+  tooltip.style('top', (d3.event.layerY - 50) + 'px')
   .style('left', (d3.event.layerX + 10)+'px')
 });
 
@@ -145,7 +145,8 @@ var hAxis = d3.svg.axis()
 .scale(xScale)
 .orient('bottom')
 .tickFormat(function(i){ //X axis venue names
-  return results[i].venue;
+  // return results[i].venue;
+  return "";
 });
 
 var horizontalGuide = d3.select('svg').append('g')
