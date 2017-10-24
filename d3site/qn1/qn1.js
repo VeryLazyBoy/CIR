@@ -45,12 +45,12 @@
   // }
   // ];
   
-    // $.ajax({
- //        url: "http://localhost:8080/json/authors?venue=arXiv&top=10"
- //    }).then(function(results) {
- //       alert(results);
+    $.ajax({
+        url: "http://localhost:8080/json/authors?venue=arXiv&top=10"
+    }).then(function(results) {
+       alert(results);
  
-d3.json("../json/author_bar.json", function(results) {
+// d3.json("../json/author_bar.json", function(results) {
 
 
 //Margins to accommodate X and Y axis labels

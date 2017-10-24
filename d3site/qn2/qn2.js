@@ -44,12 +44,12 @@
   // }
   // ];
    
-  // $.ajax({
- //        url: "http://localhost:8080/json/articles?venue=arXiv&top=5"
- //    }).then(function(results) {
- //       alert(results);
+  $.ajax({
+        url: "http://localhost:8080/json/articles?venue=arXiv&top=5"
+    }).then(function(results) {
+       alert(results);
 
-d3.json("../json/article_bar.json", function(results) {
+// d3.json("../json/article_bar.json", function(results) {
 
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 100}

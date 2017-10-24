@@ -24,12 +24,12 @@
   // }
   // ];
   
-  // $.ajax({
- //        url: "http://localhost:8080/json/venues?year=2016"
- //    }).then(function(results) {
- //       alert(results);
-d3.json("../json/venue_sector.json", function(results) {
-
+  $.ajax({
+        url: "http://localhost:8080/json/venues?year=2016"
+    }).then(function(results) {
+       alert(results);
+// d3.json("../json/venue_sector.json", function(results) {
+results.splice(0,1);
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 10, bottom: 30, left: 100}
 var verticalMargin = margin.top + margin.bottom;
@@ -102,12 +102,12 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
   barColor = this.style.fill;
   d3.select(this)
   .style('fill', hoverColor);
-
   var currentvenue = data.venue;
   var currentpublications = data.publications;
   tooltip.select('.label').html("Venue: "+currentvenue);
   tooltip.select('.count').html("Publications: "+currentpublications);
   tooltip.style('display','block');
+  
 })
 .on('mouseout', function(data) { // mouse out changes the color back to the original color
   d3.select(this)
