@@ -27,7 +27,7 @@
   $.ajax({
         url: "http://localhost:8080/json/venues?year=2016"
     }).then(function(results) {
-       alert(results);
+       alert("RESULTS LOADED!");
 // d3.json("../json/venue_sector.json", function(results) {
 results.splice(0,1);
 //Margins to accommodate X and Y axis labels

@@ -48,7 +48,7 @@
     $.ajax({
         url: "http://localhost:8080/json/authors?venue=arXiv&top=10"
     }).then(function(results) {
-       alert(results);
+       alert("RESULTS LOADED!");
  
 // d3.json("../json/author_bar.json", function(results) {
 

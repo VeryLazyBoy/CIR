@@ -72,12 +72,12 @@
   //     ]
   //   };
 
-// $.ajax({
- //        url: "http://localhost:8080/json/networks?base=Low-density%20parity%20check%20codes%20over%20GF(q)"
- //    }).then(function(results) {
- //       alert(results);
+$.ajax({
+        url: "http://localhost:8080/json/networks?base=Low-density%20parity%20check%20codes%20over%20GF(q)"
+    }).then(function(results) {
+       alert("RESULTS LOADED!");
 
- d3.json("../json/network.json", function(results) {
+ // d3.json("../json/network.json", function(results) {
 
 var uniqueIds = [];
 var uniqueArticles = [];

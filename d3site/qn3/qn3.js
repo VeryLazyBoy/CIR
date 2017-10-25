@@ -44,12 +44,12 @@
   // }
   // ];
 
- // $.ajax({
- //        url: "http://localhost:8080/json/publications?venue=arXiv"
- //    }).then(function(results) {
- //       alert(results);
+ $.ajax({
+        url: "http://localhost:8080/json/publications?venue=arXiv"
+    }).then(function(results) {
+       alert("RESULTS LOADED!");
 
-d3.json("../json/year_line.json", function(results) {
+// d3.json("../json/year_line.json", function(results) {
 
 //Margins to accommodate X and Y axis labels
 var margin = {top: 30, right: 100, bottom: 30, left: 100}
