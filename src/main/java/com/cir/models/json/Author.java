@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Author implements Comparable<Author> {
 
     @JsonProperty("ids")
-    private List<String> ids = null;
+    private List<String> ids = null; // Nullable
     @JsonProperty("name")
-    private String name;
+    private String name; // Assume format is consistent
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -112,10 +112,12 @@ public class Author implements Comparable<Author> {
     }
 
     public String getId() {
-        if (ids.size() != 1) {
-            throw new RuntimeException("!!!!");
-        } else {
+        if (ids.size() > 1) {
+            throw new RuntimeException("This author " + name + " has two ids");
+        } else if (ids.size() == 1) {
             return ids.get(0);
+        } else {
+            return "";
         }
     }
     // Descending

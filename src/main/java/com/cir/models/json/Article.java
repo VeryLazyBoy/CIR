@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "title", "venue", "year" })
 public class Article implements Comparable<Article> {
 
+    // Assumes each field's format is consistent
     @JsonProperty("authors")
     private List<Author> authors = null;
     @JsonProperty("id")
@@ -94,7 +95,11 @@ public class Article implements Comparable<Article> {
 
     @JsonProperty("id")
     public String getId() {
-        return id;
+        if (id == null) {
+            throw new RuntimeException("This article " + title + " has no id");
+        } else {
+            return id;
+        }
     }
 
     @JsonProperty("id")
@@ -174,7 +179,11 @@ public class Article implements Comparable<Article> {
 
     @JsonProperty("venue")
     public String getVenue() {
-        return venue;
+        if (venue == null) {
+            return "N.A.";
+        } else {
+            return venue;    
+        }
     }
 
     @JsonProperty("venue")
@@ -253,11 +262,20 @@ public class Article implements Comparable<Article> {
         }
     }
 
+    public boolean isInYear(int year) {
+        if (this.year == null) {
+            return false;
+        } else {
+            return this.year == year;
+        }
+    }
+
     public int getCitationTimes() {
         return inCitations.size();
     }
 
     public List<String> getAuthorNames() {
+        // authors can be empty
         List<String> result = new ArrayList<>();
         for (Author a : authors) {
             result.add(a.getName());
