@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.cir.controllers.jsonobj.ArticleBar;
 import com.cir.controllers.jsonobj.ArticleNetwork;
@@ -25,9 +26,15 @@ public class JsonService {
      * the same, the one whose name alphabetically smaller ranks first; if name still same,
      * the one whose id alphabetically smaller ranks first.
      **/
-    public List<AuthorBar> getTopAuthorsWithVenueInJson(@QueryParam("venue") String venue,
+    public Response getTopAuthorsWithVenueInJson(@QueryParam("venue") String venue,
             @QueryParam("top") int top) {
-        return datasetsIR.getTopAuthorsWithVenue(top, venue);
+        List<AuthorBar> result = datasetsIR.getTopAuthorsWithVenue(top, venue);
+        return Response.ok()
+                       .entity(result)
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS")
+                       .build();
     }
 
     @GET
@@ -38,9 +45,15 @@ public class JsonService {
      * the same, the one whose title alphabetically smaller ranks first; if title still same,
      * the one whose id alphabetically smaller ranks first.
      **/
-    public List<ArticleBar> getTopArticlesWithVenueInJson(@QueryParam("venue") String venue,
+    public Response getTopArticlesWithVenueInJson(@QueryParam("venue") String venue,
             @QueryParam("top") int top) {
-        return datasetsIR.getTopArticlesWithVenue(top, venue);
+        List<ArticleBar> result = datasetsIR.getTopArticlesWithVenue(top, venue);
+        return Response.ok()
+                       .entity(result)
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS")
+                       .build();
     }
 
     @GET
@@ -49,21 +62,40 @@ public class JsonService {
     /**
      * Sorted by year.
      **/
-    public List<YearLine> getPublicationNumAcrossYearWithVenueInJson(@QueryParam("venue") String venue){
-        return datasetsIR.getPublicationNumAcrossYearWithVenue(venue);
+    public Response getPublicationNumAcrossYearWithVenueInJson(@QueryParam("venue") String venue){
+        List<YearLine> result = datasetsIR.getPublicationNumAcrossYearWithVenue(venue);
+        return Response.ok()
+                       .entity(result)
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS")
+                       .build();
     }
 
     @GET
     @Path("/networks")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArticleNetwork getBaseArticleNetwork(@QueryParam("base") String base) {
-        return datasetsIR.getBaseArticleNetwork(base);
+    public Response getBaseArticleNetwork(@QueryParam("base") String base) {
+        ArticleNetwork result = datasetsIR.getBaseArticleNetwork(base);
+        return Response.ok()
+                .entity(result)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
     }
 
     @GET
     @Path("/venues")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<VenueSector> getPublciationNumForVenuesInYear(@QueryParam("year") int year) {
-        return datasetsIR.getPublicationNumForVenuesInYear(year);
+    public Response getPublciationNumForVenuesInYear(@QueryParam("year") int year) {
+        List<VenueSector> result = datasetsIR.getPublicationNumForVenuesInYear(year);
+        return Response.ok()
+                .entity(result)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS")
+                .build();
+        
     }
 }
