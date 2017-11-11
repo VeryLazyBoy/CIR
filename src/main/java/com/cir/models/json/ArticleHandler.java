@@ -2,8 +2,6 @@ package com.cir.models.json;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,9 +21,7 @@ public class ArticleHandler {
 	List<Article> allArticles = new ArrayList<>();
 	Map<String, Article> idToArticleMap = new HashMap<>();
 
-//	private String filePath = "/json/123.json";
-//	private String filePath = "/json/dummy.json";
-	private String filePath = "/json/dataset.json";
+	private String filePath = "datasets/json/dataset.json";
 
 	public ArticleHandler() {
 		unmarshal();
@@ -41,8 +37,7 @@ public class ArticleHandler {
 	private void unmarshal() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-		    InputStream in = this.getClass().getResourceAsStream(filePath); // Reads as stream, not a file
-            allArticles = mapper.readValue(in, new TypeReference<List<Article>>(){});
+		    allArticles = mapper.readValue(new File(filePath), new TypeReference<List<Article>>(){});
         } catch (JsonParseException e) {
             e.printStackTrace();
         } catch (JsonMappingException e) {
