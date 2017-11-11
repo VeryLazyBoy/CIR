@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- JS file -->
+     <script src="https://https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="jquery.easy-autocomplete.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<!-- CSS file -->
+<link rel="stylesheet" href="easy-autocomplete.min.css"> 
+
+<!-- Additional CSS Themes file - not required-->
+<link rel="stylesheet" href="easy-autocomplete.themes.min.css"> 
+   
+    <style type="text/css">
+        
+        .navbar{
+
+          border-style: solid;
+        }
+
+      </style>
+
+  </head>
+  <body>
+
+  
+	 <div class="container" style="background-color:lightblue; border-style:solid; padding-bottom: 15px;">
+  	  <h2>CIR Home</h2>
+    <div>
+
+      Trend 1
+      <div class="form-group row">
+
+       <label for="SYear" class="col-2 col-form-label">Start Year:</label>
+       <div class="col-1">
+        <input class="form-control" type="text"  id="SYear" name="SYear">
+       </div>
+       <label for="EYear" class="col-1 col-form-label">End Year:</label>
+       <div class="col-1">
+        <input class="form-control" type="text" name="EYear" id="EYear">
+       </div>
+       <label for="child_contact" class="col-1 col-form-label">Venue:</label>
+       <div class="col-6">
+        <input type="text" id="T1Venue" list="venueList" placeholder="e.g. datalist">
+
+         
+       </div>
+      </div>
+
+      <div class="row">
+       <div class="col-12 text-center">
+         <input class="btn btn-primary" id ="T1Submit" name="submit" type="submit" value="Submit" />
+       </div>
+      </div>  
+
+      Trend 2
+
+      <div class="form-group row">
+       <label for="child_password" class="col-2 col-form-label">Year:</label>
+       <div class="col-2">
+        <input class="form-control" type="password" name="child_password" id="child_password">
+       </div>
+       <label for="child_confirmpassword" class="col-2 col-form-label">Venue:</label>
+       <div class="col-6">
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
+    <option selected>Choose...</option>
+    <option value="1">Primary One</option>
+    <option value="2">Primary Two</option>
+    <option value="3">Primary Three</option>
+    <option value="4">Primary Four</option>
+    <option value="5">Primary Five</option>
+    <option value="6">Primary Six</option>
+  </select>
+       </div>
+       
+       </div>
+
+       <div class="row">
+       <div class="col-12 text-center">
+         <input class="btn btn-primary" id ="T2Submit" name="submit" type="submit" value="Submit" />
+       </div>
+      </div>
+
+       Trend 3
+       
+       <div class="form-group row">
+        <label for="child_birthdate" class="col-2 col-form-label">Top:</label>
+       <div class="col-2">
+        <input class="form-control" type="text" id="child_birthdate" name="child_birthdate" placeholder="value">
+       </div>
+       <label for="child_level" class="col-2 col-form-label">Type:</label>
+       <div class="col-4">
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
+    <option selected>Choose...</option>
+    <option value="1">Primary One</option>
+    <option value="2">Primary Two</option>
+    <option value="3">Primary Three</option>
+    <option value="4">Primary Four</option>
+    <option value="5">Primary Five</option>
+    <option value="6">Primary Six</option>
+  </select>
+       </div>
+       </div>    
+
+	   <div class="row">
+       <div class="col-12 text-center">
+         <input class="btn btn-primary" id ="T3Submit" name="submit" type="submit" value="Submit" />
+       </div>
+      </div>
+
+	</div>
+	</div>
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+   
+    
+    
+
+
+      <script type="text/javascript">
+
+      var T1Syear = 0;
+      var T1Eyear = 0;
+      var T2Year =0;
+
+      var options = {
+        url: "venueList.json",
+
+        getValue: "venue",
+
+  list: {
+    match: {
+      enabled: true
+    }
+  },
+  theme: "square"
+};
+
+$("#T1Venue").easyAutocomplete(options);
+      
+      /*var dataList = document.getElementById('venueList');
+      var input = document.getElementById('T1Venue');
+
+      // Create a new XMLHttpRequest.
+      var request = new XMLHttpRequest();
+
+      // Handle state changes for the request.
+      request.onreadystatechange = function(response) {
+        if (request.readyState === 4) {
+          if (request.status === 200) {
+          // Parse the JSON
+          var jsonOptions = JSON.parse(request.responseText);
+
+      // Loop over the JSON array.
+      jsonOptions.forEach(function(item) {
+        // Create a new <option> element.
+        var option = document.createElement('option');
+        // Set the value using the item in the JSON array.
+        option.value = item.get("venue");
+        // Add the <option> element to the <datalist>.
+        dataList.appendChild(option);
+      });
+
+      // Update the placeholder text.
+      input.placeholder = "e.g. datalist";
+    } else {
+      // An error occured :(
+      input.placeholder = "Couldn't load datalist options :(";
+    }
+  }
+};
+
+// Update the placeholder text.
+input.placeholder = "Loading options...";
+
+// Set up and make the request.
+request.open('GET', 'venueList.json', true);
+request.send();*/
+         
+    document.getElementById("T1Submit").onclick = function () {
+        T1Syear =document.getElementById("SYear").value;
+        T1Eyear =document.getElementById("EYear").value;
+        location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear;
+    };
+
+    document.getElementById("T2Submit").onclick = function () {
+        location.href = "T2.js";
+    };
+
+    document.getElementById("T3Submit").onclick = function () {
+        location.href = "T3.js";
+    };
+
+    </script>
+  </body>
+</html>
