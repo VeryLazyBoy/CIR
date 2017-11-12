@@ -1,1 +1,7 @@
 /bin/
+/target/
+*.json
+*.txt
+*.xml
+*.xsd
+!pom.xml
