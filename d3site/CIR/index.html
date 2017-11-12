@@ -22,6 +22,10 @@
           border-style: solid;
         }
 
+        .t3toplabel{
+           margin-left: 20px;
+        }
+
       </style>
 
   </head>
@@ -42,18 +46,20 @@
        <label for="EYear" class="col-1 col-form-label">End Year:</label>
        <div class="col-1">
         <input class="form-control" type="text" name="EYear" id="EYear">
+        </div>
        <div id='TextBoxesGroup'>
   <div id="TextBoxDiv1">
     <label>venue1 : </label><input type='textbox' id='textbox1' >
   </div>
 </div>
        
-        <input type='button' value='View List of venue' onclick="window.open('ListOfVenue.html')" id='getButtonValue'>
+        
 
-       </div>
+       
       </div>
 
       <div>
+        <input type='button' value='View List of venue' onclick="window.open('ListOfVenue.html')" id='getButtonValue'>
         <input type='button' value='Add Venue' id='addButton'>
         <input type='button' value='Remove Venue' id='removeButton'>
         
@@ -72,20 +78,20 @@
        <div class="col-2">
         <input class="form-control" type="password" name="child_password" id="child_password">
        </div>
-       <label for="child_confirmpassword" class="col-2 col-form-label">Venue:</label>
-       <div class="col-6">
-        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
-    <option selected>Choose...</option>
-    <option value="1">Primary One</option>
-    <option value="2">Primary Two</option>
-    <option value="3">Primary Three</option>
-    <option value="4">Primary Four</option>
-    <option value="5">Primary Five</option>
-    <option value="6">Primary Six</option>
-  </select>
-       </div>
+       
+       <div id='t2TextBoxesGroup'>
+  <div id="t2TextBoxDiv1">
+    <label>venue1 : </label><input type='textbox' id='t2textbox1' >
+  </div>
+</div>
        
        </div>
+
+       <div>
+        <input type='button' value='Add Venue' id='t2addButton'>
+        <input type='button' value='Remove Venue' id='t2removeButton'>
+        
+      </div>
 
        <div class="row">
        <div class="col-12 text-center">
@@ -96,23 +102,42 @@
        Trend 3
        
        <div class="form-group row">
-        <label for="child_birthdate" class="col-2 col-form-label">Top:</label>
-       <div class="col-2">
-        <input class="form-control" type="text" id="child_birthdate" name="child_birthdate" placeholder="value">
+        <label for="topvalue" class="t3toplabel">Top:</label>
+       <div class="col-1">
+        <input class="form-control" type="text" id="topvalue" name="topvalue" placeholder="value">
        </div>
-       <label for="child_level" class="col-2 col-form-label">Type:</label>
+       <label for="child_level" class="t3typelabel">Type:</label>
        <div class="col-4">
         <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
-    <option selected>Choose...</option>
-    <option value="1">Primary One</option>
-    <option value="2">Primary Two</option>
-    <option value="3">Primary Three</option>
-    <option value="4">Primary Four</option>
-    <option value="5">Primary Five</option>
-    <option value="6">Primary Six</option>
-  </select>
+          <option selected>Choose...</option>
+          <option value="1">Primary One</option>
+          <option value="2">Primary Two</option>
+          <option value="3">Primary Three</option>
+          <option value="4">Primary Four</option>
+          <option value="5">Primary Five</option>
+          <option value="6">Primary Six</option>
+        </select>
+        <label for="level" class="t3typelabel">Of:</label>
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
+          <option selected>Choose...</option>
+          <option value="1">Primary One</option>
+          <option value="2">Primary Two</option>
+          <option value="3">Primary Three</option>
+          <option value="4">Primary Four</option>
+          <option value="5">Primary Five</option>
+          <option value="6">Primary Six</option>
+        </select>
        </div>
-       </div>    
+
+        
+       
+
+       </div>  
+
+       <div>
+         <input type='button' value='View List of author' onclick="window.open('ListOfAuthor.html')" id='getButtonValue'>
+
+       </div>  
 
 	   <div class="row">
        <div class="col-12 text-center">
@@ -171,6 +196,41 @@
   counter--;
 
         $("#TextBoxDiv" + counter).remove();
+
+     });
+
+        var t2counter = 2;
+
+       $("#t2addButton").click(function () {
+
+
+  if(counter>10){
+            alert("Only 10 textboxes allow");
+            return false;
+  }
+
+  var newt2TextBoxDiv = $(document.createElement('div'))
+       .attr("id", 'TextBoxDiv' + t2counter);
+
+  newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
+        '<input type="text" name="venue' + t2counter +
+        '" id="venue' + t2counter + '" value="" >');
+
+  newt2TextBoxDiv.appendTo("#t2TextBoxesGroup");
+
+
+  t2counter++;
+     });
+
+        $("#t2removeButton").click(function () {
+  if(t2counter==1){
+          alert("No more textbox to remove");
+          return false;
+       }
+
+  t2counter--;
+
+        $("#t2TextBoxDiv" + t2counter).remove();
 
      });
 
