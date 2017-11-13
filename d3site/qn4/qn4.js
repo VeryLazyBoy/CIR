@@ -71,17 +71,172 @@
   //     } //C CITED BY D
   //     ]
   //   };
+var resultsParent = [
+  {
+    "articles": [
+      {
+        "id": "id1",
+        "title": "CS3219",
+        "authors": [
+          "Shawn",
+          "James"
+        ],
+        "level": 1
+      },
+      {
+        "id": "id2",
+        "title": "paper B",
+        "authors": [
+          "Trevor",
+          "Michael"
+        ],
+        "level": 3
+      },
+      {
+        "id": "id3",
+        "title": "paper C",
+        "authors": [
+          "Zack",
+          "Brown"
+        ],
+        "level": 2
+      },
+      {
+        "id": "id4",
+        "title": "paper D",
+        "authors": [
+          "Harald",
+          "Jonah"
+        ],
+        "level": 1
+      },
+      {
+        "id": "id5",
+        "title": "paper M",
+        "authors": [
+          "Matt",
+          "Bigsby"
+        ],
+        "level": 4
+      },
+      {
+        "id": "id6",
+        "title": "paper N",
+        "authors": [
+          "John",
+          "Green"
+        ],
+        "level": 3
+      }
+    ],
+    "links": [
+      {
+        "source": "id2",
+        "target": "id3"
+      },
+      {
+        "source": "id5",
+        "target": "id2"
+      },
+      {
+        "source": "id6",
+        "target": "id3"
+      },
+      {
+        "source": "id3",
+        "target": "id4"
+      }
+    ]
+  },
+  {
+    "articles": [
+      {
+        "id": "id11",
+        "title": "machinelearning",
+        "authors": [
+          "1Shawn",
+          "1James"
+        ],
+        "level": 1
+      },
+      {
+        "id": "id12",
+        "title": "paper 1B",
+        "authors": [
+          "1Trevor",
+          "1Michael"
+        ],
+        "level": 3
+      },
+      {
+        "id": "id13",
+        "title": "paper 1C",
+        "authors": [
+          "1Zack",
+          "1Brown"
+        ],
+        "level": 2
+      },
+      {
+        "id": "id14",
+        "title": "paper 1D",
+        "authors": [
+          "1Harald",
+          "1Jonah"
+        ],
+        "level": 1
+      },
+      {
+        "id": "id15",
+        "title": "paper 1M",
+        "authors": [
+          "1Matt",
+          "1Bigsby"
+        ],
+        "level": 4
+      },
+      {
+        "id": "id16",
+        "title": "paper 1N",
+        "authors": [
+          "1John",
+          "1Green"
+        ],
+        "level": 3
+      }
+    ],
+    "links": [
+      {
+        "source": "id12",
+        "target": "id13"
+      },
+      {
+        "source": "id15",
+        "target": "id12"
+      },
+      {
+        "source": "id16",
+        "target": "id13"
+      },
+      {
+        "source": "id13",
+        "target": "id14"
+      }
+    ]
+  }
+];
 
-$.ajax({
-        url: "http://localhost:8080/json/networks?base=Low-density%20parity%20check%20codes%20over%20GF(q)"
-    }).then(function(results) {
-       alert("RESULTS LOADED!");
+// $.ajax({
+//         url: "http://localhost:8080/json/networks?base=Low-density%20parity%20check%20codes%20over%20GF(q)"
+//     }).then(function(results) {
+//        alert("RESULTS LOADED!");
 
  // d3.json("../json/network.json", function(results) {
 
+for(var v = 0; v < resultsParent.length; v++){
+  var results = resultsParent[0];
 var uniqueIds = [];
 var uniqueArticles = [];
-
 for (var i = 0; i < results.articles.length; i++) {
   var exists = false;
   var id = results.articles[i].id;
@@ -96,6 +251,7 @@ for (var i = 0; i < results.articles.length; i++) {
   }
 }
 
+  console.log(results[0]);
     var svg = d3.select("#network").append('svg'),
     width = 2000,
     height = 2000;
@@ -127,7 +283,7 @@ for (var i = 0; i < results.articles.length; i++) {
       }
       return combinedString;
     };
-
+}
 
 var ticked = function() {
   link.attr("x1", function(d) { return d.source.x; })
@@ -190,5 +346,4 @@ node = node
 // .style("fill", function(d) { return color(d.level); })
 // .text(function(d) {return d.title;});
 
-})
 })(window.d3);

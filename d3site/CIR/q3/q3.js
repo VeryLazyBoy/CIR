@@ -13,46 +13,18 @@ $( document ).ready(function() {
   //data from API
   var results = [
   {
-    'title': 'Paper1',
-    'shawn':2134
+    "author": "Trump",
+    "publications": 1000
   },
   {
-    'title': 'Paper2',
-    'shawn':4352
+    "author": "Xi Jinping",
+    "publications": 100
   },
   {
-    'title': 'Paper3',
-    'shawn':45645
-  },
-  {
-    'title': 'Paper4',
-    'shawn':3242
-  },
-  {
-    'title': 'Paper5',
-    'shawn':6576
-  },
-  {
-    'title': 'Paper6',
-    'shawn':13414
-  },
-  {
-    'title': 'Paper7',
-    'shawn':43577
-  },
-  {
-    'title': 'Paper8',
-    'shawn':4422
-  },
-  {
-    'title': 'Paper9',
-    'shawn':65234
-  },
-  {
-    'title': 'Paper10',
-    'shawn':12348
+    "author":"Frank",
+    "publications":10
   }
-  ];
+];
   // $.ajax({
   //       url: "http://localhost:8080/json/articles?venue=arXiv&top=5"
   //   }).then(function(results) {
@@ -220,6 +192,15 @@ var generateAPIUrl = function(){
     break;
   }
   //add values if they exist
+  if($('#topValue').val()){
+    urlString += $('#topValue').val();
+  }
+  if($('#yearValue').val()){
+    urlString += $('#yearValue').val();
+  }
+  if($('#confValue').val()){
+    urlString += $('#confValue').val();
+  }
   if($('#topValue').val()){
     urlString += $('#topValue').val();
   }
