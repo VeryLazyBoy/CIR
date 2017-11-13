@@ -10,21 +10,26 @@
     <!-- JS file -->
     
 <!-- CSS file -->
-<link rel="stylesheet" href="easy-autocomplete.min.css"> 
+
 
 <!-- Additional CSS Themes file - not required-->
-<link rel="stylesheet" href="easy-autocomplete.themes.min.css"> 
+
    
     <style type="text/css">
         
-        .navbar{
-
-          border-style: solid;
+        .SYearLabel{
+           margin-left: 20px;
         }
 
         .t3toplabel{
            margin-left: 20px;
         }
+
+        .T2YearLabel{
+           margin-left: 20px;
+        }
+
+        
 
       </style>
 
@@ -39,7 +44,7 @@
       Trend 1
       <div class="form-group row">
 
-       <label for="SYear" class="col-2 col-form-label">Start Year:</label>
+       <label for="SYear" class="SYearLabel">Start Year:</label>
        <div class="col-1">
         <input class="form-control" type="text"  id="SYear" name="SYear">
        </div>
@@ -49,7 +54,7 @@
         </div>
        <div id='TextBoxesGroup'>
   <div id="TextBoxDiv1">
-    <label>venue1 : </label><input type='textbox' id='textbox1' >
+    <label>venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
   </div>
 </div>
        
@@ -74,14 +79,14 @@
       Trend 2
 
       <div class="form-group row">
-       <label for="child_password" class="col-2 col-form-label">Year:</label>
+       <label for="T2Year" class="T2YearLabel">Year:</label>
        <div class="col-2">
-        <input class="form-control" type="password" name="child_password" id="child_password">
+        <input class="form-control" type="textbox" name="T2Year" id="T2Year">
        </div>
        
        <div id='t2TextBoxesGroup'>
   <div id="t2TextBoxDiv1">
-    <label>venue1 : </label><input type='textbox' id='t2textbox1' >
+    <label>venue1 : </label><input type='textbox' id='t2venue1' name = 't2venue1' >
   </div>
 </div>
        
@@ -95,7 +100,7 @@
 
        <div class="row">
        <div class="col-12 text-center">
-         <input class="btn btn-primary" id ="T2Submit" name="submit" type="submit" value="Submit" />
+         <input class="btn btn-primary" id ="T2Submit" name="T2submit" type="submit" value="Submit" />
        </div>
       </div>
 
@@ -161,6 +166,7 @@
       <script type="text/javascript">
 
       var T1Syear = 0;
+      var T2year = 0;
       var T1Eyear = 0;
       var T2Year =0;
 
@@ -169,124 +175,100 @@
        $("#addButton").click(function () {
 
 
-  if(counter>10){
-            alert("Only 10 textboxes allow");
-            return false;
-  }
+       if(counter>10){
+                 alert("Only 10 textboxes allow");
+                 return false;
+       }     
 
-  var newTextBoxDiv = $(document.createElement('div'))
-       .attr("id", 'TextBoxDiv' + counter);
+       var newTextBoxDiv = $(document.createElement('div'))
+            .attr("id", 'TextBoxDiv' + counter);     
 
-  newTextBoxDiv.after().html('<label>venue'+ counter + ' : </label>' +
-        '<input type="text" name="venue' + counter +
-        '" id="venue' + counter + '" value="" >');
+       newTextBoxDiv.after().html('<label>venue'+ counter + ' : </label>' +
+             '<input type="text" name="venue' + counter +
+             '" id="venue' + counter + '" value="" >');     
 
-  newTextBoxDiv.appendTo("#TextBoxesGroup");
+       newTextBoxDiv.appendTo("#TextBoxesGroup");     
+     
 
+       counter++;
+          });     
 
-  counter++;
-     });
+             $("#removeButton").click(function () {
+       if(counter==1){
+               alert("No more textbox to remove");
+               return false;
+            }     
 
-        $("#removeButton").click(function () {
-  if(counter==1){
-          alert("No more textbox to remove");
-          return false;
-       }
+       counter--;     
 
-  counter--;
+             $("#TextBoxDiv" + counter).remove();     
 
-        $("#TextBoxDiv" + counter).remove();
-
-     });
+          });
 
         var t2counter = 2;
 
        $("#t2addButton").click(function () {
 
 
-  if(counter>10){
-            alert("Only 10 textboxes allow");
-            return false;
-  }
+         if(counter>10){
+                   alert("Only 10 textboxes allow");
+                   return false;
+         }       
 
-  var newt2TextBoxDiv = $(document.createElement('div'))
-       .attr("id", 'TextBoxDiv' + t2counter);
+         var newt2TextBoxDiv = $(document.createElement('div'))
+              .attr("id", 't2TextBoxDiv' + t2counter);       
 
-  newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
-        '<input type="text" name="venue' + t2counter +
-        '" id="venue' + t2counter + '" value="" >');
+         newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
+               '<input type="text" name="t2venue' + t2counter +
+               '" id="t2venue' + t2counter + '" value="" >');       
 
-  newt2TextBoxDiv.appendTo("#t2TextBoxesGroup");
+         newt2TextBoxDiv.appendTo("#t2TextBoxesGroup");
 
 
   t2counter++;
      });
 
         $("#t2removeButton").click(function () {
-  if(t2counter==1){
-          alert("No more textbox to remove");
-          return false;
-       }
+          if(t2counter==1){
+            alert("No more textbox to remove");
+            return false;
+          }
 
-  t2counter--;
+          t2counter--;
 
         $("#t2TextBoxDiv" + t2counter).remove();
 
      });
 
-
-
-
-
-
-      
-      /*var dataList = document.getElementById('venueList');
-      var input = document.getElementById('T1Venue');
-
-      // Create a new XMLHttpRequest.
-      var request = new XMLHttpRequest();
-
-      // Handle state changes for the request.
-      request.onreadystatechange = function(response) {
-        if (request.readyState === 4) {
-          if (request.status === 200) {
-          // Parse the JSON
-          var jsonOptions = JSON.parse(request.responseText);
-
-      // Loop over the JSON array.
-      jsonOptions.forEach(function(item) {
-        // Create a new <option> element.
-        var option = document.createElement('option');
-        // Set the value using the item in the JSON array.
-        option.value = item.get("venue");
-        // Add the <option> element to the <datalist>.
-        dataList.appendChild(option);
-      });
-
-      // Update the placeholder text.
-      input.placeholder = "e.g. datalist";
-    } else {
-      // An error occured :(
-      input.placeholder = "Couldn't load datalist options :(";
-    }
-  }
-};
-
-// Update the placeholder text.
-input.placeholder = "Loading options...";
-
-// Set up and make the request.
-request.open('GET', 'venueList.json', true);
-request.send();*/
+ 
          
     document.getElementById("T1Submit").onclick = function () {
         T1Syear =document.getElementById("SYear").value;
         T1Eyear =document.getElementById("EYear").value;
-        location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear;
+
+        var venues = document.getElementById("venue1").value;
+
+        for(t = 2; t<counter; t++){
+
+            venues= venues + '$$' + $('#venue' + t).val();
+
+        }
+
+        location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear+ "&Venues=" + venues;
     };
 
     document.getElementById("T2Submit").onclick = function () {
-        location.href = "T2.js";
+
+      T2Year = document.getElementById("T2Year").value;
+      var T2venues = document.getElementById("t2venue1").value;
+
+      for(t = 2; t<t2counter; t++){
+
+            T2venues= T2venues + '$$' + $('#t2venue' + t).val();
+
+      }
+
+        location.href = "T2.js?Year=" + T2Year + "&Venues=" + T2venues;
     };
 
     document.getElementById("T3Submit").onclick = function () {
