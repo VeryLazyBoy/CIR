@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-  var apiString = "";
+  var apiRoot = "localhost:8080/json/";
+
   var generateD3 = function(urlString) {
 
     //Clear the bar-chart
@@ -105,7 +106,7 @@ var tooltip = d3.select('#bar-chart')
 .append('div')
 .attr('class', 'bar-tooltip');
 tooltip.append('div')
-.attr('class', 'label');
+.attr('class', 'custom-tooltip-label');
 tooltip.append('div')
 .attr('class', 'count');
 
@@ -142,7 +143,7 @@ d3.select('#bar-chart').append('svg') // append SVG to id=bar-chart
   var xLabelToUpper = keys[0].toUpperCase();
   var yLabelToUpper = keys[1].toUpperCase();
 
-  tooltip.select('.label').html(xLabelToUpper+": "+currentX);
+  tooltip.select('.custom-tooltip-label').html(xLabelToUpper+": "+currentX);
   tooltip.select('.count').html(yLabelToUpper+": "+currentY);
   tooltip.style('display','block');
 })
@@ -196,26 +197,98 @@ horizontalGuide.selectAll('line')
 
 };
 var generateAPIUrl = function(){
-  var urlString;
-   Top = document.getElementById("topvalue").value;
-   TypeX= document.getElementById("TypeX").value;   
-   TypeY= document.getElementById("TypeY").value;
-   TypeYval= document.getElementById("TypeYvalue").value;
-   TypeY2 = document.getElementById("TypeY2").value;
-   TypY2val = document.getElementById("TypeY2value").value;
-   location.href = "T3.js?Top="+ Top + "&TypeX=" + TypeX + "&TypeY="+ TypeY + "&TypeYVal=" + TypeYval + "&TypeY2=" + TypeY2 + 
-   "&TypeY2Val="+ TypY2val;
-
-return urlString;
+  var urlString = apiRoot;
+  //get value of select
+  var val = $('#queryTypeSelect').val();
+  //add first filter
+  switch(val){
+    case '0':
+    case '1':
+    case '2':
+    urlString += "authors?"
+    break;
+    case '3':
+    case '4':
+    case '5':
+    urlString += "citedauthors?"
+    break;
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+    urlString += "citations?"
+    break;
+  }
+  //add values if they exist
+  if($('#topValue').val()){
+    urlString += $('#topValue').val();
+  }
+  return urlString;
 }
 
 $('#queryTypeSelect').on('change', function() {
-  alert( this.value );
-})
+  var top = false;
+  var year = false;
+  var conf = false;
+  var author = false;
+
+  var val = this.value;
+  console.log(val);
+  switch(val){
+    case '0':
+    case '3':
+    case '6':
+    top = true;
+    year = true;
+    conf = true;
+    break;
+    case '1':
+    case '4':
+    case '7':
+    top = true;
+    conf = true;
+    break;
+    case '2':
+    case '5':
+    case '8':
+    top = true;
+    year = true;
+    break;
+    case '9':
+    top = true;
+    author = true;
+    break;
+  }
+  console.log(top);
+  console.log(year);
+  console.log(conf);
+  console.log(author);
+  if(top){
+    $("#topInputContainer").removeClass("hidden");
+  }else{
+    $("#topInputContainer").addClass("hidden");
+  }
+  if(year){
+    $("#yearInputContainer").removeClass("hidden");
+  }else{
+    $("#yearInputContainer").addClass("hidden");
+  }
+  if(conf){
+    $("#confInputContainer").removeClass("hidden");
+  }else{
+    $("#confInputContainer").addClass("hidden");
+  }
+  if(author){
+    $("#authorInputContainer").removeClass("hidden");
+  }else{
+    $("#authorInputContainer").addClass("hidden");
+  }
+});
 
 $("#generateBtn").click(function(){
 
-var urlString = generateAPIUrl();
- generateD3(urlString);
-});
+  var urlString = generateAPIUrl();
+  generateD3(urlString);
+  });
+
 });

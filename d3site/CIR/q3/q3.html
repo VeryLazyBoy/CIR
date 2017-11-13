@@ -34,7 +34,7 @@
   <h1>Trend 3 - Bar Chart</h1>
   <h2>Top Authors, Cited Authors and Citations across Conferences and Years</h2>
   <div class="form-group row">
-    <div class="col-3">
+    <div>
       <label>Type:</label>
       <select id="queryTypeSelect" name="queryType">
         <option value="-1" selected>Type Of Query</option>
@@ -50,19 +50,23 @@
         <option value="9">Top Citations by an author</option>
       </select>
     </div>
-    <div class="col-3" id="topInputContainer">
-      <label>Top: </label>
-      <input class="form-control" type="text" id="topValue" name="topInput" placeholder="#number of results e.g. '10'">
+    <div class="hidden" id="topInputContainer">
+      <label>Number of Results: </label>
+      <input class="form-control" type="text" id="topValue" name="topInput" placeholder="e.g. '10'">
     </div>
-    <div class="col-3" id="yearInputContainer">
+    <div class="hidden"  id="yearInputContainer">
       <label>Year: </label>
-      <input class="form-control" type="text" id="yearValue" name="yearInput" placeholder="Year e.g. '2015'">
+      <input class="form-control" type="text" id="yearValue" name="yearInput" placeholder="e.g. '2015'">
     </div>
-    <div class="col-3" id="confInputContainer">
+    <div class="hidden" id="confInputContainer">
       <label>Conference: </label>
-      <input class="form-control" type="text" id="confValue" name="confInput" placeholder="Conference e.g. 'arXiv'">
+      <input class="form-control" type="text" id="confValue" name="confInput" placeholder="e.g. 'arXiv'">
     </div>
-    <div>
+    <div class="hidden" id="authorInputContainer">
+      <label>Author: </label>
+      <input class="form-control" type="text" id="authorValue" name="authorInput" placeholder="e.g. 'Trump'">
+    </div>
+    <div class="margins">
       <input class="btn btn-primary" type='button' value='Generate Chart' id='generateBtn'>
     </div>
 
@@ -71,7 +75,7 @@
     <!-- Javascript -->
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/d3.v3.min.js"></script>
-    <script src="../bootstrap/js/boostrap.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
     <script src="q3.js"></script>
   </body>
