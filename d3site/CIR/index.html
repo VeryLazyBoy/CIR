@@ -115,53 +115,6 @@ Trend 3
 
 
 
-       Trend 3
-       
-       <div class="form-group row">
-             <label for="topvalue" class="t3toplabel">Top:</label>
-             <div class="col-1">
-              <input class="form-control" type="text" id="topvalue" name="topvalue" placeholder="value">
-             </div>
-             <label for="TypeX" class="t3typelabel">Type:</label>
-             <div class="col-2">
-              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="TypeX" name="TypeX">
-                <option selected>Type X</option>
-                <option value="Author">Author</option>
-                <option value="CoAuthor">CoAuthor</option>
-                <option value="Citation">Citation</option>
-              </select>
-              </div>     
-      
-
-              <label for="TypeY" class="OfAnd">Of:</label>
-              <div class="col-1.5">
-              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="TypeY" name="TypeY">
-                <option selected>TypeY</option>
-                <option value="Conference">Conference</option>
-                <option value="Author">Author</option>
-                
-              </select>
-              </div>   
-
-              
-              <div class="col-1">
-               <input class="form-control" type="text" id="TypeYvalue" name="TypeYvalue" placeholder="value">
-              </div>
-
-              <label for="TypeY2" class="OfAnd">And</label>
-              <div class="col-1.5">
-              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="TypeY2" name="TypeY2">
-                <option selected>TypeY</option>
-                <option value="Year">Year</option>
-              </select>
-              </div>  
-
-              <div class="col-1">
-               <input class="form-control" type="text" id="TypeY2value" name="TypeY2value" placeholder="value">
-              </div> 
-
-
-       </div>
 
 </div>  
 
@@ -191,16 +144,6 @@ Trend 3
 
 <script type="text/javascript">
 
-      var T1Syear = 0;
-      var T2year = 0;
-      var T1Eyear = 0;
-      var T2Year =0;
-      var Top =0;
-      var TypeX=0;
-      var TypeY=0;
-      var TypeYvalue =0;
-      var TypeY2 =0;
-      var TypeY2value = 0;
   var T1Syear = 0;
   var T2year = 0;
   var T1Eyear = 0;
@@ -300,16 +243,6 @@ Trend 3
 
     for(t = 2; t<t2counter; t++){
 
-    document.getElementById("T3Submit").onclick = function () {
-           Top = document.getElementById("topvalue").value;
-            TypeX= document.getElementById("TypeX").value;   
-            TypeY= document.getElementById("TypeY").value;
-         TypeYval= document.getElementById("TypeYvalue").value;
-         TypeY2 = document.getElementById("TypeY2").value;
-         TypY2val = document.getElementById("TypeY2value").value;
-       location.href = "T3.js?Top="+ Top + "&TypeX=" + TypeX + "&TypeY="+ TypeY + "&TypeYVal=" + TypeYval + "&TypeY2=" + TypeY2 + 
-       "&TypeY2Val="+ TypY2val;
-    };
       T2venues= T2venues + '$$' + $('#t2venue' + t).val();
 
     }
