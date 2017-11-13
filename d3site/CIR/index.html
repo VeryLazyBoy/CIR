@@ -1,117 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <!-- JS file -->
-    
-<!-- CSS file -->
+  <!-- JS file -->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/d3.v3.min.js"></script>
+    <script src="js/d3.v4.min.js"></script>
 
+  <!-- CSS file -->
+  <link rel="stylesheet" href="css/style.css">
 
-<!-- Additional CSS Themes file - not required-->
-
-   
-    <style type="text/css">
-        
-        .SYearLabel{
-           margin-left: 20px;
-        }
-
-        .t3toplabel{
-           margin-left: 20px;
-        }
-
-        .T2YearLabel{
-           margin-left: 20px;
-        }
-        .t3typeylabel{
-          margin-left: 0px;
-        }
-        .t3Ytoplabel{
-          margin-left: 0px;
-        }
-        .OfAnd{
-          margin-right: 5px;
-        }
-
-
-
-      </style>
-
-  </head>
-  <body>
-
-  
-	 <div class="container" style="background-color:lightblue; border-style:solid; padding-bottom: 15px;">
-  	  <h2>CIR Home</h2>
-    <div>
-
-      Trend 1
-      <div class="form-group row">
-
-       <label for="SYear" class="SYearLabel">Start Year:</label>
-       <div class="col-1">
-        <input class="form-control" type="text"  id="SYear" name="SYear">
-       </div>
-       <label for="EYear" class="col-1 col-form-label">End Year:</label>
-       <div class="col-1">
-        <input class="form-control" type="text" name="EYear" id="EYear">
-        </div>
-       <div id='TextBoxesGroup'>
-  <div id="TextBoxDiv1">
-    <label>venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
+  <!-- Additional CSS Themes file - not required--> 
+</head>
+<body>
+  <div class="container" style="background-color:lightblue; border-style:solid; padding-bottom: 15px;">
+   <h2>CIR Home</h2>
+   <h3>Navigaton</h3>
+   <ul>
+     <li><a href="q3/q3.html">Question 3</a></li>
+   </ul>
+   <div>
+    Trend 1
+    <div class="form-group row container">
+     <label for="SYear" class="SYearLabel">Start Year:</label>
+     <div class="col-1">
+      <input class="form-control" type="text"  id="SYear" name="SYear">
+    </div>
+    <label for="EYear" class="col-1 col-form-label">End Year:</label>
+    <div class="col-1">
+      <input class="form-control" type="text" name="EYear" id="EYear">
+    </div>
+    <div id='TextBoxesGroup'>
+      <div id="TextBoxDiv1">
+        <label>venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
+      </div>
+    </div>
   </div>
-</div>
-       
-        
 
-       
-      </div>
+  <div>
+    <input type='button' value='View List of venue' onclick="window.open('ListOfVenue.html')" id='getButtonValue'>
+    <input type='button' value='Add Venue' id='addButton'>
+    <input type='button' value='Remove Venue' id='removeButton'>
 
-      <div>
-        <input type='button' value='View List of venue' onclick="window.open('ListOfVenue.html')" id='getButtonValue'>
-        <input type='button' value='Add Venue' id='addButton'>
-        <input type='button' value='Remove Venue' id='removeButton'>
-        
-      </div>
-
-      <div class="row">
-       <div class="col-12 text-center">
-         <input class="btn btn-primary" id ="T1Submit" name="submit" type="submit" value="Submit" />
-       </div>
-      </div>  
-
-      Trend 2
-
-      <div class="form-group row">
-       <label for="T2Year" class="T2YearLabel">Year:</label>
-       <div class="col-2">
-        <input class="form-control" type="textbox" name="T2Year" id="T2Year">
-       </div>
-       
-       <div id='t2TextBoxesGroup'>
-  <div id="t2TextBoxDiv1">
-    <label>venue1 : </label><input type='textbox' id='t2venue1' name = 't2venue1' >
   </div>
+
+  <div class="row">
+   <div class="col-12 text-center">
+     <input class="btn btn-primary" id ="T1Submit" name="submit" type="submit" value="Submit" />
+   </div>
+ </div>  
+
+ Trend 2
+
+ <div class="form-group row">
+   <label for="T2Year" class="T2YearLabel">Year:</label>
+   <div class="col-2">
+    <input class="form-control" type="textbox" name="T2Year" id="T2Year">
+  </div>
+
+  <div id='t2TextBoxesGroup'>
+    <div id="t2TextBoxDiv1">
+      <label>venue1 : </label><input type='textbox' id='t2venue1' name = 't2venue1' >
+    </div>
+  </div>
+
 </div>
-       
-       </div>
 
-       <div>
-        <input type='button' value='Add Venue' id='t2addButton'>
-        <input type='button' value='Remove Venue' id='t2removeButton'>
-        
-      </div>
+<div>
+  <input type='button' value='Add Venue' id='t2addButton'>
+  <input type='button' value='Remove Venue' id='t2removeButton'>
 
-       <div class="row">
-       <div class="col-12 text-center">
-         <input class="btn btn-primary" id ="T2Submit" name="T2submit" type="submit" value="Submit" />
-       </div>
-      </div>
+</div>
+
+<div class="row">
+ <div class="col-12 text-center">
+   <input class="btn btn-primary" id ="T2Submit" name="T2submit" type="submit" value="Submit" />
+ </div>
+</div>
+
+Trend 3
+
+<div class="form-group row">
+  <label for="topvalue" class="t3toplabel">Top:</label>
+  <div class="col-1">
+    <input class="form-control" type="text" id="topvalue" name="topvalue" placeholder="value">
+  </div>
+  <label for="child_level" class="t3typelabel">Type:</label>
+  <div class="col-4">
+    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
+      <option selected>Choose...</option>
+      <option value="1">Primary One</option>
+      <option value="2">Primary Two</option>
+      <option value="3">Primary Three</option>
+      <option value="4">Primary Four</option>
+      <option value="5">Primary Five</option>
+      <option value="6">Primary Six</option>
+    </select>
+    <label for="level" class="t3typelabel">Of:</label>
+    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="level" name="level">
+      <option selected>Choose...</option>
+      <option value="1">Primary One</option>
+      <option value="2">Primary Two</option>
+      <option value="3">Primary Three</option>
+      <option value="4">Primary Four</option>
+      <option value="5">Primary Five</option>
+      <option value="6">Primary Six</option>
+    </select>
+  </div>
+
+
 
        Trend 3
        
@@ -161,36 +163,33 @@
 
        </div>
 
-        
-       
+</div>  
 
-       </div>  
+<div>
+ <input type='button' value='View List of author' onclick="window.open('ListOfAuthor.html')" id='getButtonValue'>
 
-       <div>
-         <input type='button' value='View List of author' onclick="window.open('ListOfAuthor.html')" id='getButtonValue'>
+</div>  
 
-       </div>  
+<div class="row">
+ <div class="col-12 text-center">
+   <input class="btn btn-primary" id ="T3Submit" name="submit" type="submit" value="Submit" />
+ </div>
+</div>
 
-	   <div class="row">
-       <div class="col-12 text-center">
-         <input class="btn btn-primary" id ="T3Submit" name="submit" type="submit" value="Submit" />
-       </div>
-      </div>
+</div>
+</div>
 
-	</div>
-	</div>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
 
-  <!-- jQuery first, then Tether, then Bootstrap JS. -->
-   
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 
 
-      <script type="text/javascript">
+<script type="text/javascript">
 
       var T1Syear = 0;
       var T2year = 0;
@@ -202,107 +201,104 @@
       var TypeYvalue =0;
       var TypeY2 =0;
       var TypeY2value = 0;
+  var T1Syear = 0;
+  var T2year = 0;
+  var T1Eyear = 0;
+  var T2Year =0;
 
-      var counter = 2;
+  var counter = 2;
 
-       $("#addButton").click(function () {
-
-
-       if(counter>10){
-                 alert("Only 10 textboxes allow");
-                 return false;
-       }     
-
-       var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'TextBoxDiv' + counter);     
-
-       newTextBoxDiv.after().html('<label>venue'+ counter + ' : </label>' +
-             '<input type="text" name="venue' + counter +
-             '" id="venue' + counter + '" value="" >');     
-
-       newTextBoxDiv.appendTo("#TextBoxesGroup");     
-     
-
-       counter++;
-          });     
-
-             $("#removeButton").click(function () {
-       if(counter==1){
-               alert("No more textbox to remove");
-               return false;
-            }     
-
-       counter--;     
-
-             $("#TextBoxDiv" + counter).remove();     
-
-          });
-
-        var t2counter = 2;
-
-       $("#t2addButton").click(function () {
+  $("#addButton").click(function () {
 
 
-         if(counter>10){
-                   alert("Only 10 textboxes allow");
-                   return false;
-         }       
+   if(counter>10){
+     alert("Only 10 textboxes allow");
+     return false;
+   }     
 
-         var newt2TextBoxDiv = $(document.createElement('div'))
-              .attr("id", 't2TextBoxDiv' + t2counter);       
+   var newTextBoxDiv = $(document.createElement('div'))
+   .attr("id", 'TextBoxDiv' + counter);     
 
-         newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
-               '<input type="text" name="t2venue' + t2counter +
-               '" id="t2venue' + t2counter + '" value="" >');       
+   newTextBoxDiv.after().html('<label>venue'+ counter + ' : </label>' +
+     '<input type="text" name="venue' + counter +
+     '" id="venue' + counter + '" value="" >');     
 
-         newt2TextBoxDiv.appendTo("#t2TextBoxesGroup");
+   newTextBoxDiv.appendTo("#TextBoxesGroup");     
 
 
-  t2counter++;
-     });
+   counter++;
+ });     
 
-        $("#t2removeButton").click(function () {
-          if(t2counter==1){
-            alert("No more textbox to remove");
-            return false;
-          }
+  $("#removeButton").click(function () {
+   if(counter==1){
+     alert("No more textbox to remove");
+     return false;
+   }     
 
-          t2counter--;
+   counter--;     
 
-        $("#t2TextBoxDiv" + t2counter).remove();
+   $("#TextBoxDiv" + counter).remove();     
 
-     });
+ });
 
- 
-         
-    document.getElementById("T1Submit").onclick = function () {
-        T1Syear =document.getElementById("SYear").value;
-        T1Eyear =document.getElementById("EYear").value;
+  var t2counter = 2;
 
-        var venues = document.getElementById("venue1").value;
+  $("#t2addButton").click(function () {
 
-        for(t = 2; t<counter; t++){
 
-            venues= venues + '$$' + $('#venue' + t).val();
+   if(counter>10){
+     alert("Only 10 textboxes allow");
+     return false;
+   }       
 
-        }
+   var newt2TextBoxDiv = $(document.createElement('div'))
+   .attr("id", 't2TextBoxDiv' + t2counter);       
 
-        location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear+ "&Venues=" + venues;
-    };
+   newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
+     '<input type="text" name="t2venue' + t2counter +
+     '" id="t2venue' + t2counter + '" value="" >');       
 
-    document.getElementById("T2Submit").onclick = function () {
+   newt2TextBoxDiv.appendTo("#t2TextBoxesGroup");
 
-      T2Year = document.getElementById("T2Year").value;
-      var T2venues = document.getElementById("t2venue1").value;
 
-      for(t = 2; t<t2counter; t++){
+   t2counter++;
+ });
 
-            T2venues= T2venues + '$$' + $('#t2venue' + t).val();
+  $("#t2removeButton").click(function () {
+    if(t2counter==1){
+      alert("No more textbox to remove");
+      return false;
+    }
 
-      }
+    t2counter--;
 
-        location.href = "T2.js?Year=" + T2Year + "&Venues=" + T2venues;
-    };
+    $("#t2TextBoxDiv" + t2counter).remove();
+
+  });
+
+
+
+  document.getElementById("T1Submit").onclick = function () {
+    T1Syear =document.getElementById("SYear").value;
+    T1Eyear =document.getElementById("EYear").value;
+
+    var venues = document.getElementById("venue1").value;
+
+    for(t = 2; t<counter; t++){
+
+      venues= venues + '$$' + $('#venue' + t).val();
+
+    }
+
+    location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear+ "&Venues=" + venues;
+  };
+
+  document.getElementById("T2Submit").onclick = function () {
+
+    T2Year = document.getElementById("T2Year").value;
+    var T2venues = document.getElementById("t2venue1").value;
+
+    for(t = 2; t<t2counter; t++){
 
     document.getElementById("T3Submit").onclick = function () {
            Top = document.getElementById("topvalue").value;
@@ -314,7 +310,17 @@
        location.href = "T3.js?Top="+ Top + "&TypeX=" + TypeX + "&TypeY="+ TypeY + "&TypeYVal=" + TypeYval + "&TypeY2=" + TypeY2 + 
        "&TypeY2Val="+ TypY2val;
     };
+      T2venues= T2venues + '$$' + $('#t2venue' + t).val();
 
-    </script>
-  </body>
+    }
+
+    location.href = "T2.js?Year=" + T2Year + "&Venues=" + T2venues;
+  };
+
+  document.getElementById("T3Submit").onclick = function () {
+    location.href = "T3.js";
+  };
+
+</script>
+</body>
 </html>

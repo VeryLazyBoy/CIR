@@ -45,7 +45,7 @@
   // ];
 
  $.ajax({
-        url: "http://localhost:8080/json/publications?venue=arXiv"
+        url: "http://localhost:8080/json/publications?venue=ICSE"
     }).then(function(results) {
        alert("RESULTS LOADED!");
 
