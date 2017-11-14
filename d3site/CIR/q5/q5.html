@@ -2,11 +2,11 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<title>Trend 4 - Network</title>
+	<title>Trend 5 - Wordcloud</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="network.css">
+	<link rel="stylesheet" href="wordcloud.css">
 </head>
 <body class="container-fluid">
 	<nav class="navbar navbar-default"> 
@@ -25,41 +25,38 @@
 					<li><a href="../index.html">Home</a></li>
 					<li><a href="../q1/qn1.html">Trend 1</a></li> 
 					<li><a href="../q3/q3.html">Trend 3</a></li> 
-					<li class="active"><a href="#">Trend 4</a></li> 
-					<li><a href="../q5/q5.html">Trend 5</a></li> 
+					<li><a href="../q4/qn4-Network.html">Trend 4</a></li> 
+					<li class="active"><a href="#">Trend 5</a></li> 
 				</ul> 
 			</div> 
 		</div> 
 	</nav>
-	<h1>Compare Citations of 2 Base Papers</h1> 
-	<div id="paper1InputContainer">
-      <label>Paper 1: </label>
-      <input class="form-control" type="text" id="paper1Value" name="paper1Input" placeholder="e.g. 'CS3219'">
+	<h1>Most Frequently Used Words In A Conference</h1> 
+	<div id="conferenceInputContainer">
+      <label>Conference Code: </label>
+      <input class="form-control" type="text" id="conferenceInput" placeholder="e.g. 'arXiv'">
     </div>
-    <div id="paper2InputContainer">
-      <label>Paper 2: </label>
-      <input class="form-control" type="text" id="paper2Value" name="paper2Input" placeholder="e.g. 'machinelearning'">
+    <div id="conferenceYearInputContainer">
+      <label>Conference Year: </label>
+      <input class="form-control" type="text" id="conferenceYearInput" placeholder="e.g. '2015'">
     </div>
     <div class="margins">
       <input class="btn btn-primary" type='button' value='Generate Chart' id='generateBtn'>
     </div>
 
-	<div id="network">
-		<svg id="networkSVG"></svg>
-	</div>
-	<svg>
-		<defs>
-			<marker id="arrow" viewbox="0 -5 10 10" refX="18" refY="0"
-			markerWidth="6" markerHeight="6" orient="auto">
-			<path d="M0,-5L10,0L0,5Z">
-			</marker>
-		</defs>
-	</svg>
+    <svg id="wordCloudDiv"></svg>
 
 	<!-- Javascript -->
 	<script src="../js/jquery-3.2.1.min.js"></script>
-	<script src="../js/d3.v4.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
-	<script src="qn4.js" type="text/javascript"></script>
+	<script src="../js/d3.v3.min.js"></script>
+	<script src="d3.layout.cloud.js"></script>
+	<script src="q5.js" type="text/javascript"></script>
 </body>
+<div style="width: 40%;">
+    <div class="legend">
+        Commonly used words are larger and slightly faded in color.  Less common words are smaller and darker.
+    </div>
+
+</div>
 </html>

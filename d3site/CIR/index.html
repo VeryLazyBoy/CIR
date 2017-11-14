@@ -38,6 +38,8 @@
         <li><a href="q1/qn1.html">Trend 1</a></li> 
         <li><a href="q3/q3.html">Trend 3</a></li> 
         <li><a href="q4/qn4-Network.html">Trend 4</a></li> 
+        <li><a href="../q5/q5.html">Trend 5</a></li> 
+
       </ul> 
     </div> 
   </div> 
@@ -170,20 +172,7 @@ Trend 3
 
 
 
-  document.getElementById("T1Submit").onclick = function () {
-    T1Syear =document.getElementById("SYear").value;
-    T1Eyear =document.getElementById("EYear").value;
-
-    var venues = document.getElementById("venue1").value;
-
-    for(t = 2; t<counter; t++){
-
-      venues= venues + '$$' + $('#venue' + t).val();
-
-    }
-
-    location.href = "T1.js?SYear=" + T1Syear + "&EYear=" + T1Eyear+ "&Venues=" + venues;
-  };
+  
 
   document.getElementById("T2Submit").onclick = function () {
 

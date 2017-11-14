@@ -280,24 +280,20 @@ $( document ).ready(function() {
 var generateAPIUrl = function(){
   var urlString = apiRoot;
   //add values if they exist
-  if($('#paper1Value').val()){
-    if($('#paper1InputContainer').is(":visible")){
+  if($('#paper1Value').val() && $('#paper2Value').val()){
       urlString += "paper1="+$('#paper1Value').val() + "&";
-    }
+      urlString += "paper2="+$('#paper2Value').val();
+      urlString = urlString.slice(0, -1); 
+      return urlString;//removes the last '&' from the string
   }
-  if($('#paper2Value').val()){
-    if($('#paper2InputContainer').is(":visible")){
-      urlString += "paper2="+$('#paper2Value').val() + "&";
-    }
-  }
-  urlString = urlString.slice(0, -1); //removes the last '&' from the string
-  return urlString;
 }
 
 $("#generateBtn").click(function(){
     var urlString = generateAPIUrl();
     console.log(urlString);
-    generateD3(urlString);
+    if(urlString != apiRoot){
+      generateD3(urlString);
+    }
 });
 
 

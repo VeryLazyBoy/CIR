@@ -223,6 +223,9 @@ var generateAPIUrl = function(){
     }
   }
   urlString = urlString.slice(0, -1); //removes the last '&' from the string
+  if(urlString == apiRoot){
+    return false;
+  }
   return urlString;
 }
 
