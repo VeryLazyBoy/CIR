@@ -36,7 +36,7 @@ $(document).ready(function() {
 //      ]
 //   }
 // ];
-// 
+
 var dataGroup = [
   {
     "confId": "arXiv2014",
@@ -113,22 +113,28 @@ var InitChart = function(){
             left: 50
         },
         lSpace = WIDTH/dataGroup.length;
-        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(data, function(d) {
-            // console.log("data of xscale (data) "+JSON.stringify(data));
-            // console.log("data of xscale (dataGroup) "+JSON.stringify(dataGroup));
-            // console.log("Formatted: " + formatValues(d[dataKeys[0]]))
-            return d[dataKeys[0]];
-        }), d3.max(data, function(d) {
-            return d[dataKeys[0]];
-        })]),
+        xScale = d3.scale.ordinal()
+        .rangePoints([MARGINS.left, WIDTH - MARGINS.right])
+        .domain(data.map(function(d) { 
+            console.log(d[dataKeys[0]]);
+            return d[dataKeys[0]]; 
+        }));
+        // .domain([d3.min(data, function(d) {
+        //     // console.log("data of xscale (data) "+JSON.stringify(data));
+        //     // console.log("data of xscale (dataGroup) "+JSON.stringify(dataGroup));
+        //     console.log("X: " + d[dataKeys[0]])
+        //     return d[dataKeys[0]];
+        // }), d3.max(data, function(d) {
+        //     return d[dataKeys[0]];
+        // })]),
         yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(data, function(d) {
             return d[dataKeys[1]];
         }), d3.max(data, function(d) {
             return d[dataKeys[1]];
         })]),
         xAxis = d3.svg.axis()
-        .scale(xScale)
-        .tickFormat(xAxisFormat),
+        .scale(xScale),
+        // .tickFormat(xAxisFormat),
         yAxis = d3.svg.axis()
         .scale(yScale)     
         .orient("left");
