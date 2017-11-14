@@ -43,36 +43,6 @@
   </div> 
 </nav>
    <div>
-    Trend 1
-    <div class="form-group row container">
-     <label for="SYear" class="SYearLabel">Start Year:</label>
-     <div class="col-1">
-      <input class="form-control" type="text"  id="SYear" name="SYear">
-    </div>
-    <label for="EYear" class="col-1 col-form-label">End Year:</label>
-    <div class="col-1">
-      <input class="form-control" type="text" name="EYear" id="EYear">
-    </div>
-
-  <div>
-    <input type='button' value='Add Venue' id='addButton'>
-    <input type='button' value='Remove Venue' id='removeButton'>
-    <a href="ListOfVenue.html" target="_blank">(view all venues)</a>
-  </div>
-    <div id='TextBoxesGroup'>
-      <div id="TextBoxDiv1">
-        <label>Venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row">
-   <div class="col-12 text-center">
-     <input class="btn btn-primary" id ="T1Submit" name="submit" type="submit" value="Submit" />
-   </div>
- </div>  
-
  Trend 2
 
  <div class="form-group row">
@@ -161,45 +131,7 @@ Trend 3
 
 <script type="text/javascript">
 
-  var T1Syear = 0;
-  var T2year = 0;
-  var T1Eyear = 0;
-  var T2Year =0;
-
-  var counter = 2;
-
-  $("#addButton").click(function () {
-
-
-   if(counter>10){
-     alert("Only 10 textboxes allow");
-     return false;
-   }     
-
-   var newTextBoxDiv = $(document.createElement('div'))
-   .attr("id", 'TextBoxDiv' + counter);     
-
-   newTextBoxDiv.after().html('<label>Venue'+ counter + ' : </label>' +
-     '<input type="text" name="venue' + counter +
-     '" id="venue' + counter + '" value="" >');     
-
-   newTextBoxDiv.appendTo("#TextBoxesGroup");     
-
-
-   counter++;
- });     
-
-  $("#removeButton").click(function () {
-   if(counter==2){
-     alert("No more textbox to remove");
-     return false;
-   }     
-
-   counter--;     
-
-   $("#TextBoxDiv" + counter).remove();     
-
- });
+  
 
   var t2counter = 2;
 

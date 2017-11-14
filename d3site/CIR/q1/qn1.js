@@ -71,37 +71,100 @@ var dataGroup = [
         "citations": 7
       }
     ]
+  },
+  {
+    "confId": "Shawn",
+    "venueline": [
+      {
+        "conference": "abc",
+        "citations": 10
+      },
+      {
+        "conference": "edf",
+        "citations": 3
+      },
+     {
+        "conference": "ggg",
+        "citations": 1
+      }
+    ]
   }
 ];
 
+
+// var dataGroup = [
+//   {
+//     "confId": "arXiv2016",
+//     "yearline": [
+//       {
+//         "year": 1993,
+//         "citations": 1
+//       },
+//       {
+//         "year": 1994,
+//         "citations": 4
+//       },
+//      {
+//         "year": 1995,
+//         "citations": 8
+//       }
+//     ]
+//   },
+//   {
+//     "confId": "bat2016",
+//     "yearline": [
+//       {
+//         "year": 1993,
+//         "citations": 8
+//       },
+//       {
+//         "year": 1994,
+//         "citations": 7
+//       },
+//       {
+//         "year": 1995,
+//         "citations": 4
+//       }
+//      ]
+//   }
+// ];
+
 var unnestDataGroup = function(data, children){
-                var out = [];
-        data.forEach(function(d, i){
-          // console.log(i, d);
-          d_keys = Object.keys(d);
-          // console.log(i, d_keys)
-          values = d[children];
-          
-          values.forEach(function(v){
-            d_keys.forEach(function(k){
-              if (k != children) { v[k] = d[k]}
-            })
-            out.push(v);
-          })
-          
+    var out = [];
+    data.forEach(function(d, i){
+      // console.log(i, d);
+      d_keys = Object.keys(d);
+      // console.log(i, d_keys)
+      values = d[children];
+      
+      values.forEach(function(v){
+        d_keys.forEach(function(k){
+          if (k != children) { v[k] = d[k]}
         })
-        return out;
-      }
+        out.push(v);
+      })
+      
+    })
+    return out;
+}
+
+//Referenced From: https://code.tutsplus.com/tutorials/building-a-multi-line-chart-using-d3js-part-2--cms-22973
+//
+var InitChart = function(urlString){
+console.log("url string = " + urlString);
+
+// $.ajax({
+//         url: urlString
+//     }).then(function(results) {
+//        alert("RESULTS LOADED!");
 
 var dataGroupKeys = Object.keys(dataGroup[0]);
 console.log(dataGroupKeys[1]);
-
 var data = unnestDataGroup(dataGroup, dataGroupKeys[1]);
-
 var dataKeys = Object.keys(data[0]);
 var xAxisFormat = d3.format("");
 
-var InitChart = function(){
+
     var color = d3.scale.category10();
     var vis = d3.select("#custom-chart"),
         WIDTH = 1000,
@@ -180,6 +243,67 @@ var InitChart = function(){
             })
             .text(d[dataGroupKeys[0]]);
     });
-    };
-    InitChart();
+    //});
+};
+
+var counter = 2;
+var apiRootUrl = "http://localhost:8080/json/yeartransitions?";
+
+$("#addButton").click(function () {
+    if(counter>10){
+        alert("Max. of 10 Conference years allowed.");
+        return false;
+    }
+    var newTextBoxDiv = $(document.createElement('div'))
+    .attr("id", 'ConferenceYearDiv' + counter);
+    newTextBoxDiv.after().html('<label>Conference Year '+ counter + ':</label>' +
+     '<input class="form-control" type="text" ' + counter +
+     '" id="confYearInput' + counter + '" placeholder="e.g. '+"'1993'" +'">');     
+    newTextBoxDiv.appendTo("#ConferenceYearsGroup");     
+    counter++;
+});
+
+$("#removeButton").click(function () {
+    if(counter==2){
+        alert("At least one conference year is required.");
+        return false;
+    }     
+    counter--;     
+    $("#ConferenceYearDiv" + counter).remove();     
+});
+
+$("#generateBtn").click(function () {
+
+    var urlString = apiRootUrl;
+    var conference = $("#conferenceInput").val();
+    var startYear = $("#startYearInput").val();
+    var endYear = $("#endYearInput").val();
+
+    var conferenceYears = "";
+    for(t = 1; t<=counter; t++){
+        if($('#confYearInput'+t).val()){
+            conferenceYears += $('#confYearInput' + t).val() + '$$';
+        }
+    }
+    console.log("Before slicing: " + conferenceYears);
+    if(conferenceYears){
+        console.log("slicing ");
+        conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
+        conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
+        console.log("After slicing: " + conferenceYears);
+    }
+
+    if(conference && startYear && endYear && conferenceYears){
+        urlString += "conf=" + conference + "&";
+        urlString += "yearids=" + conferenceYears + "&";
+        urlString += "syear=" + startYear + "&";
+        urlString += "eyear=" + endYear;
+    }
+
+    InitChart(urlString);
+    
+});
+
+// InitChart();
+
 });

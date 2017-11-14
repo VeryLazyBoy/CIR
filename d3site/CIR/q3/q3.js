@@ -1,7 +1,7 @@
 $( document ).ready(function() {
   var apiRoot = "http://localhost:8080/json/";
 
-  var generateD3 = function(urlString) {
+var generateD3 = function(urlString) {
 
     //Clear the bar-chart
     $("#bar-chart").html(function(){
@@ -25,6 +25,7 @@ $( document ).ready(function() {
     "publications":10
   }
   ];
+
   // $.ajax({
   //       url: urlString
   //   }).then(function(results) {
@@ -174,6 +175,7 @@ $( document ).ready(function() {
   {
     alert("No Results Found!");
   };
+  //});
 }
 
 var generateAPIUrl = function(){

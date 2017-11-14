@@ -274,6 +274,7 @@ $( document ).ready(function() {
     });
 
   };
+  //});
 }
 
 var generateAPIUrl = function(){
