@@ -5,26 +5,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
   <!-- JS file -->
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/d3.v3.min.js"></script>
-    <script src="js/d3.v4.min.js"></script>
+  <script src="js/d3.v4.min.js"></script>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
 
   <!-- CSS file -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Additional CSS Themes file - not required--> 
 </head>
-<body>
-  <div class="container" style="background-color:lightblue; border-style:solid; padding-bottom: 15px;">
-   <h2>CIR Home</h2>
-   <h3>Navigaton</h3>
-   <ul>
-     <li><a href="q3/q3.html">Question 3</a></li>
-      <li><a href="q4/qn4-Network.html">Question 4</a></li>
-   </ul>
+<body class="container-fluid">
+     <nav class="navbar navbar-default"> 
+    <div class="container-fluid"> 
+      <div class="navbar-header"> 
+        <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> 
+          <span class="sr-only">Toggle navigation</span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+        </button> 
+        <a href="#" class="navbar-brand">CIR Application</a> 
+      </div> 
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
+        <ul class="nav navbar-nav"> 
+        <li><a class="active" href="#">Home</a></li>
+        <li><a href="q1/qn1.html">Trend 1</a></li> 
+        <li><a href="q3/q3.html">Trend 3</a></li> 
+        <li><a href="q4/qn4-Network.html">Trend 4</a></li> 
+      </ul> 
+    </div> 
+  </div> 
+</nav>
    <div>
     Trend 1
     <div class="form-group row container">
@@ -36,19 +53,19 @@
     <div class="col-1">
       <input class="form-control" type="text" name="EYear" id="EYear">
     </div>
+
+  <div>
+    <input type='button' value='Add Venue' id='addButton'>
+    <input type='button' value='Remove Venue' id='removeButton'>
+    <a href="ListOfVenue.html" target="_blank">(view all venues)</a>
+  </div>
     <div id='TextBoxesGroup'>
       <div id="TextBoxDiv1">
-        <label>venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
+        <label>Venue1 : </label><input type='textbox' name = 'venue1' id = 'venue1' >
       </div>
     </div>
   </div>
 
-  <div>
-    <input type='button' value='View List of venue' onclick="window.open('ListOfVenue.html')" id='getButtonValue'>
-    <input type='button' value='Add Venue' id='addButton'>
-    <input type='button' value='Remove Venue' id='removeButton'>
-
-  </div>
 
   <div class="row">
    <div class="col-12 text-center">
@@ -64,17 +81,17 @@
     <input class="form-control" type="textbox" name="T2Year" id="T2Year">
   </div>
 
-  <div id='t2TextBoxesGroup'>
-    <div id="t2TextBoxDiv1">
-      <label>venue1 : </label><input type='textbox' id='t2venue1' name = 't2venue1' >
-    </div>
-  </div>
-
-</div>
-
 <div>
   <input type='button' value='Add Venue' id='t2addButton'>
   <input type='button' value='Remove Venue' id='t2removeButton'>
+
+</div>
+
+  <div id='t2TextBoxesGroup'>
+    <div id="t2TextBoxDiv1">
+      <label>Venue1 : </label><input type='textbox' id='t2venue1' name = 't2venue1' >
+    </div>
+  </div>
 
 </div>
 
@@ -131,7 +148,6 @@ Trend 3
 </div>
 
 </div>
-</div>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 
@@ -163,7 +179,7 @@ Trend 3
    var newTextBoxDiv = $(document.createElement('div'))
    .attr("id", 'TextBoxDiv' + counter);     
 
-   newTextBoxDiv.after().html('<label>venue'+ counter + ' : </label>' +
+   newTextBoxDiv.after().html('<label>Venue'+ counter + ' : </label>' +
      '<input type="text" name="venue' + counter +
      '" id="venue' + counter + '" value="" >');     
 
@@ -174,7 +190,7 @@ Trend 3
  });     
 
   $("#removeButton").click(function () {
-   if(counter==1){
+   if(counter==2){
      alert("No more textbox to remove");
      return false;
    }     
@@ -190,7 +206,7 @@ Trend 3
   $("#t2addButton").click(function () {
 
 
-   if(counter>10){
+   if(t2counter>10){
      alert("Only 10 textboxes allow");
      return false;
    }       
@@ -198,7 +214,7 @@ Trend 3
    var newt2TextBoxDiv = $(document.createElement('div'))
    .attr("id", 't2TextBoxDiv' + t2counter);       
 
-   newt2TextBoxDiv.after().html('<label>venue'+ t2counter + ' : </label>' +
+   newt2TextBoxDiv.after().html('<label>Venue'+ t2counter + ' : </label>' +
      '<input type="text" name="t2venue' + t2counter +
      '" id="t2venue' + t2counter + '" value="" >');       
 
@@ -209,7 +225,7 @@ Trend 3
  });
 
   $("#t2removeButton").click(function () {
-    if(t2counter==1){
+    if(t2counter==2){
       alert("No more textbox to remove");
       return false;
     }

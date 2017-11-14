@@ -1,0 +1,17 @@
+.axis path {
+    fill: none;
+    stroke: #777;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    font-family: Lato;
+    font-size: 13px;
+}
+.custom-chart-wrapper{
+  width:1000px;
+  height:1000px;
+}
+.legend {
+    font-size: 14px;
+    font-weight: bold;
+}
