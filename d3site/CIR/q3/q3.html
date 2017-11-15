@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="bar.css">
+</head>
+<body class="container-fluid">
+  <nav class="navbar navbar-default"> 
+    <div class="container-fluid"> 
+      <div class="navbar-header"> 
+        <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> 
+          <span class="sr-only">Toggle navigation</span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+        </button> 
+        <a href="#" class="navbar-brand">CIR Application</a> 
+      </div> 
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
+        <ul class="nav navbar-nav"> 
+          <li><a href="../q1/qn1.html">Trend 1</a></li> 
+          <li><a href="../q2/q2.html">Trend 2</a></li> 
+          <li class="active"><a href="#">Trend 3</a></li> 
+          <li><a href="../q4/qn4-Network.html">Trend 4</a></li>
+          <li><a href="../q5/q5.html">Trend 5</a></li> 
+
+        </ul> 
+      </div> 
+    </div> 
+  </nav>
+  
+  <h1>Trend 3 - Bar Chart</h1>
+  <h2>Top Authors, Cited Authors and Citations across Conferences and Years</h2>
+  <div class="form-group row">
+    <div>
+      <label>Type:</label>
+      <select id="queryTypeSelect" name="queryType">
+        <option value="-1" selected>Type Of Query</option>
+        <option value="0">Top Authors in conference in a year</option>
+        <option value="1">Top Authors in Conference across all years</option>
+        <option value="2">Top Authors in a year</option>
+        <option value="3">Most Cited Authors in conference in a year</option>
+        <option value="4">Most Cited Authors in conference across all years</option>
+        <option value="5">Most Cited Authors in a year</option>
+        <option value="6">Top Citations in conference in a year</option>
+        <option value="7">Top Citations in a conference across all years</option>
+        <option value="8">Top Citations in a year</option>
+        <option value="9">Top Citations by an author</option>
+      </select>
+    </div>
+    <div class="hidden" id="topInputContainer">
+      <label>Number of Results: </label>
+      <input class="form-control" type="text" id="topValue" name="topInput" placeholder="e.g. '10'">
+    </div>
+    <div class="hidden"  id="yearInputContainer">
+      <label>Year: </label>
+      <input class="form-control" type="text" id="yearValue" name="yearInput" placeholder="e.g. '2015'">
+    </div>
+    <div class="hidden" id="confInputContainer">
+      <label>Conference: </label>
+      <input class="form-control" type="text" id="confValue" name="confInput" placeholder="e.g. 'arXiv'">
+    </div>
+    <div class="hidden" id="authorInputContainer">
+      <label>Author: <a href="../ListOfAuthor.html" target="_blank">(view all authors)</a></label>
+      <input class="form-control" type="text" id="authorValue" name="authorInput" placeholder="e.g. 'Trump'">
+    </div>
+    <div class="margins">
+      <input class="btn btn-primary" type='button' value='Generate Chart' id='generateBtn'>
+    </div>
+
+    <div id="bar-chart"></div>
+
+    <!-- Javascript -->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/d3.v3.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="q3.js"></script>
+  </body>
+  </html>
