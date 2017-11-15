@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Chart</title>
+  <title>Trend 1</title>
     <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -34,27 +34,44 @@
   <h1>Trend 1 - Multiline Chart</h1>
   <h2>Transition Over Time</h2>
    <div class="form-group row container">
+   	<div>
+      <label>Transition across:</label>
+      <select id="queryTypeSelect" name="queryType">
+        <option value="0" selected>Years</option>
+        <option value="1">Conferences</option>
+      </select>
+    </div>
    	<div id="conferenceInputContainer">
       <label>Conference: </label>
       <input class="form-control" type="text" id="conferenceInput" placeholder="e.g. 'arXiv'" />
     </div>
     <div id="startYearInputContainer">
-      <label>Start Year: </label>
+      <label>Conference Year 1: </label>
       <input class="form-control" type="text" id="startYearInput" placeholder="e.g. '1993'" />
     </div>
     <div id="endYearInputContainer">
-      <label>End Year: </label>
+      <label>Conference Year 2: </label>
       <input class="form-control" type="text" id="endYearInput" placeholder="e.g. '1996'" />
     </div>
-    <button class="btn btn-info margins" type='button' id='addButton'>Add Conference Year</button>
+
+    <div id="ConferenceYearsGroup" class="col">
+   	<button class="btn btn-info margins" type='button' id='addButton'>Add Conference Year</button>
     <button class="btn btn-info margins" type='button' id='removeButton'>Remove Conference Year</button>
-    <div id="ConferenceYearsGroup">
      <div id="ConferenceYearDiv1">
       <label>Conference Year 1: </label>
       <input class="form-control" type="text" id="confYearInput1" placeholder="e.g. '1993'" />
 	  </div>
     </div>
-  </div>
+
+    <div id="ConferenceListGroup" class="col hidden">
+   	<button class="btn btn-info margins" type='button' id='addConferenceButton'>Add Conference</button>
+    <button class="btn btn-info margins" type='button' id='removeConferenceButton'>Remove Conference</button>
+     <div id="ConferenceListDiv1">
+      <label>Conference 1: </label>
+      <input class="form-control" type="text" id="confListInput1" placeholder="e.g. 'arXiv'" />
+	  </div>
+    </div>
+</div>
   <button class="btn btn-primary" id="generateBtn" name="generateBtn">Generate</button>
   <div class="custom-chart-wrapper">
   	<svg id="custom-chart" width="1000" height="500"></svg>
