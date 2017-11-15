@@ -5,165 +5,165 @@ $( document ).ready(function() {
     console.log(urlString);
     'use strict';
   //data from API
-  var resultsParent = [
-  {
-    "articles": [
-    {
-      "id": "id1",
-      "title": "CS3219",
-      "authors": [
-      "Shawn",
-      "James"
-      ],
-      "level": 1
-    },
-    {
-      "id": "id2",
-      "title": "paper B",
-      "authors": [
-      "Trevor",
-      "Michael"
-      ],
-      "level": 3
-    },
-    {
-      "id": "id3",
-      "title": "paper C",
-      "authors": [
-      "Zack",
-      "Brown"
-      ],
-      "level": 2
-    },
-    {
-      "id": "id4",
-      "title": "paper D",
-      "authors": [
-      "Harald",
-      "Jonah"
-      ],
-      "level": 1
-    },
-    {
-      "id": "id5",
-      "title": "paper M",
-      "authors": [
-      "Matt",
-      "Bigsby"
-      ],
-      "level": 4
-    },
-    {
-      "id": "id6",
-      "title": "paper N",
-      "authors": [
-      "John",
-      "Green"
-      ],
-      "level": 3
-    }
-    ],
-    "links": [
-    {
-      "source": "id2",
-      "target": "id3"
-    },
-    {
-      "source": "id5",
-      "target": "id2"
-    },
-    {
-      "source": "id6",
-      "target": "id3"
-    },
-    {
-      "source": "id3",
-      "target": "id4"
-    }
-    ]
-  },
-  {
-    "articles": [
-    {
-      "id": "id11",
-      "title": "machinelearning",
-      "authors": [
-      "1Shawn",
-      "1James"
-      ],
-      "level": 1
-    },
-    {
-      "id": "id12",
-      "title": "paper 1B",
-      "authors": [
-      "1Trevor",
-      "1Michael"
-      ],
-      "level": 3
-    },
-    {
-      "id": "id13",
-      "title": "paper 1C",
-      "authors": [
-      "1Zack",
-      "1Brown"
-      ],
-      "level": 2
-    },
-    {
-      "id": "id14",
-      "title": "paper 1D",
-      "authors": [
-      "1Harald",
-      "1Jonah"
-      ],
-      "level": 1
-    },
-    {
-      "id": "id15",
-      "title": "paper 1M",
-      "authors": [
-      "1Matt",
-      "1Bigsby"
-      ],
-      "level": 4
-    },
-    {
-      "id": "id16",
-      "title": "paper 1N",
-      "authors": [
-      "1John",
-      "1Green"
-      ],
-      "level": 3
-    }
-    ],
-    "links": [
-    {
-      "source": "id12",
-      "target": "id13"
-    },
-    {
-      "source": "id15",
-      "target": "id12"
-    },
-    {
-      "source": "id16",
-      "target": "id13"
-    },
-    {
-      "source": "id13",
-      "target": "id14"
-    }
-    ]
-  }
-  ];
+  // var resultsParent = [
+  // {
+  //   "articles": [
+  //   {
+  //     "id": "id1",
+  //     "title": "CS3219",
+  //     "authors": [
+  //     "Shawn",
+  //     "James"
+  //     ],
+  //     "level": 1
+  //   },
+  //   {
+  //     "id": "id2",
+  //     "title": "paper B",
+  //     "authors": [
+  //     "Trevor",
+  //     "Michael"
+  //     ],
+  //     "level": 3
+  //   },
+  //   {
+  //     "id": "id3",
+  //     "title": "paper C",
+  //     "authors": [
+  //     "Zack",
+  //     "Brown"
+  //     ],
+  //     "level": 2
+  //   },
+  //   {
+  //     "id": "id4",
+  //     "title": "paper D",
+  //     "authors": [
+  //     "Harald",
+  //     "Jonah"
+  //     ],
+  //     "level": 1
+  //   },
+  //   {
+  //     "id": "id5",
+  //     "title": "paper M",
+  //     "authors": [
+  //     "Matt",
+  //     "Bigsby"
+  //     ],
+  //     "level": 4
+  //   },
+  //   {
+  //     "id": "id6",
+  //     "title": "paper N",
+  //     "authors": [
+  //     "John",
+  //     "Green"
+  //     ],
+  //     "level": 3
+  //   }
+  //   ],
+  //   "links": [
+  //   {
+  //     "source": "id2",
+  //     "target": "id3"
+  //   },
+  //   {
+  //     "source": "id5",
+  //     "target": "id2"
+  //   },
+  //   {
+  //     "source": "id6",
+  //     "target": "id3"
+  //   },
+  //   {
+  //     "source": "id3",
+  //     "target": "id4"
+  //   }
+  //   ]
+  // },
+  // {
+  //   "articles": [
+  //   {
+  //     "id": "id11",
+  //     "title": "machinelearning",
+  //     "authors": [
+  //     "1Shawn",
+  //     "1James"
+  //     ],
+  //     "level": 1
+  //   },
+  //   {
+  //     "id": "id12",
+  //     "title": "paper 1B",
+  //     "authors": [
+  //     "1Trevor",
+  //     "1Michael"
+  //     ],
+  //     "level": 3
+  //   },
+  //   {
+  //     "id": "id13",
+  //     "title": "paper 1C",
+  //     "authors": [
+  //     "1Zack",
+  //     "1Brown"
+  //     ],
+  //     "level": 2
+  //   },
+  //   {
+  //     "id": "id14",
+  //     "title": "paper 1D",
+  //     "authors": [
+  //     "1Harald",
+  //     "1Jonah"
+  //     ],
+  //     "level": 1
+  //   },
+  //   {
+  //     "id": "id15",
+  //     "title": "paper 1M",
+  //     "authors": [
+  //     "1Matt",
+  //     "1Bigsby"
+  //     ],
+  //     "level": 4
+  //   },
+  //   {
+  //     "id": "id16",
+  //     "title": "paper 1N",
+  //     "authors": [
+  //     "1John",
+  //     "1Green"
+  //     ],
+  //     "level": 3
+  //   }
+  //   ],
+  //   "links": [
+  //   {
+  //     "source": "id12",
+  //     "target": "id13"
+  //   },
+  //   {
+  //     "source": "id15",
+  //     "target": "id12"
+  //   },
+  //   {
+  //     "source": "id16",
+  //     "target": "id13"
+  //   },
+  //   {
+  //     "source": "id13",
+  //     "target": "id14"
+  //   }
+  //   ]
+  // }
+  // ];
 
-// $.ajax({
-//         url: urlString
-//     }).then(function(results) {
-//        alert("RESULTS LOADED!");
+$.ajax({
+        url: urlString
+    }).then(function(resultsParent) {
+       // alert("RESULTS LOADED!");
 
  // d3.json("../json/network.json", function(results) {
   if(resultsParent){
@@ -275,7 +275,7 @@ $( document ).ready(function() {
     });
 
   };
-  //});
+  });
 }
 
 var generateAPIUrl = function(){

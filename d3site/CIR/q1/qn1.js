@@ -37,59 +37,59 @@ $(document).ready(function() {
 //   }
 // ];
 
-var dataGroup = [
-  {
-    "confId": "arXiv2014",
-    "venueline": [
-      {
-        "conference": "abc",
-        "citations": 1
-      },
-      {
-        "conference": "edf",
-        "citations": 4
-      },
-     {
-        "conference": "ggg",
-        "citations": 7
-      }
-    ]
-  },
-  {
-    "confId": "arXiv2015",
-    "venueline": [
-      {
-        "conference": "abc",
-        "citations": 8
-      },
-      {
-        "conference": "edf",
-        "citations": 7
-      },
-     {
-        "conference": "ggg",
-        "citations": 7
-      }
-    ]
-  },
-  {
-    "confId": "Shawn",
-    "venueline": [
-      {
-        "conference": "abc",
-        "citations": 10
-      },
-      {
-        "conference": "edf",
-        "citations": 3
-      },
-     {
-        "conference": "ggg",
-        "citations": 1
-      }
-    ]
-  }
-];
+// var dataGroup = [
+//   {
+//     "confId": "arXiv2014",
+//     "venueline": [
+//       {
+//         "conference": "abc",
+//         "citations": 1
+//       },
+//       {
+//         "conference": "edf",
+//         "citations": 4
+//       },
+//      {
+//         "conference": "ggg",
+//         "citations": 7
+//       }
+//     ]
+//   },
+//   {
+//     "confId": "arXiv2015",
+//     "venueline": [
+//       {
+//         "conference": "abc",
+//         "citations": 8
+//       },
+//       {
+//         "conference": "edf",
+//         "citations": 7
+//       },
+//      {
+//         "conference": "ggg",
+//         "citations": 7
+//       }
+//     ]
+//   },
+//   {
+//     "confId": "Shawn",
+//     "venueline": [
+//       {
+//         "conference": "abc",
+//         "citations": 10
+//       },
+//       {
+//         "conference": "edf",
+//         "citations": 3
+//       },
+//      {
+//         "conference": "ggg",
+//         "citations": 1
+//       }
+//     ]
+//   }
+// ];
 
 
 // var dataGroup = [
@@ -155,10 +155,10 @@ var InitChart = function(urlString){
     $('#custom-chart').html("");
 console.log("url string = " + urlString);
 
-// $.ajax({
-//         url: urlString
-//     }).then(function(results) {
-//        alert("RESULTS LOADED!");
+$.ajax({
+        url: urlString
+    }).then(function(dataGroup) {
+       // alert("RESULTS LOADED!");
 
 var dataGroupKeys = Object.keys(dataGroup[0]);
 // console.log(dataGroupKeys[1]);
@@ -245,7 +245,7 @@ var xAxisFormat = d3.format("");
             })
             .text(d[dataGroupKeys[0]]);
     });
-    //});
+    });
 };
 
 var counter = 2;
