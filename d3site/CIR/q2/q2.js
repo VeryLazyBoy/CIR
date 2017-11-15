@@ -331,10 +331,13 @@ var isNumeric = function(num){
     return !isNaN(num)
 }
 var isValidYear = function(yearString){
+    if(yearString == ""){
+        return true;
+    }
     if(!isNumeric(yearString)){
         return false;
     }
-    if(parseInt(yearString) < 2017){
+    if(parseInt(yearString) < 2017 && parseInt(yearString) > 0){
         return true;
     }
     return false;
