@@ -151,8 +151,6 @@ var unnestDataGroup = function(data, children){
 //Referenced From: https://code.tutsplus.com/tutorials/building-a-multi-line-chart-using-d3js-part-2--cms-22973
 //
 var InitChart = function(urlString){
-    //clear chart
-    $('#custom-chart').html("");
 console.log("url string = " + urlString);
 
 // $.ajax({
@@ -248,34 +246,11 @@ var xAxisFormat = d3.format("");
     //});
 };
 
-var counter = 2;
-var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
-var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
+var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
+var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
 
 var conferenceCounter = 2;
-
-$("#addButton").click(function () {
-    if(counter>10){
-        alert("Max. of 10 years allowed.");
-        return false;
-    }
-    var newTextBoxDiv = $(document.createElement('div'))
-    .attr("id", 'ConferenceYearDiv' + counter);
-    newTextBoxDiv.after().html('<label>Year '+ counter + ':</label>' +
-     '<input class="form-control" type="text" ' + counter +
-     '" id="confYearInput' + counter + '" placeholder="e.g. '+"'1993'" +'">');     
-    newTextBoxDiv.appendTo("#ConferenceYearsGroup");     
-    counter++;
-});
-
-$("#removeButton").click(function () {
-    if(counter==2){
-        alert("At least one year is required.");
-        return false;
-    }     
-    counter--;     
-    $("#ConferenceYearDiv" + counter).remove();     
-});
+var conferenceCounter2 = 2;
 
 $("#addConferenceButton").click(function () {
     if(conferenceCounter>10){
@@ -298,6 +273,29 @@ $("#removeConferenceButton").click(function () {
     }     
     conferenceCounter--;     
     $("#ConferenceListDiv" + conferenceCounter).remove();     
+});
+
+$("#addConferenceButton2").click(function () {
+    if(conferenceCounter2>10){
+        alert("Max. of 10 Conferences allowed.");
+        return false;
+    }
+    var newTextBoxDiv = $(document.createElement('div'))
+    .attr("id", 'ConferenceList2Div' + conferenceCounter2);
+    newTextBoxDiv.after().html('<label>Conference '+ conferenceCounter2 + ':</label>' +
+     '<input class="form-control" type="text" ' + conferenceCounter2 +
+     '" id="confList2Input' + conferenceCounter2 + '" placeholder="e.g. '+"'arXiv'" +'">');     
+    newTextBoxDiv.appendTo("#ConferenceListGroup2");     
+    conferenceCounter2++;
+});
+
+$("#removeConferenceButton2").click(function () {
+    if(conferenceCounter2==2){
+        alert("At least one conference is required.");
+        return false;
+    }     
+    conferenceCounter2--;     
+    $("#ConferenceList2Div" + conferenceCounter2).remove();     
 });
 
 $('#queryTypeSelect').on('change', function() {
@@ -324,9 +322,9 @@ $('#queryTypeSelect').on('change', function() {
     $("#endYearInputContainer").addClass("hidden");
   }
   if(confList){
-    $("#ConferenceListGroup").removeClass("hidden");
+    $("#ConferenceListGroup2").removeClass("hidden");
   }else{
-    $("#ConferenceListGroup").addClass("hidden");
+    $("#ConferenceListGroup2").addClass("hidden");
   }
 });
 $("#generateBtn").click(function () {
@@ -335,61 +333,61 @@ $("#generateBtn").click(function () {
     if($('#queryTypeSelect').val() == 0){
         urlString = apiRootUrlOverYears;
 
-        var conference = $("#conferenceInput").val();
+        var conferenceYear = $("#conferenceYearInput").val();
         var startYear = $("#startYearInput").val();
         var endYear = $("#endYearInput").val();
 
-        var conferenceYears = "";
-        for(t = 1; t<=counter; t++){
-            if($('#confYearInput'+t).val()){
-                conferenceYears += $('#confYearInput' + t).val() + '$$';
+        var conferences = "";
+        for(t = 1; t<=conferenceCounter; t++){
+            if($('#confListInput'+t).val()){
+                conferences += $('#confListInput' + t).val() + '$$';
             }
         }
-        // console.log("Before slicing: " + conferenceYears);
-        if(conferenceYears){
+        // console.log("Before slicing: " + conferences);
+        if(conferences){
             // console.log("slicing ");
-            conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
-            conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
-            // console.log("After slicing: " + conferenceYears);
+            conferences = conferences.slice(0,-1); //removes the last '$' from the string
+            conferences = conferences.slice(0,-1); //removes the 2nd last '$' from the string
+            // console.log("After slicing: " + conferences);
         }
 
-        if(conference && startYear && endYear && conferenceYears){
-            urlString += "conf=" + conference + "&";
-            urlString += "years=" + conferenceYears + "&";
+        if(conferenceYear && startYear && endYear && conferences){
+            urlString += "year=" + conferenceYear + "&";
+            urlString += "confs=" + conferences + "&";
             urlString += "syear=" + startYear + "&";
             urlString += "eyear=" + endYear;
         }
     }else{
         urlString = apiRootUrlOverConferences;
-        var conference = $("#conferenceInput").val();
-        var conferenceYears = "";
-        for(t = 1; t<=counter; t++){
-            if($('#confYearInput'+t).val()){
-                conferenceYears += $('#confYearInput' + t).val() + '$$';
-            }
-        }
-        if(conferenceYears){
-            // console.log("slicing ");
-            conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
-            conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
-            // console.log("After slicing: " + conferenceYears);
-        }
-        var conferenceList = "";
+        var conferenceYear = $("#conferenceYearInput").val();
+        var conferences = "";
         for(t = 1; t<=conferenceCounter; t++){
             if($('#confListInput'+t).val()){
-                conferenceList += $('#confListInput' + t).val() + '$$';
+                conferences += $('#confListInput' + t).val() + '$$';
             }
         }
-        if(conferenceList){
+        if(conferences){
             // console.log("slicing ");
-            conferenceList = conferenceList.slice(0,-1); //removes the last '$' from the string
-            conferenceList = conferenceList.slice(0,-1); //removes the 2nd last '$' from the string
-            // console.log("After slicing: " + conferenceList);
+            conferences = conferences.slice(0,-1); //removes the last '$' from the string
+            conferences = conferences.slice(0,-1); //removes the 2nd last '$' from the string
+            // console.log("After slicing: " + conferences);
         }
-        if(conference && conferenceYears && conferenceList){
-            urlString += "conf=" + conference + "&";
-            urlString += "years=" + conferenceYears + "&";
-            urlString += "conflist=" + conferenceList;
+        var conferences2 = "";
+        for(t = 1; t<=conferenceCounter2; t++){
+            if($('#confList2Input'+t).val()){
+                conferences2 += $('#confList2Input' + t).val() + '$$';
+            }
+        }
+        if(conferences2){
+            // console.log("slicing ");
+            conferences2 = conferences2.slice(0,-1); //removes the last '$' from the string
+            conferences2 = conferences2.slice(0,-1); //removes the 2nd last '$' from the string
+            // console.log("After slicing: " + conferences2);
+        }
+        if(conferenceYear && conferences && conferences2){
+            urlString += "year=" + conferenceYear + "&";
+            urlString += "confs=" + conferences + "&";
+            urlString += "conflist=" + conferences2;
         }
     }
 

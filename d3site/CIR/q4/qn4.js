@@ -2,6 +2,7 @@ $( document ).ready(function() {
   var apiRoot = "http://localhost:8080/json/networks?";
 
   var generateD3 = function(urlString) {
+    console.log(urlString);
     'use strict';
   //data from API
   var resultsParent = [
@@ -184,7 +185,7 @@ $( document ).ready(function() {
         }
       }
 
-      console.log(results[0]);
+      // console.log(results[0]);
       //clear existing svg
       $("#networkSVG").html("");
       var svg = d3.select("#networkSVG");
@@ -283,16 +284,15 @@ var generateAPIUrl = function(){
   if($('#paper1Value').val() && $('#paper2Value').val()){
       urlString += "paper1="+$('#paper1Value').val() + "&";
       urlString += "paper2="+$('#paper2Value').val();
-      urlString = urlString.slice(0, -1); 
-      return urlString;//removes the last '&' from the string
+      return urlString;
   }
 }
 
 $("#generateBtn").click(function(){
     var urlString = generateAPIUrl();
-    console.log(urlString);
+    // console.log(urlString);
     if(urlString != apiRoot){
-      generateD3(urlString);
+      generateD3(encodeURI(urlString));
     }
 });
 

@@ -2,6 +2,7 @@ $( document ).ready(function() {
   var apiRoot = "http://localhost:8080/json/";
 
 var generateD3 = function(urlString) {
+  console.log(urlString);
 
     //Clear the bar-chart
     $("#bar-chart").html(function(){
@@ -37,7 +38,7 @@ var generateD3 = function(urlString) {
   {
     //get keys in JSON
     var keys = Object.keys(results[0]);
-    console.log(keys);
+    // console.log(keys);
 
     //Margins to accommodate X and Y axis labels
     var margin = {top: 30, right: 10, bottom: 30, left: 100}
@@ -98,7 +99,7 @@ var generateD3 = function(urlString) {
     // .attr('width', barWidth)
     .attr('width', xScale.rangeBand()) //use x axis rangeBand to determine width of each bar
     .attr('height', function (data) {
-      console.log("DATA: " + data[keys[1]]);
+      // console.log("DATA: " + data[keys[1]]);
       return yScale(data[keys[1]]); //use y axis range to determine height of each bar. The tallest value takes up all the height
     })
     .attr('x', function (data, i) {
@@ -236,7 +237,7 @@ $('#queryTypeSelect').on('change', function() {
   var author = false;
 
   var val = this.value;
-  console.log(val);
+  // console.log(val);
   switch(val){
     case '0':
     case '3':
@@ -262,10 +263,10 @@ $('#queryTypeSelect').on('change', function() {
     author = true;
     break;
   }
-  console.log(top);
-  console.log(year);
-  console.log(conf);
-  console.log(author);
+  // console.log(top);
+  // console.log(year);
+  // console.log(conf);
+  // console.log(author);
   if(top){
     $("#topInputContainer").removeClass("hidden");
   }else{
@@ -290,8 +291,8 @@ $('#queryTypeSelect').on('change', function() {
 
   $("#generateBtn").click(function(){
     var urlString = generateAPIUrl();
-    console.log(urlString);
-    generateD3(urlString);
+    // console.log(urlString);
+    generateD3(encodeURI(urlString));
   });
 
 });
