@@ -178,7 +178,18 @@ var generateD3 = function(urlString) {
   };
   //});
 }
-
+var isNumeric = function(num){
+    return !isNaN(num)
+}
+var isValidYear = function(yearString){
+    if(!isNumeric(yearString)){
+        return false;
+    }
+    if(parseInt(yearString) < 2017){
+        return true;
+    }
+    return false;
+}
 var generateAPIUrl = function(){
   var urlString = apiRoot;
   //get value of select
@@ -203,30 +214,48 @@ var generateAPIUrl = function(){
     break;
   }
   //add values if they exist
+if($('#topInputContainer').is(":visible")){
   if($('#topValue').val()){
-    if($('#topInputContainer').is(":visible")){
       urlString += "top="+$('#topValue').val() + "&";
-    }
-  }
-  if($('#yearValue').val()){
-    if($('#yearInputContainer').is(":visible")){
-      urlString += "year="+$('#yearValue').val() + "&";
-    }
-  }
-  if($('#confValue').val()){
-    if($('#confInputContainer').is(":visible")){
-      urlString += "conf="+$('#confValue').val() + "&";
-    }
-  }
-  if($('#authorValue').val()){
-    if($('#authorInputContainer').is(":visible")){
-      urlString += "author="+$('#authorValue').val() + "&";
-    }
-  }
-  urlString = urlString.slice(0, -1); //removes the last '&' from the string
-  if(urlString == apiRoot){
+    }else{
+    alert("Number of results is required");
     return false;
   }
+}
+if($('#yearInputContainer').is(":visible")){
+  if(!isValidYear($('#yearValue').val())){
+    alert("Year is invalid");
+    return false;
+  }
+  if($('#yearValue').val()){
+      urlString += "year="+$('#yearValue').val() + "&";
+    }else{
+    alert("Year is required");
+    return false;
+  }
+}
+if($('#confInputContainer').is(":visible")){
+  if($('#confValue').val()){
+      urlString += "conf="+$('#confValue').val() + "&";
+    }else{
+    alert("Conference is required");
+    return false;
+  }
+}
+if($('#authorInputContainer').is(":visible")){
+  if($('#authorValue').val()){
+      urlString += "author="+$('#authorValue').val() + "&";
+    }else{
+      alert("Author is required");
+      return false;
+    }
+}
+  if(urlString == apiRoot){
+    alert("Please select a query");
+    return false;
+  }
+    urlString = urlString.slice(0, -1); //removes the last '&' from the string
+
   return urlString;
 }
 
@@ -292,7 +321,9 @@ $('#queryTypeSelect').on('change', function() {
   $("#generateBtn").click(function(){
     var urlString = generateAPIUrl();
     // console.log(urlString);
-    generateD3(encodeURI(urlString));
+    if(urlString){
+        generateD3(encodeURI(urlString));
+    }
   });
 
 });

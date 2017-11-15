@@ -285,13 +285,20 @@ var generateAPIUrl = function(){
       urlString += "paper1="+$('#paper1Value').val() + "&";
       urlString += "paper2="+$('#paper2Value').val();
       return urlString;
+  }else{
+    alert("Both paper 1 and paper 2 titles are required");
+    return false;
+  }
+  if(urlString == apiRoot){
+    alert("Both paper 1 and paper 2 titles are required");
+    return false;
   }
 }
 
 $("#generateBtn").click(function(){
     var urlString = generateAPIUrl();
     // console.log(urlString);
-    if(urlString != apiRoot){
+    if(urlString){
       generateD3(encodeURI(urlString));
     }
 });

@@ -329,6 +329,18 @@ $('#queryTypeSelect').on('change', function() {
     $("#ConferenceListGroup").addClass("hidden");
   }
 });
+var isNumeric = function(num){
+    return !isNaN(num)
+}
+var isValidYear = function(yearString){
+    if(!isNumeric(yearString)){
+        return false;
+    }
+    if(parseInt(yearString) < 2017){
+        return true;
+    }
+    return false;
+}
 $("#generateBtn").click(function () {
 
     var urlString;
@@ -336,24 +348,45 @@ $("#generateBtn").click(function () {
         urlString = apiRootUrlOverYears;
 
         var conference = $("#conferenceInput").val();
+        if(!conference){
+            alert("Conference Code is required.");
+            return false;
+        }
         var startYear = $("#startYearInput").val();
+        if(!isValidYear(startYear)){
+            alert("Start year is invalid");
+            return false;
+        }
         var endYear = $("#endYearInput").val();
-
+        if(!isValidYear(endYear)){
+            alert("End year is invalid");
+            return false;
+        }
+        //input validation
+        
+        if(parseInt(startYear) > parseInt(endYear)){
+            alert("Start year must be before end year.");
+            return false;
+        }
         var conferenceYears = "";
         for(t = 1; t<=counter; t++){
             if($('#confYearInput'+t).val()){
                 conferenceYears += $('#confYearInput' + t).val() + '$$';
             }
         }
+
         // console.log("Before slicing: " + conferenceYears);
         if(conferenceYears){
             // console.log("slicing ");
             conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
             conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
             // console.log("After slicing: " + conferenceYears);
+        }else{
+            alert("At least 1 conference year is required.");
+            return false;
         }
 
-        if(conference && startYear && endYear && conferenceYears){
+        if(conference && conferenceYears){
             urlString += "conf=" + conference + "&";
             urlString += "years=" + conferenceYears + "&";
             urlString += "syear=" + startYear + "&";
@@ -362,6 +395,10 @@ $("#generateBtn").click(function () {
     }else{
         urlString = apiRootUrlOverConferences;
         var conference = $("#conferenceInput").val();
+        if(!conference){
+            alert("Conference Code is required.");
+            return false;
+        }
         var conferenceYears = "";
         for(t = 1; t<=counter; t++){
             if($('#confYearInput'+t).val()){
@@ -373,6 +410,9 @@ $("#generateBtn").click(function () {
             conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
             conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
             // console.log("After slicing: " + conferenceYears);
+        }else{
+            alert("At least one conference year is required.");
+            return false;
         }
         var conferenceList = "";
         for(t = 1; t<=conferenceCounter; t++){
@@ -385,6 +425,9 @@ $("#generateBtn").click(function () {
             conferenceList = conferenceList.slice(0,-1); //removes the last '$' from the string
             conferenceList = conferenceList.slice(0,-1); //removes the 2nd last '$' from the string
             // console.log("After slicing: " + conferenceList);
+        }else{
+            alert("At least one conference code is required.");
+            return false;
         }
         if(conference && conferenceYears && conferenceList){
             urlString += "conf=" + conference + "&";

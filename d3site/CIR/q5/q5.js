@@ -45,21 +45,42 @@ $( document ).ready(function() {
   //});
 }
 var apiRoot = "http://localhost:8080/json/keywords?";
-
+var isNumeric = function(num){
+    return !isNaN(num)
+}
+var isValidYear = function(yearString){
+    if(!isNumeric(yearString)){
+        return false;
+    }
+    if(parseInt(yearString) < 2017){
+        return true;
+    }
+    return false;
+}
 var generateAPIUrl = function(){
   var urlString = apiRoot;
   //add values if they exist
+  if(!isValidYear($('#conferenceYearInput').val())){
+    alert("Year is invalid");
+    return false;
+  }
   if($('#conferenceInput').val() && $('#conferenceYearInput').val()){
       urlString += "conf="+$('#conferenceInput').val() + "&";
       urlString += "year="+$('#conferenceYearInput').val();
+  }else{
+    alert("Both conference code and conference year are required");
+    return false;
+  }
+  if(urlString == apiRoot){
+    alert("Both conference code and conference year are required");
+    return false;
   }
   return urlString;
 }
 
 $("#generateBtn").click(function(){
-  generateD3(urlString);
     var urlString = generateAPIUrl();
-    if(urlString != apiRoot){
+    if(urlString){
       // console.log(urlString);
       generateD3(encodeURI(urlString));
     }
