@@ -159,6 +159,10 @@ $.ajax({
         url: urlString
     }).then(function(dataGroup) {
        // alert("RESULTS LOADED!");
+       if(dataGroup.length == 0){
+        alert("No Results!");
+        return false;
+       }
 
 var dataGroupKeys = Object.keys(dataGroup[0]);
 // console.log(dataGroupKeys[1]);

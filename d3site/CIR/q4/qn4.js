@@ -164,6 +164,10 @@ $.ajax({
         url: urlString
     }).then(function(resultsParent) {
        // alert("RESULTS LOADED!");
+       if(resultsParent.length == 0){
+        alert("No Results!");
+        return false;
+       }
 
  // d3.json("../json/network.json", function(results) {
   if(resultsParent){

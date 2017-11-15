@@ -10,7 +10,10 @@ $.ajax({
         url: urlString
     }).then(function(data) {
        // alert("RESULTS LOADED!");
-
+       if(data.length == 0){
+        alert("No Results!");
+        return false;
+       }
   //clear cloud
   $('#wordCloudDiv').html("");
   var color = d3.scale.linear()

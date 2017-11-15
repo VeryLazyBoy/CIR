@@ -31,7 +31,10 @@ var generateD3 = function(urlString) {
         url: urlString
     }).then(function(results) {
        // alert("RESULTS LOADED!");
-
+  if(results.length == 0){
+        alert("No Results!");
+        return false;
+       }
 // d3.json("../json/article_bar.json", function(results) {
 
     if(results.length > 0)
