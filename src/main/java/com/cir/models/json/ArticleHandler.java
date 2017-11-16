@@ -24,8 +24,8 @@ public class ArticleHandler {
 	private String filePath = "datasets/json/dataset.json";
 
 	public ArticleHandler() {
-		unmarshal();
-		populateIdToArticleMap();
+//		unmarshal();
+//		populateIdToArticleMap();
 	}
 
 	private void populateIdToArticleMap() {
