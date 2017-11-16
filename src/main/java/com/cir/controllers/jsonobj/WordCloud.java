@@ -13,13 +13,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "source", "target" })
-public class Link {
+@JsonPropertyOrder({ "text", "size" })
+public class WordCloud {
 
-    @JsonProperty("source")
-    private String source; // Base paper
-    @JsonProperty("target")
-    private String target; // Cited By
+    @JsonProperty("text")
+    private String text;
+    @JsonProperty("size")
+    private Integer size;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -27,38 +27,38 @@ public class Link {
      * No args constructor for use in serialization
      * 
      */
-    public Link() {
+    public WordCloud() {
     }
 
     /**
      * 
-     * @param source
-     * @param target
+     * @param text
+     * @param size
      */
-    public Link(String source, String target) {
+    public WordCloud(String text, Integer size) {
         super();
-        this.source = source;
-        this.target = target;
+        this.text = text;
+        this.size = size;
     }
 
-    @JsonProperty("source")
-    public String getSource() {
-        return source;
+    @JsonProperty("text")
+    public String getText() {
+        return text;
     }
 
-    @JsonProperty("source")
-    public void setSource(String source) {
-        this.source = source;
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
-    @JsonProperty("target")
-    public String getTarget() {
-        return target;
+    @JsonProperty("size")
+    public Integer getSize() {
+        return size;
     }
 
-    @JsonProperty("target")
-    public void setTarget(String target) {
-        this.target = target;
+    @JsonProperty("size")
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     @JsonAnyGetter
@@ -73,13 +73,13 @@ public class Link {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("source", source).append("target", target)
+        return new ToStringBuilder(this).append("text", text).append("size", size)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(source).append(additionalProperties).append(target).toHashCode();
+        return new HashCodeBuilder().append(text).append(additionalProperties).append(size).toHashCode();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class Link {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Link) == false) {
+        if ((other instanceof WordCloud) == false) {
             return false;
         }
-        Link rhs = ((Link) other);
-        return new EqualsBuilder().append(source, rhs.source).append(additionalProperties, rhs.additionalProperties)
-                .append(target, rhs.target).isEquals();
+        WordCloud rhs = ((WordCloud) other);
+        return new EqualsBuilder().append(text, rhs.text).append(additionalProperties, rhs.additionalProperties)
+                .append(size, rhs.size).isEquals();
     }
 
 }

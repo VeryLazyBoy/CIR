@@ -1,7 +1,6 @@
 package com.cir.controllers.jsonobj;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -14,13 +13,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "articles", "links" })
-public class ArticleNetwork {
+@JsonPropertyOrder({ "paper", "cited" })
+public class PaperBar {
 
-    @JsonProperty("articles")
-    private List<ArticleToSend> articles = null;
-    @JsonProperty("links")
-    private List<Link> links = null;
+    @JsonProperty("paper")
+    private String paper;
+    @JsonProperty("cited")
+    private Integer cited;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -28,38 +27,38 @@ public class ArticleNetwork {
      * No args constructor for use in serialization
      * 
      */
-    public ArticleNetwork() {
+    public PaperBar() {
     }
 
     /**
      * 
-     * @param articles
-     * @param links
+     * @param cited
+     * @param paper
      */
-    public ArticleNetwork(List<ArticleToSend> articles, List<Link> links) {
+    public PaperBar(String paper, Integer cited) {
         super();
-        this.articles = articles;
-        this.links = links;
+        this.paper = paper;
+        this.cited = cited;
     }
 
-    @JsonProperty("articles")
-    public List<ArticleToSend> getArticles() {
-        return articles;
+    @JsonProperty("paper")
+    public String getPaper() {
+        return paper;
     }
 
-    @JsonProperty("articles")
-    public void setArticles(List<ArticleToSend> articles) {
-        this.articles = articles;
+    @JsonProperty("paper")
+    public void setPaper(String paper) {
+        this.paper = paper;
     }
 
-    @JsonProperty("links")
-    public List<Link> getLinks() {
-        return links;
+    @JsonProperty("cited")
+    public Integer getCited() {
+        return cited;
     }
 
-    @JsonProperty("links")
-    public void setLinks(List<Link> links) {
-        this.links = links;
+    @JsonProperty("cited")
+    public void setCited(Integer cited) {
+        this.cited = cited;
     }
 
     @JsonAnyGetter
@@ -74,13 +73,13 @@ public class ArticleNetwork {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("articles", articles).append("links", links)
+        return new ToStringBuilder(this).append("paper", paper).append("cited", cited)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(articles).append(additionalProperties).append(links).toHashCode();
+        return new HashCodeBuilder().append(additionalProperties).append(cited).append(paper).toHashCode();
     }
 
     @Override
@@ -88,12 +87,12 @@ public class ArticleNetwork {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ArticleNetwork) == false) {
+        if ((other instanceof PaperBar) == false) {
             return false;
         }
-        ArticleNetwork rhs = ((ArticleNetwork) other);
-        return new EqualsBuilder().append(articles, rhs.articles).append(additionalProperties, rhs.additionalProperties)
-                .append(links, rhs.links).isEquals();
+        PaperBar rhs = ((PaperBar) other);
+        return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(cited, rhs.cited)
+                .append(paper, rhs.paper).isEquals();
     }
 
 }

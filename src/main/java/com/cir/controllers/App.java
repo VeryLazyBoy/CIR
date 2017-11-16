@@ -44,6 +44,18 @@ public class App {
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+        DbHandler.connectToDb();
+//        DbHandler.createYearLine("PERSUASIVE", 2010, 0, 2010);
+//        DbHandler.createVenueLine("PERSUASIVE", 2010, "CHI Extended Abstracts", "Behaviour research and therapy");
+//        DbHandler.close();
+//        DbHandler.createTopAuthorBar("arxiv", 2003, 5);
+//        DbHandler.createTopAuthorBar("arxiv", 5);
+//        DbHandler.createTopAuthorBar(2003, 5);
+//        DbHandler.createTopCitedAuthorBar("arxiv", 2003, 5);
+//        DbHandler.createTopCitedAuthorBar("arxiv", 5);
+//        DbHandler.createTopCitedAuthorBar(2003, 100);
+        DbHandler.getBaseArticleNetwork("Low-density parity check codes over GF(q)");
+        
         System.in.read();
         server.shutdown();
     }

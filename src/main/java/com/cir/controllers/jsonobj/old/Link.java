@@ -1,4 +1,4 @@
-package com.cir.controllers.jsonobj;
+package com.cir.controllers.jsonobj.old;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +13,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "title", "citations" })
-public class ArticleBar {
+@JsonPropertyOrder({ "source", "target" })
+public class Link {
 
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("citations")
-    private Integer citations;
+    @JsonProperty("source")
+    private String source; // Base paper
+    @JsonProperty("target")
+    private String target; // Cited By
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -27,38 +27,38 @@ public class ArticleBar {
      * No args constructor for use in serialization
      * 
      */
-    public ArticleBar() {
+    public Link() {
     }
 
     /**
      * 
-     * @param title
-     * @param citations
+     * @param source
+     * @param target
      */
-    public ArticleBar(String title, Integer citations) {
+    public Link(String source, String target) {
         super();
-        this.title = title;
-        this.citations = citations;
+        this.source = source;
+        this.target = target;
     }
 
-    @JsonProperty("title")
-    public String getTitle() {
-        return title;
+    @JsonProperty("source")
+    public String getSource() {
+        return source;
     }
 
-    @JsonProperty("title")
-    public void setTitle(String title) {
-        this.title = title;
+    @JsonProperty("source")
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    @JsonProperty("citations")
-    public Integer getCitations() {
-        return citations;
+    @JsonProperty("target")
+    public String getTarget() {
+        return target;
     }
 
-    @JsonProperty("citations")
-    public void setCitations(Integer citations) {
-        this.citations = citations;
+    @JsonProperty("target")
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     @JsonAnyGetter
@@ -73,13 +73,13 @@ public class ArticleBar {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("title", title).append("citations", citations)
+        return new ToStringBuilder(this).append("source", source).append("target", target)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(title).append(citations).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(source).append(additionalProperties).append(target).toHashCode();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class ArticleBar {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ArticleBar) == false) {
+        if ((other instanceof Link) == false) {
             return false;
         }
-        ArticleBar rhs = ((ArticleBar) other);
-        return new EqualsBuilder().append(title, rhs.title).append(citations, rhs.citations)
-                .append(additionalProperties, rhs.additionalProperties).isEquals();
+        Link rhs = ((Link) other);
+        return new EqualsBuilder().append(source, rhs.source).append(additionalProperties, rhs.additionalProperties)
+                .append(target, rhs.target).isEquals();
     }
 
 }

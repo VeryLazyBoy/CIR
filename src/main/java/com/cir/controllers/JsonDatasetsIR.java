@@ -11,23 +11,22 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import com.cir.controllers.jsonobj.AuthorBar;
+import com.cir.controllers.jsonobj.PaperBar;
+import com.cir.controllers.jsonobj.YearLineWithLabel;
+import com.cir.controllers.jsonobj.old.ArticleNetwork;
+import com.cir.controllers.jsonobj.old.ArticleToSend;
+import com.cir.controllers.jsonobj.old.Link;
+import com.cir.controllers.jsonobj.old.VenueSector;
+import com.cir.controllers.jsonobj.old.YearLine;
 import com.cir.models.json.Article;
 import com.cir.models.json.ArticleHandler;
 import com.cir.models.json.Author;
 import com.cir.utility.FixedSizeSortedList;
 
-import com.cir.controllers.jsonobj.ArticleBar;
-import com.cir.controllers.jsonobj.ArticleNetwork;
-import com.cir.controllers.jsonobj.ArticleToSend;
-import com.cir.controllers.jsonobj.AuthorBar;
-import com.cir.controllers.jsonobj.Link;
-import com.cir.controllers.jsonobj.VenueSector;
-import com.cir.controllers.jsonobj.YearLine;
-
 public class JsonDatasetsIR {
     ArticleHandler articleHandler = new ArticleHandler();
     
-    // Q1
     public List<AuthorBar> getTopAuthorsWithVenue(int top, String venue) {
         List<Article> articlesWithVenue = articleHandler.getArticlesWithVenue(venue);
         List<Author> authors = articleHandler.getAuthorsInArticles(articlesWithVenue);
@@ -56,13 +55,12 @@ public class JsonDatasetsIR {
         return results;
     }
 
-    // Q2
-    public List<ArticleBar> getTopArticlesWithVenue(int top, String venue) {
+    public List<PaperBar> getTopArticlesWithVenue(int top, String venue) {
         List<Article> articlesWithVenue = articleHandler.getArticlesWithVenue(venue);
         return getTopArticles(top, articlesWithVenue);
     }
 
-    private List<ArticleBar> getTopArticles(int top, List<Article> articles) {
+    private List<PaperBar> getTopArticles(int top, List<Article> articles) {
         FixedSizeSortedList<Article> topFiveArticles = new FixedSizeSortedList<>(top,
                 Article::compareByCitations);
         System.out.println(articles.size());
@@ -70,15 +68,14 @@ public class JsonDatasetsIR {
             topFiveArticles.add(a);
         }
         
-        List<ArticleBar> results = new ArrayList<>();
+        List<PaperBar> results = new ArrayList<>();
         for(Article a : topFiveArticles.getSortedResultList()) {
-            ArticleBar ab = new ArticleBar(a.getTitle(), a.getCitationTimes());
+            PaperBar ab = new PaperBar(a.getTitle(), a.getCitationTimes());
             results.add(ab);
         }
         return results;
     }
 
-    // Q3
     public List<YearLine> getPublicationNumAcrossYearWithVenue(String venue) {
         List<Article> articlesWithVenue = articleHandler.getArticlesWithVenue(venue);
         List<Integer> years = articleHandler.getYearsInArticles(articlesWithVenue);
@@ -104,7 +101,6 @@ public class JsonDatasetsIR {
         return results;
     }
 
-    // Q4
     public ArticleNetwork getBaseArticleNetwork(String title) {
         ArticleNetwork result = new ArticleNetwork();
         List<ArticleToSend> articlesToSend = new ArrayList<>();
@@ -139,7 +135,6 @@ public class JsonDatasetsIR {
         return result;
     }
     
-    // Q5
     public List<VenueSector> getPublicationNumForVenuesInYear(int year) {
         List<Article> articlesInYear = articleHandler.getArticlesInYear(year);
         List<String> venues = articleHandler.getVenuesInArticles(articlesInYear);
@@ -176,5 +171,9 @@ public class JsonDatasetsIR {
             e.printStackTrace();
         }
         return allAuthors;
+    }
+    
+    public YearLineWithLabel getCitationNumAcrossYearWithVenueAndYear(String venue, int yearId) {
+        return null;
     }
 }
