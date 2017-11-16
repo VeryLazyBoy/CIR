@@ -39,6 +39,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UnwindOptions;
 
 public class DbHandler {
     private static MongoClient mongoClient;
@@ -340,6 +341,8 @@ public class DbHandler {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
         setUnionValues.add("$$this");
+        UnwindOptions uo = new UnwindOptions();
+        uo.preserveNullAndEmptyArrays(true);
         AggregateIterable<Document> papersCitingBase = collection.aggregate(Arrays.asList(
                 match(regex("title", Pattern.compile(Pattern.quote(baseTitle), Pattern.CASE_INSENSITIVE))),
                 limit(1),
@@ -351,7 +354,7 @@ public class DbHandler {
                         " authors: '$citationInfo.authors', "+
                         "title: '$citationInfo.title', "+
                         "ic: '$citationInfo.inCitations'}")),
-                unwind("$ic"),
+                unwind("$ic", uo),
                 lookup("papers", "ic", "id", "citationInfo"),
                 group("$id", 
                       first("id", "$id"), 
