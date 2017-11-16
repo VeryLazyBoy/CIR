@@ -13,11 +13,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "paper", "cited" })
-public class PaperBar {
+@JsonPropertyOrder({ "citedauthor", "cited" })
+public class CitedAuthorBar {
 
-    @JsonProperty("paper")
-    private String paper;
+    @JsonProperty("citedauthor")
+    private String citedauthor;
     @JsonProperty("cited")
     private Integer cited;
     @JsonIgnore
@@ -27,28 +27,28 @@ public class PaperBar {
      * No args constructor for use in serialization
      * 
      */
-    public PaperBar() {
+    public CitedAuthorBar() {
     }
 
     /**
      * 
      * @param cited
-     * @param paper
+     * @param citedauthor
      */
-    public PaperBar(String paper, Integer cited) {
+    public CitedAuthorBar(String citedauthor, Integer cited) {
         super();
-        this.paper = paper;
+        this.citedauthor = citedauthor;
         this.cited = cited;
     }
 
-    @JsonProperty("paper")
-    public String getPaper() {
-        return paper;
+    @JsonProperty("citedauthor")
+    public String getCitedauthor() {
+        return citedauthor;
     }
 
-    @JsonProperty("paper")
-    public void setPaper(String paper) {
-        this.paper = paper;
+    @JsonProperty("citedauthor")
+    public void setCitedauthor(String citedauthor) {
+        this.citedauthor = citedauthor;
     }
 
     @JsonProperty("cited")
@@ -73,13 +73,13 @@ public class PaperBar {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("paper", paper).append("cited", cited)
+        return new ToStringBuilder(this).append("citedauthor", citedauthor).append("cited", cited)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(additionalProperties).append(cited).append(paper).toHashCode();
+        return new HashCodeBuilder().append(additionalProperties).append(cited).append(citedauthor).toHashCode();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class PaperBar {
         if (other == this) {
             return true;
         }
-        if ((other instanceof PaperBar) == false) {
+        if ((other instanceof CitedAuthorBar) == false) {
             return false;
         }
-        PaperBar rhs = ((PaperBar) other);
+        CitedAuthorBar rhs = ((CitedAuthorBar) other);
         return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(cited, rhs.cited)
-                .append(paper, rhs.paper).isEquals();
+                .append(citedauthor, rhs.citedauthor).isEquals();
     }
 
 }

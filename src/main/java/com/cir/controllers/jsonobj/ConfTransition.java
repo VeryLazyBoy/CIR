@@ -13,13 +13,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "paper", "cited" })
-public class PaperBar {
+@JsonPropertyOrder({ "conference", "citations" })
+public class ConfTransition {
 
-    @JsonProperty("paper")
-    private String paper;
-    @JsonProperty("cited")
-    private Integer cited;
+    @JsonProperty("conference")
+    private String conference;
+    @JsonProperty("citations")
+    private Integer citations;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -27,38 +27,38 @@ public class PaperBar {
      * No args constructor for use in serialization
      * 
      */
-    public PaperBar() {
+    public ConfTransition() {
     }
 
     /**
      * 
-     * @param cited
-     * @param paper
+     * @param citations
+     * @param conference
      */
-    public PaperBar(String paper, Integer cited) {
+    public ConfTransition(String conference, Integer citations) {
         super();
-        this.paper = paper;
-        this.cited = cited;
+        this.conference = conference;
+        this.citations = citations;
     }
 
-    @JsonProperty("paper")
-    public String getPaper() {
-        return paper;
+    @JsonProperty("conference")
+    public String getConference() {
+        return conference;
     }
 
-    @JsonProperty("paper")
-    public void setPaper(String paper) {
-        this.paper = paper;
+    @JsonProperty("conference")
+    public void setConference(String conference) {
+        this.conference = conference;
     }
 
-    @JsonProperty("cited")
-    public Integer getCited() {
-        return cited;
+    @JsonProperty("citations")
+    public Integer getCitations() {
+        return citations;
     }
 
-    @JsonProperty("cited")
-    public void setCited(Integer cited) {
-        this.cited = cited;
+    @JsonProperty("citations")
+    public void setCitations(Integer citations) {
+        this.citations = citations;
     }
 
     @JsonAnyGetter
@@ -73,13 +73,13 @@ public class PaperBar {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("paper", paper).append("cited", cited)
+        return new ToStringBuilder(this).append("conference", conference).append("citations", citations)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(additionalProperties).append(cited).append(paper).toHashCode();
+        return new HashCodeBuilder().append(citations).append(additionalProperties).append(conference).toHashCode();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class PaperBar {
         if (other == this) {
             return true;
         }
-        if ((other instanceof PaperBar) == false) {
+        if ((other instanceof ConfTransition) == false) {
             return false;
         }
-        PaperBar rhs = ((PaperBar) other);
-        return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(cited, rhs.cited)
-                .append(paper, rhs.paper).isEquals();
+        ConfTransition rhs = ((ConfTransition) other);
+        return new EqualsBuilder().append(citations, rhs.citations)
+                .append(additionalProperties, rhs.additionalProperties).append(conference, rhs.conference).isEquals();
     }
 
 }
