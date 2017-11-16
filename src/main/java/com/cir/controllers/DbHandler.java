@@ -285,8 +285,7 @@ public class DbHandler {
                         .append("paper", 
                                 new Document("$first", "$citationInfo.title"))
                         .append("count", 
-                                new Document("count", 
-                                        new Document("$sum", 1)))),
+                                new Document("$sum", 1))),
                 new Document("$sort", new Document("count", -1).append("paper", 1).append("_id", 1)),
                 new Document("$limit", top)));
         List<PaperBar> pbs = new ArrayList<>();
