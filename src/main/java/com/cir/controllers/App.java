@@ -54,7 +54,8 @@ public class App {
 //        DbHandler.createTopCitedAuthorBar("arxiv", 2003, 5);
 //        DbHandler.createTopCitedAuthorBar("arxiv", 5);
 //        DbHandler.createTopCitedAuthorBar(2003, 100);
-        DbHandler.getBaseArticleNetwork("Low-density parity check codes over GF(q)");
+//        DbHandler.getBaseArticleNetwork("Low-density parity check codes over GF(q)");
+        DbHandler.createWordCloud("arxiv", 2008);
         
         System.in.read();
         server.shutdown();
