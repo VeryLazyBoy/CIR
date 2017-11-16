@@ -214,8 +214,10 @@ var generateAPIUrl = function(){
     case '6':
     case '7':
     case '8':
-    case '9':
     urlString += "citations?"
+    break;
+    case '9':
+    urlString +="authors/citations?"
     break;
   }
   //add values if they exist
