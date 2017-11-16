@@ -13,13 +13,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "venue", "publications" })
-public class VenueSector {
+@JsonPropertyOrder({ "year", "citations" })
+public class YearTransition {
 
-    @JsonProperty("venue")
-    private String venue;
-    @JsonProperty("publications")
-    private Integer publications;
+    @JsonProperty("year")
+    private Integer year;
+    @JsonProperty("citations")
+    private Integer citations;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -27,38 +27,38 @@ public class VenueSector {
      * No args constructor for use in serialization
      * 
      */
-    public VenueSector() {
+    public YearTransition() {
     }
 
     /**
      * 
-     * @param publications
-     * @param venue
+     * @param citations
+     * @param year
      */
-    public VenueSector(String venue, Integer publications) {
+    public YearTransition(Integer year, Integer citations) {
         super();
-        this.venue = venue;
-        this.publications = publications;
+        this.year = year;
+        this.citations = citations;
     }
 
-    @JsonProperty("venue")
-    public String getVenue() {
-        return venue;
+    @JsonProperty("year")
+    public Integer getYear() {
+        return year;
     }
 
-    @JsonProperty("venue")
-    public void setVenue(String venue) {
-        this.venue = venue;
+    @JsonProperty("year")
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    @JsonProperty("publications")
-    public Integer getPublications() {
-        return publications;
+    @JsonProperty("citations")
+    public Integer getCitations() {
+        return citations;
     }
 
-    @JsonProperty("publications")
-    public void setPublications(Integer publications) {
-        this.publications = publications;
+    @JsonProperty("citations")
+    public void setCitations(Integer citations) {
+        this.citations = citations;
     }
 
     @JsonAnyGetter
@@ -73,13 +73,13 @@ public class VenueSector {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("venue", venue).append("publications", publications)
+        return new ToStringBuilder(this).append("year", year).append("citations", citations)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(publications).append(additionalProperties).append(venue).toHashCode();
+        return new HashCodeBuilder().append(citations).append(additionalProperties).append(year).toHashCode();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class VenueSector {
         if (other == this) {
             return true;
         }
-        if ((other instanceof VenueSector) == false) {
+        if ((other instanceof YearTransition) == false) {
             return false;
         }
-        VenueSector rhs = ((VenueSector) other);
-        return new EqualsBuilder().append(publications, rhs.publications)
-                .append(additionalProperties, rhs.additionalProperties).append(venue, rhs.venue).isEquals();
+        YearTransition rhs = ((YearTransition) other);
+        return new EqualsBuilder().append(citations, rhs.citations)
+                .append(additionalProperties, rhs.additionalProperties).append(year, rhs.year).isEquals();
     }
 
 }
