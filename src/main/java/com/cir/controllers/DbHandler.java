@@ -8,11 +8,13 @@ import static com.mongodb.client.model.Aggregates.limit;
 import static com.mongodb.client.model.Aggregates.lookup;
 import static com.mongodb.client.model.Aggregates.match;
 import static com.mongodb.client.model.Aggregates.project;
+import static com.mongodb.client.model.Aggregates.sort;
 import static com.mongodb.client.model.Aggregates.unwind;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -313,8 +315,10 @@ public class DbHandler {
     // Missing co-author, author's name is not unique; ui title
     public static List<PaperBar> createTopPaperBarForAuthor(String author, int top) {
         AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
-                match(and(exists("ids"), regex("author", Pattern.compile(author, Pattern.CASE_INSENSITIVE)))),
-                project(Document.parse("{ count: { $size:'$inCitations' }, paper:'$title'}"))
+                match(and(exists("authors.ids"), regex("authors.name", Pattern.compile(Pattern.quote(author), Pattern.CASE_INSENSITIVE)))),
+                project(Document.parse("{ count: { $size:'$inCitations' }, paper:'$title'}")),
+                sort(descending("count")),
+                limit(top)
                 ));
         
         List<PaperBar> pbs = new ArrayList<>();
