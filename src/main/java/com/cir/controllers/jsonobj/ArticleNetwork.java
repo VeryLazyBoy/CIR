@@ -1,7 +1,9 @@
-package com.cir.controllers.jsonobj.old;
+package com.cir.controllers.jsonobj;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,13 +15,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "year", "publications" })
-public class YearLine {
+@JsonPropertyOrder({ "articles", "links" })
+public class ArticleNetwork {
 
-    @JsonProperty("year")
-    private Integer year;
-    @JsonProperty("publications")
-    private Integer publications;
+    @JsonProperty("articles")
+    private List<ArticleToSend> articles = null;
+    @JsonProperty("links")
+    private List<Link> links = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -27,38 +29,38 @@ public class YearLine {
      * No args constructor for use in serialization
      * 
      */
-    public YearLine() {
+    public ArticleNetwork() {
     }
 
     /**
      * 
-     * @param publications
-     * @param year
+     * @param articles
+     * @param links
      */
-    public YearLine(Integer year, Integer publications) {
+    public ArticleNetwork(List<ArticleToSend> articles, List<Link> links) {
         super();
-        this.year = year;
-        this.publications = publications;
+        this.articles = articles;
+        this.links = links;
     }
 
-    @JsonProperty("year")
-    public Integer getYear() {
-        return year;
+    @JsonProperty("articles")
+    public List<ArticleToSend> getArticles() {
+        return articles;
     }
 
-    @JsonProperty("year")
-    public void setYear(Integer year) {
-        this.year = year;
+    @JsonProperty("articles")
+    public void setArticles(List<ArticleToSend> articles) {
+        this.articles = articles;
     }
 
-    @JsonProperty("publications")
-    public Integer getPublications() {
-        return publications;
+    @JsonProperty("links")
+    public List<Link> getLinks() {
+        return links;
     }
 
-    @JsonProperty("publications")
-    public void setPublications(Integer publications) {
-        this.publications = publications;
+    @JsonProperty("links")
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 
     @JsonAnyGetter
@@ -73,13 +75,13 @@ public class YearLine {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("year", year).append("publications", publications)
+        return new ToStringBuilder(this).append("articles", articles).append("links", links)
                 .append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(publications).append(additionalProperties).append(year).toHashCode();
+        return new HashCodeBuilder().append(articles).append(additionalProperties).append(links).toHashCode();
     }
 
     @Override
@@ -87,12 +89,12 @@ public class YearLine {
         if (other == this) {
             return true;
         }
-        if ((other instanceof YearLine) == false) {
+        if ((other instanceof ArticleNetwork) == false) {
             return false;
         }
-        YearLine rhs = ((YearLine) other);
-        return new EqualsBuilder().append(publications, rhs.publications)
-                .append(additionalProperties, rhs.additionalProperties).append(year, rhs.year).isEquals();
+        ArticleNetwork rhs = ((ArticleNetwork) other);
+        return new EqualsBuilder().append(articles, rhs.articles).append(additionalProperties, rhs.additionalProperties)
+                .append(links, rhs.links).isEquals();
     }
 
 }
