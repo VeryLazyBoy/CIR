@@ -11,18 +11,16 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.cir.controllers.jsonobj.ArticleNetwork;
 import com.cir.controllers.jsonobj.AuthorBar;
 import com.cir.controllers.jsonobj.CitedAuthorBar;
 import com.cir.controllers.jsonobj.ConfLineWithLabel;
 import com.cir.controllers.jsonobj.PaperBar;
 import com.cir.controllers.jsonobj.WordCloud;
 import com.cir.controllers.jsonobj.YearLineWithLabel;
-import com.cir.controllers.jsonobj.old.ArticleNetwork;
-import com.cir.controllers.jsonobj.old.VenueSector;
 
 @Path("/json")
 public class JsonService {
-    private JsonDatasetsIR datasetsIR = new JsonDatasetsIR();
     @GET
     @Path("/authors")
     @Produces(MediaType.APPLICATION_JSON)
@@ -177,20 +175,6 @@ public class JsonService {
     }
 
     @GET
-    @Path("/venues")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPublciationNumForVenuesInYear(@QueryParam("year") int year) {
-        List<VenueSector> result = datasetsIR.getPublicationNumForVenuesInYear(year);
-        return Response.ok()
-                .entity(result)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .allow("OPTIONS")
-                .build();
-        
-    }
-    
-    @GET
     @Path("/yeartransitions")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCitedDocNumberAcrossYearForVenueWithYears(@QueryParam("conf") String conf, 
@@ -259,7 +243,7 @@ public class JsonService {
     }
     
     @GET
-    @Path("/confcomtemporaries")
+    @Path("/confcontemporaries")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCitedDocNumberAcrossVenueForVenuesWithYear(@QueryParam("confs") String confId, 
             @QueryParam("year") Integer year, 
@@ -293,7 +277,7 @@ public class JsonService {
     }
     
     @GET
-    @Path("/yearcomtemporaries")
+    @Path("/yearcontemporaries")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCitedDocNumberAcrossYearForVenuesWithYear(@QueryParam("confs") String confId, 
             @QueryParam("year") Integer year,

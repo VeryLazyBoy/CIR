@@ -8,11 +8,13 @@ import static com.mongodb.client.model.Aggregates.limit;
 import static com.mongodb.client.model.Aggregates.lookup;
 import static com.mongodb.client.model.Aggregates.match;
 import static com.mongodb.client.model.Aggregates.project;
+import static com.mongodb.client.model.Aggregates.sort;
 import static com.mongodb.client.model.Aggregates.unwind;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,22 +25,23 @@ import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import com.cir.controllers.jsonobj.ArticleNetwork;
+import com.cir.controllers.jsonobj.ArticleToSend;
 import com.cir.controllers.jsonobj.AuthorBar;
 import com.cir.controllers.jsonobj.CitedAuthorBar;
 import com.cir.controllers.jsonobj.ConfLineWithLabel;
 import com.cir.controllers.jsonobj.ConfTransition;
+import com.cir.controllers.jsonobj.Link;
 import com.cir.controllers.jsonobj.PaperBar;
 import com.cir.controllers.jsonobj.WordCloud;
 import com.cir.controllers.jsonobj.YearLineWithLabel;
 import com.cir.controllers.jsonobj.YearTransition;
-import com.cir.controllers.jsonobj.old.ArticleNetwork;
-import com.cir.controllers.jsonobj.old.ArticleToSend;
-import com.cir.controllers.jsonobj.old.Link;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UnwindOptions;
 
 public class DbHandler {
     private static MongoClient mongoClient;
@@ -145,20 +148,6 @@ public class DbHandler {
                                 new Document("$regex", Pattern.quote(venue))
                                 .append("$options", "i"))
                         .append("year", year)),
-//                new Document("$group", 
-//                        new Document("_id", 
-//                                new Document("venue", "$venue")
-//                                .append("year", "$year"))
-//                        .append("oc", 
-//                                new Document("$addToSet", "$outCitations"))),
-//                new Document("$addFields", 
-//                        new Document("oc", 
-//                                new Document("$reduce", 
-//                                        new Document("input", "$oc")
-//                                        .append("initialValue", 
-//                                                new ArrayList<Document>())
-//                                        .append("in", 
-//                                                new Document("$setUnion", setUnionValues))))),
                 new Document("$unwind", "$outCitations"),
                 new Document("$lookup", 
                         new Document("from", "papers")
@@ -189,54 +178,6 @@ public class DbHandler {
     }
 
     
-    public static AggregateIterable<Document> test(String venue, int year, int sYear, int eYear){
-        List<String> setUnionValues = new ArrayList<String>();
-        setUnionValues.add("$$value");
-        setUnionValues.add("$$this");
-        List<Document> andValues = new ArrayList<>();
-        andValues.add(new Document("citationInfo.year", 
-                new Document("$exists", true).append("$ne", new ArrayList<String>())));
-        andValues.add(new Document("citationInfo.year", new Document("$ne", "")));
-        AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
-                new Document("$match", 
-                        new Document("venue", 
-                                new Document("$regex", Pattern.quote(venue))
-                                .append("$options", "i"))
-                        .append("year", year)),
-//                new Document("$group", 
-//                        new Document("_id", 
-//                                new Document("venue", "$venue")
-//                                .append("year", "$year"))
-//                        .append("oc", 
-//                                new Document("$addToSet", "$outCitations"))),
-//                new Document("$addFields", 
-//                        new Document("oc", 
-//                                new Document("$reduce", 
-//                                        new Document("input", "$oc")
-//                                        .append("initialValue", 
-//                                                new ArrayList<Document>())
-//                                        .append("in", 
-//                                                new Document("$setUnion", setUnionValues))))),
-                new Document("$unwind", "$outCitations"),
-                new Document("$lookup", 
-                        new Document("from", "papers")
-                        .append("localField", "outCitations")
-                        .append("foreignField", "id")
-                        .append("as", "citationInfo")),
-                new Document("$unwind", "$citationInfo"),
-                new Document("$match", new Document("$and", andValues)), // One
-                new Document("$group", 
-                        new Document("_id", "$citationInfo.year") // Two
-                        .append("count", 
-                                new Document("$sum", 1))
-                        .append("confWithYear", 
-                                new Document("$first", "$_id"))),
-                new Document("$match", getYearFilterDoc(sYear, eYear)), // Three
-                new Document("$sort", new Document("_id", 1))
-                ));
-        return output;
-    }
-
     public AggregateIterable<Document> query(List<Document> docs) {
         return collection.aggregate(docs);
     }
@@ -344,8 +285,7 @@ public class DbHandler {
                         .append("paper", 
                                 new Document("$first", "$citationInfo.title"))
                         .append("count", 
-                                new Document("count", 
-                                        new Document("$sum", 1)))),
+                                new Document("$sum", 1))),
                 new Document("$sort", new Document("count", -1).append("paper", 1).append("_id", 1)),
                 new Document("$limit", top)));
         List<PaperBar> pbs = new ArrayList<>();
@@ -374,8 +314,10 @@ public class DbHandler {
     // Missing co-author, author's name is not unique; ui title
     public static List<PaperBar> createTopPaperBarForAuthor(String author, int top) {
         AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
-                match(and(exists("ids"), regex("author", Pattern.compile(author, Pattern.CASE_INSENSITIVE)))),
-                project(Document.parse("{ count: { $size:'$inCitations' }, paper:'$title'}"))
+                match(and(exists("authors.ids"), regex("authors.name", Pattern.compile(Pattern.quote(author), Pattern.CASE_INSENSITIVE)))),
+                project(Document.parse("{ count: { $size:'$inCitations' }, paper:'$title'}")),
+                sort(descending("count")),
+                limit(top)
                 ));
         
         List<PaperBar> pbs = new ArrayList<>();
@@ -402,6 +344,8 @@ public class DbHandler {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
         setUnionValues.add("$$this");
+        UnwindOptions uo = new UnwindOptions();
+        uo.preserveNullAndEmptyArrays(true);
         AggregateIterable<Document> papersCitingBase = collection.aggregate(Arrays.asList(
                 match(regex("title", Pattern.compile(Pattern.quote(baseTitle), Pattern.CASE_INSENSITIVE))),
                 limit(1),
@@ -413,7 +357,7 @@ public class DbHandler {
                         " authors: '$citationInfo.authors', "+
                         "title: '$citationInfo.title', "+
                         "ic: '$citationInfo.inCitations'}")),
-                unwind("$ic"),
+                unwind("$ic", uo),
                 lookup("papers", "ic", "id", "citationInfo"),
                 group("$id", 
                       first("id", "$id"), 
@@ -491,7 +435,8 @@ public class DbHandler {
                 ));
         List<WordCloud> wcs = new ArrayList<>();
         for (Document d : output) {
-            WordCloud wc = new WordCloud(d.getString("keyPhrases"), d.getInteger("count"));
+            System.out.println(d);
+            WordCloud wc = new WordCloud(d.getString("_id"), d.getInteger("count"));
             wcs.add(wc);
         }
         return wcs;
