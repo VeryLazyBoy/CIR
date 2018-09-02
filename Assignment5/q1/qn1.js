@@ -55,7 +55,9 @@ $(document).ready(function() {
             lSpace = WIDTH/dataGroup.length;
             xScale = d3.scale.ordinal()
             .rangePoints([MARGINS.left, WIDTH - MARGINS.right])
-            .domain(data.map(function(d) {
+            .domain(data.sort(function(a,b) {
+                return (a[dataKeys[0]] > b[dataKeys[0]]) ? 1 : ((b[dataKeys[0]] > a[dataKeys[0]]) ? -1 : 0);
+            }).map(function(d) {
                 // console.log(d[dataKeys[0]]);
                 return d[dataKeys[0]];
             }));
