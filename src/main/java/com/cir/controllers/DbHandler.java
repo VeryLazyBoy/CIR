@@ -18,6 +18,7 @@ import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -79,6 +80,15 @@ public class DbHandler {
     }
 
     // TODO naming
+    /**
+     * For a specific venue in a year, counting number of papers it cites, which are
+     * published from any venue from the venueList. If there is no cited paper published
+     * in a particular venue, the count is 0.
+     * @param venue, a conference, a journal or etc.
+     * @param year, time when the conference is conducted or the journal is published
+     * @param venueList, list of venues where cited papers are published
+     * @return ConfLineWithLabel which wraps the counted info for this venue
+     */
     public static ConfLineWithLabel createVenueLine(String venue, int year, String...venueList) {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
@@ -126,10 +136,31 @@ public class DbHandler {
                 new Document("$project", new Document("conf", "$_id").append("count", "$count"))
                 ));
         List<ConfTransition> ts = new ArrayList<>();
+        // TODO is venueList a set? 
+        List<String> venues = Arrays.asList(venueList);
+        Collections.sort(venues);
+        int targetVenueIndex = 0;
+        ConfTransition t = new ConfTransition();
         for (Document d : output) {
             System.out.println(d);
-            ConfTransition t = new ConfTransition(d.getString("conf"), d.getInteger("count"));
+            String currentVenue = d.getString("conf");
+            String targetVenue = venues.get(targetVenueIndex);
+            while(!targetVenue.equalsIgnoreCase(currentVenue)) {
+                t = new ConfTransition(targetVenue, 0);
+                targetVenueIndex++;
+                targetVenue = venues.get(targetVenueIndex);
+                ts.add(t);
+            }
+            
+            t = new ConfTransition(currentVenue, d.getInteger("count"));
             ts.add(t);
+            targetVenueIndex++;
+        }
+        
+        while(targetVenueIndex < venues.size()) {
+            t = new ConfTransition(venues.get(targetVenueIndex), 0);
+            ts.add(t);
+            targetVenueIndex++;
         }
         ConfLineWithLabel vlwl = new ConfLineWithLabel(venue + year, ts);
         return vlwl;
