@@ -81,15 +81,15 @@ public class DbHandler {
 
     // TODO naming
     /**
-     * For a specific venue in a year, counting number of papers it cites, which are
-     * published from any venue from the venueList. If there is no cited paper published
-     * in a particular venue, the count is 0.
-     * @param venue, a conference, a journal or etc.
+     * For a specific place in a year, counting number of papers it cites, which are
+     * published from any place from the venueList. If there is no cited paper published
+     * in a particular place, the count is 0.
+     * @param place, a conference, a journal or etc.
      * @param year, time when the conference is conducted or the journal is published
-     * @param venueList, list of venues where cited papers are published
-     * @return ConfLineWithLabel which wraps the counted info for this venue
+     * @param placeList, list of places where cited papers are published
+     * @return ConfLineWithLabel which wraps the counted info for this place
      */
-    public static ConfLineWithLabel createVenueLine(String venue, int year, String...venueList) {
+    public static ConfLineWithLabel createPlaceLine(String place, int year, String...placeList) {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
         setUnionValues.add("$$this");
@@ -100,7 +100,7 @@ public class DbHandler {
         AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
                 new Document("$match", 
                         new Document("venue", 
-                                new Document("$regex", "^" + Pattern.quote(venue) + "$")
+                                new Document("$regex", "^" + Pattern.quote(place) + "$")
                                 .append("$options", "i"))
                         .append("year", year)),
 //                new Document("$group", 
@@ -131,52 +131,52 @@ public class DbHandler {
                                 new Document("$sum", 1))
                         .append("confWithYear", 
                                 new Document("$first", "$_id"))),
-                new Document("$match", getVenueFilterDoc(venueList)), // Three
+                new Document("$match", getVenueFilterDoc(placeList)), // Three
                 new Document("$sort", new Document("_id", 1)),
                 new Document("$project", new Document("conf", "$_id").append("count", "$count"))
                 ));
         List<ConfTransition> ts = new ArrayList<>();
         // TODO is venueList a set? 
-        List<String> venues = Arrays.asList(venueList);
-        Collections.sort(venues);
-        int targetVenueIndex = 0;
+        List<String> places = Arrays.asList(placeList);
+        Collections.sort(places);
+        int targetPlaceIndex = 0;
         ConfTransition t = new ConfTransition();
         for (Document d : output) {
             System.out.println(d);
-            String currentVenue = d.getString("conf");
-            String targetVenue = venues.get(targetVenueIndex);
-            while(!targetVenue.equalsIgnoreCase(currentVenue)) {
-                t = new ConfTransition(targetVenue, 0);
-                targetVenueIndex++;
-                targetVenue = venues.get(targetVenueIndex);
+            String currentPlace = d.getString("conf");
+            String targetPlace = places.get(targetPlaceIndex);
+            while(!targetPlace.equalsIgnoreCase(currentPlace)) {
+                t = new ConfTransition(targetPlace, 0);
+                targetPlaceIndex++;
+                targetPlace = places.get(targetPlaceIndex);
                 ts.add(t);
             }
             
-            t = new ConfTransition(currentVenue, d.getInteger("count"));
+            t = new ConfTransition(currentPlace, d.getInteger("count"));
             ts.add(t);
-            targetVenueIndex++;
+            targetPlaceIndex++;
         }
         
-        while(targetVenueIndex < venues.size()) {
-            t = new ConfTransition(venues.get(targetVenueIndex), 0);
+        while(targetPlaceIndex < places.size()) {
+            t = new ConfTransition(places.get(targetPlaceIndex), 0);
             ts.add(t);
-            targetVenueIndex++;
+            targetPlaceIndex++;
         }
-        ConfLineWithLabel vlwl = new ConfLineWithLabel(venue + year, ts);
+        ConfLineWithLabel vlwl = new ConfLineWithLabel(place + year, ts);
         return vlwl;
     }
 
     /**
-     * For a specific venue in a year, counting number of papers it cites, which are
+     * For a specific place in a year, counting number of papers it cites, which are
      * published from sYear to eYear continuously. If there is no cited paper published
      * in a particular year, the count is 0.
-     * @param venue, a conference, a journal or etc.
+     * @param place, a conference, a journal or etc.
      * @param year, time when the conference is conducted or journal is published
      * @param sYear, starting year of the cited papers to look for
      * @param eYear, ending year of the cited papers to look for
-     * @return YearLineWithLabel which wraps the counted info for this venue
+     * @return YearLineWithLabel which wraps the counted info for this place
      */
-    public static YearLineWithLabel createYearLine(String venue, int year, int sYear, int eYear) {
+    public static YearLineWithLabel createYearLine(String place, int year, int sYear, int eYear) {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
         setUnionValues.add("$$this");
@@ -187,7 +187,7 @@ public class DbHandler {
         AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
                 new Document("$match", 
                         new Document("venue", 
-                                new Document("$regex", Pattern.quote(venue))
+                                new Document("$regex", Pattern.quote(place))
                                 .append("$options", "i"))
                         .append("year", year)),
                 new Document("$unwind", "$outCitations"),
@@ -231,7 +231,7 @@ public class DbHandler {
             targetYear++;
         }
         
-        YearLineWithLabel ylwl = new YearLineWithLabel(venue + year, ts);
+        YearLineWithLabel ylwl = new YearLineWithLabel(place + year, ts);
         return ylwl;
     }
 

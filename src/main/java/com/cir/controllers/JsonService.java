@@ -222,7 +222,7 @@ public class JsonService {
                 Integer[] yearIds = (Integer[]) Arrays.asList(yearId.split("\\$\\$")).stream().map(Integer::valueOf).toArray(Integer[]::new);
                 String[] conflist = confString.split("\\$\\$");
                 for (int year : yearIds) {
-                   ConfLineWithLabel vlwl = DbHandler.createVenueLine(conf, year, conflist);
+                   ConfLineWithLabel vlwl = DbHandler.createPlaceLine(conf, year, conflist);
                    vlwls.add(vlwl);
                 } 
             }
@@ -256,7 +256,7 @@ public class JsonService {
                 String[] confIds = confId.split("\\$\\$");
                 String[] conflist = confString.split("\\$\\$");
                 for (String c : confIds) {
-                   ConfLineWithLabel vlwl = DbHandler.createVenueLine(c, year, conflist);
+                   ConfLineWithLabel vlwl = DbHandler.createPlaceLine(c, year, conflist);
                    vlwls.add(vlwl);
                 } 
             }
