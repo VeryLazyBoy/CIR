@@ -193,38 +193,40 @@ $(document).ready(function() {
     });
 
     $('#queryTypeSelect').on('change', function() {
-    var confYears = false;
-    var confList = false;
+        var confYears = false;
+        var confList = false;
 
-    var val = this.value;
-    // console.log(val);
-    switch(val){
-        case '0': //over years
-        confYears = true;
-        confList = false;
-        break;
-        case '1':
-        confYears = false;
-        confList = true;
-        break;
-    }
-    if(confYears){
-        $("#startYearInputContainer").removeClass("hidden");
-        $("#endYearInputContainer").removeClass("hidden");
-    }else{
-        $("#startYearInputContainer").addClass("hidden");
-        $("#endYearInputContainer").addClass("hidden");
-    }
-    if(confList){
-        $("#ConferenceListGroup").removeClass("hidden");
-    }else{
-        $("#ConferenceListGroup").addClass("hidden");
-    }
+        var val = this.value;
+        // console.log(val);
+        switch(val){
+            case '0': //over years
+            confYears = true;
+            confList = false;
+            break;
+            case '1':
+            confYears = false;
+            confList = true;
+            break;
+        }
+        if(confYears){
+            $("#startYearInputContainer").removeClass("hidden");
+            $("#endYearInputContainer").removeClass("hidden");
+        }else{
+            $("#startYearInputContainer").addClass("hidden");
+            $("#endYearInputContainer").addClass("hidden");
+        }
+        if(confList){
+            $("#ConferenceListGroup").removeClass("hidden");
+        }else{
+            $("#ConferenceListGroup").addClass("hidden");
+        }
     });
-    var isNumeric = function(num){
+
+    var isNumeric = function(num) {
         return !isNaN(num)
-    }
-    var isValidYear = function(yearString){
+    };
+
+    var isValidYear = function(yearString) {
         if(yearString == ""){
             return true;
         }
@@ -235,7 +237,8 @@ $(document).ready(function() {
             return true;
         }
         return false;
-    }
+    };
+
     $("#generateBtn").click(function () {
 
         var urlString;
@@ -340,7 +343,6 @@ $(document).ready(function() {
                 urlString += "conflist=" + conferenceList;
             }
         }
-
 
         InitChart(encodeURI(urlString));
 
