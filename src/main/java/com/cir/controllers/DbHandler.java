@@ -74,10 +74,11 @@ public class DbHandler {
     }
     
     private static Document getVenueFilterDoc(String...venueList) {
-        String reg = Arrays.asList(venueList).stream().map(Pattern::quote).collect(Collectors.joining( "|" ));
+        String reg = Arrays.asList(venueList).stream().map(Pattern::quote).map(s -> "^" + s + "$").collect(Collectors.joining( "|" ));
         return new Document("_id", new Document("$regex", reg).append("$options", "i"));
     }
 
+    // TODO naming
     public static ConfLineWithLabel createVenueLine(String venue, int year, String...venueList) {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
@@ -89,7 +90,7 @@ public class DbHandler {
         AggregateIterable<Document> output = collection.aggregate(Arrays.asList(
                 new Document("$match", 
                         new Document("venue", 
-                                new Document("$regex", Pattern.quote(venue))
+                                new Document("$regex", "^" + Pattern.quote(venue) + "$")
                                 .append("$options", "i"))
                         .append("year", year)),
 //                new Document("$group", 
