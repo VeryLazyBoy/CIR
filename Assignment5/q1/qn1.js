@@ -61,11 +61,21 @@ $(document).ready(function() {
                 // console.log(d[dataKeys[0]]);
                 return d[dataKeys[0]];
             }));
-            yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(data, function(d) {
+
+            var minCount = d3.min(data, function(d) {
                 return d[dataKeys[1]];
-            }), d3.max(data, function(d) {
+            })
+
+            var maxCount = d3.max(data, function(d) {
                 return d[dataKeys[1]];
-            })]),
+            })
+
+            if (minCount == maxCount) {
+                yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, Math.max(1, data[0][dataKeys[1]] * 2)]);
+            } else {
+                yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([minCount, maxCount]);
+            }
+
             xAxis = d3.svg.axis()
             .scale(xScale),
             // .tickFormat(xAxisFormat),
