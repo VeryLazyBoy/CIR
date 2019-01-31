@@ -264,9 +264,13 @@ $(document).ready(function() {
                 return false;
             }
             var conferenceYears = "";
+            var maxConferenceYear = 0;
+            var currentYear = 0;
             for(t = 1; t<=counter; t++){
-                if($('#confYearInput'+t).val()){
+                if(currentYear = $('#confYearInput'+t).val()){
                     conferenceYears += $('#confYearInput' + t).val() + '$$';
+                    if(maxConferenceYear < currentYear)
+                        maxConferenceYear = currentYear;
                 }
             }
 
@@ -281,13 +285,19 @@ $(document).ready(function() {
                 return false;
             }
 
+            // End year should be chosen meaningfully to avoid all 0 counts.
+            if(maxConferenceYear < endYear) {
+                alert("Plear choose end year that are not larger than " + maxConferenceYear + " .");
+                return false;
+            }
+
             if(conference && conferenceYears){
                 urlString += "conf=" + conference + "&";
                 urlString += "years=" + conferenceYears + "&";
                 urlString += "syear=" + startYear + "&";
                 urlString += "eyear=" + endYear;
             }
-        }else{
+        } else {
             urlString = apiRootUrlOverConferences;
             var conference = $("#conferenceInput").val();
             if(!conference){
