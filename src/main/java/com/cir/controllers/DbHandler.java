@@ -134,6 +134,16 @@ public class DbHandler {
         return vlwl;
     }
 
+    /**
+     * For a specific venue in a year, counting number of papers it cites, which are
+     * published from sYear to eYear continuously. If there is no cited paper published
+     * in a particular year, the count is 0.
+     * @param venue, a conference
+     * @param year, time when the conference is conducted
+     * @param sYear, starting year of the cited papers to look for
+     * @param eYear, ending year of the cited papers to look for
+     * @return YearLineWithLabel which wraps the counted info for this venue
+     */
     public static YearLineWithLabel createYearLine(String venue, int year, int sYear, int eYear) {
         List<String> setUnionValues = new ArrayList<String>();
         setUnionValues.add("$$value");
@@ -168,11 +178,27 @@ public class DbHandler {
                 ));
 
         List<YearTransition> ts = new ArrayList<>();
+        int targetYear = sYear;
+        YearTransition t = new YearTransition();
         for (Document d : output) {
             System.out.println(d);
-            YearTransition t = new YearTransition(d.getInteger("year"), d.getInteger("count"));
+            int currentYear = d.getInteger("year");
+            while(targetYear != currentYear) {
+                t = new YearTransition(targetYear, 0);
+                ts.add(t);
+                targetYear++;
+            }
+            t = new YearTransition(d.getInteger("year"), d.getInteger("count"));
+            targetYear++;
             ts.add(t);
         }
+        
+        while(targetYear <= eYear) {
+            t = new YearTransition(targetYear, 0);
+            ts.add(t);
+            targetYear++;
+        }
+        
         YearLineWithLabel ylwl = new YearLineWithLabel(venue + year, ts);
         return ylwl;
     }
