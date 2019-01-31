@@ -100,11 +100,24 @@ $(document).ready(function() {
                 .y(function(d) {
                     return yScale(d[dataKeys[1]]);
                 })
-                .interpolate("basis");
+                .interpolate("basis"); // basis is for trend, the scale might not be accurate
+
+            var pathToCircle = function(d) {
+                moveToLeft = 'm -1, 0';
+                firstHalfCircle = 'a 1, 1 0 1, 1 2, 0';
+                secondHalfCircle = 'a 1, 1 0 1, 1 -2, 0';
+                return d + moveToLeft + firstHalfCircle + secondHalfCircle;
+            }
+
             dataGroup.forEach(function(d,i) {
                 // console.log("d is " + Object.keys(d));
+                if(d[dataGroupKeys[1]].length == 1) {
+                    path = pathToCircle(lineGen(d[dataGroupKeys[1]]));
+                } else {
+                    path = lineGen(d[dataGroupKeys[1]]);
+                }
                 vis.append('svg:path')
-                .attr('d', lineGen(d[dataGroupKeys[1]]))
+                .attr('d', path)
                 .attr('stroke', function(d,j) {
                         return "hsl(" + Math.random() * 360 + ",100%,50%)";
                 })
