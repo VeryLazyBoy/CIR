@@ -1,15 +1,19 @@
- label{
-  margin-right:8px;
- }
+label{
+    margin-right:8px;
+}
 
- h3{
-  font-size: 20px;
- }
+h3{
+    font-size: 20px;
+}
 
- .form-group > div{
-  padding:0 20px;
- }
+.form-group > div{
+    padding:0 20px;
+}
 
- .margins{
-  margin:20px 0;
- }
+.margins{
+    margin:20px 0;
+}
+
+#ConferenceYearsGroup{
+    margin-bottom: 50px;
+}
