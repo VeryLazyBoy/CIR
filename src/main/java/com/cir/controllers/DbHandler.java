@@ -170,8 +170,8 @@ public class DbHandler {
      * For a specific venue in a year, counting number of papers it cites, which are
      * published from sYear to eYear continuously. If there is no cited paper published
      * in a particular year, the count is 0.
-     * @param venue, a conference
-     * @param year, time when the conference is conducted
+     * @param venue, a conference, a journal or etc.
+     * @param year, time when the conference is conducted or journal is published
      * @param sYear, starting year of the cited papers to look for
      * @param eYear, ending year of the cited papers to look for
      * @return YearLineWithLabel which wraps the counted info for this venue
