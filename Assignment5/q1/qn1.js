@@ -239,61 +239,79 @@ $(document).ready(function() {
         return false;
     };
 
+    var getConferenceYears = function(yearCounter) {
+        var yearList = [];
+        for(var t = 1; t <= yearCounter; t++) {
+            var yearString = $('#confYearInput' + t).val();
+            if(yearString) {
+                //paseInst null or '' => NaN
+                yearList.push(parseInt(yearString));
+            }
+        }
+        return yearList;
+    }
+
+    var getConferences = function(NumOfConfs) {
+        var confList = [];
+        for(var t = 1; t <= NumOfConfs; t++) {
+            var conf = $('#confYearInput' + t).val();
+            if(conf) {
+                confList.push(conf);
+            }
+        }
+        return confList;
+    }
+
     $("#generateBtn").click(function () {
 
         var urlString;
         if($('#queryTypeSelect').val() == 0){
             urlString = apiRootUrlOverYears;
 
+            // Validates conference
             var conference = $("#conferenceInput").val();
             if(!conference){
                 alert("Conference Code is required.");
                 return false;
             }
+
+            // Valides start year
             var startYear = $("#startYearInput").val();
             if(!isValidYear(startYear)){
                 alert("Start year is invalid");
                 return false;
             }
+
+            // Validate end year
             var endYear = $("#endYearInput").val();
             if(!isValidYear(endYear)){
                 alert("End year is invalid");
                 return false;
             }
-            //input validation
 
+            // Validate start year and end year
             if(parseInt(startYear) > parseInt(endYear)){
                 alert("Start year must be before end year.");
                 return false;
             }
-            var conferenceYears = "";
-            var maxConferenceYear = 0;
-            var currentYear = 0;
-            for(t = 1; t<=counter; t++){
-                if(currentYear = $('#confYearInput'+t).val()){
-                    conferenceYears += $('#confYearInput' + t).val() + '$$';
-                    if(maxConferenceYear < currentYear)
-                        maxConferenceYear = currentYear;
-                }
-            }
 
-            // console.log("Before slicing: " + conferenceYears);
-            if(conferenceYears){
-                // console.log("slicing ");
-                conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
-                conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferenceYears);
-            }else{
+            // Validates conf year list
+            var yearList = getConferenceYears(counter);
+            if(yearList.length == 0){
                 alert("At least 1 conference year is required.");
                 return false;
             }
+            var conferenceYears = yearList.join('$$');
 
             // End year should be chosen meaningfully to avoid all 0 counts.
+            yearList.sort((a, b) => b - a);
+            var maxConferenceYear = yearList[0];
             if(maxConferenceYear < endYear) {
                 alert("Plear choose end year that are not larger than " + maxConferenceYear + " .");
                 return false;
             }
 
+            // Creates the final url
             if(conference && conferenceYears){
                 urlString += "conf=" + conference + "&";
                 urlString += "years=" + conferenceYears + "&";
@@ -302,41 +320,31 @@ $(document).ready(function() {
             }
         } else {
             urlString = apiRootUrlOverConferences;
+
+            // Validates conference
             var conference = $("#conferenceInput").val();
             if(!conference){
                 alert("Conference Code is required.");
                 return false;
             }
-            var conferenceYears = "";
-            for(t = 1; t<=counter; t++){
-                if($('#confYearInput'+t).val()){
-                    conferenceYears += $('#confYearInput' + t).val() + '$$';
-                }
-            }
-            if(conferenceYears){
-                // console.log("slicing ");
-                conferenceYears = conferenceYears.slice(0,-1); //removes the last '$' from the string
-                conferenceYears = conferenceYears.slice(0,-1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferenceYears);
-            }else{
-                alert("At least one conference year is required.");
+
+            // Validates conferenece year list
+            var yearList = getConferenceYears(counter);
+            if(yearList.length == 0){
+                alert("At least 1 conference year is required.");
                 return false;
             }
-            var conferenceList = "";
-            for(t = 1; t<=conferenceCounter; t++){
-                if($('#confListInput'+t).val()){
-                    conferenceList += $('#confListInput' + t).val() + '$$';
-                }
-            }
-            if(conferenceList){
-                // console.log("slicing ");
-                conferenceList = conferenceList.slice(0,-1); //removes the last '$' from the string
-                conferenceList = conferenceList.slice(0,-1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferenceList);
-            }else{
+            var conferenceYears = yearList.join('$$');
+
+            // Validates conference list
+            var confList = getConferences(conferenceCounter);
+            if(confList.length == 0) {
                 alert("At least one conference code is required.");
                 return false;
             }
+            var conferenceList = confList.join('$$');
+
+            // Creates the final url
             if(conference && conferenceYears && conferenceList){
                 urlString += "conf=" + conference + "&";
                 urlString += "years=" + conferenceYears + "&";
