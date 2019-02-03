@@ -392,14 +392,22 @@ $(document).ready(function() {
 
             // Validates conference list
             var confList = getConferences(conferenceCounter);
-            if(confList.length == 0) {
+            if (confList.length == 0) {
                 alert("At least one conference code is required.");
                 return false;
             }
+
+            // Validates no same conferences in the conference list
+            var confSet = new Set(confList);
+            if (confSet.length != conferenceCounter) {
+                alert("No conference code should be the same.");
+                return false;
+            }
+
             var conferenceList = confList.join('$$');
 
             // Creates the final url
-            if(conference && conferenceYears && conferenceList){
+            if (conference && conferenceYears && conferenceList) {
                 urlString += "conf=" + conference + "&";
                 urlString += "years=" + conferenceYears + "&";
                 urlString += "conflist=" + conferenceList;
