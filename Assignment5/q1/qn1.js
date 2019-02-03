@@ -48,6 +48,7 @@ $(document).ready(function() {
     }
 
     $('#conferenceInput').keyup(getKeyupHandler('#conferenceInputContainer'));
+    $('#confListInput1').keyup(getKeyupHandler('#ConferenceListDiv1'));
 
     var unnestDataGroup = function(data, children){
         var out = [];
@@ -224,11 +225,15 @@ $(document).ready(function() {
             return false;
         }
         var newTextBoxDiv = $(document.createElement('div'))
-        .attr("id", 'ConferenceListDiv' + conferenceCounter);
+        .attr("id", 'ConferenceListDiv' + conferenceCounter).addClass('dropdown-content');
+
         newTextBoxDiv.after().html('<label>Conference '+ conferenceCounter + ':</label>' +
         '<input class="form-control" type="text" ' + conferenceCounter +
         '" id="confListInput' + conferenceCounter + '" placeholder="e.g. '+"'arXiv'" +'">');
+
         newTextBoxDiv.appendTo("#ConferenceListGroup");
+
+        $('#confListInput' + conferenceCounter).keyup(getKeyupHandler('#ConferenceListDiv' + conferenceCounter));
         conferenceCounter++;
     });
 
