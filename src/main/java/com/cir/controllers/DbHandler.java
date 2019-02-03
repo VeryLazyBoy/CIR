@@ -506,14 +506,16 @@ public class DbHandler {
         List<String> places = new ArrayList<String>();
         String regex = ".*" + Pattern.quote(keyword) + ".*";
         Bson placeCondition = keyword.equals("") ? exists("venue") : regex("venue", Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+        Bson group = group("$venue");
+        Bson sorting = sort(ascending("_id"));
         Bson limitCondition = limit > 0 ? limit(limit) : limit(10);
-        Bson sorting = sort(ascending("venue"));
+  
         
-        AggregateIterable<Document> output = collection.aggregate(Arrays.asList(match(placeCondition), sorting, limitCondition));
+        AggregateIterable<Document> output = collection.aggregate(Arrays.asList(match(placeCondition), group, sorting, limitCondition));
         
         for (Document d : output) {
             System.out.println(d);
-            places.add(d.getString("venue"));
+            places.add(d.getString("_id"));
         }
         
         Places p = new Places(places);
