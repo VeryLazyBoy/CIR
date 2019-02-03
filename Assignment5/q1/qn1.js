@@ -176,8 +176,8 @@ $(document).ready(function() {
                     .attr('id', 'line_' + d[dataGroupKeys[0]])
                     .attr('fill', 'none');
                 vis.append("text")
-                    .attr("x", (lSpace / 2) + i * lSpace)
-                    .attr("y", HEIGHT)
+                    .attr("x", (lSpace / 3))
+                    .attr("y", 50 + i * 50)
                     .style("fill", d3.select("#line_" + d[dataGroupKeys[0]]).attr('stroke'))
                     .attr("class", "legend")
                     .on('click', function() {
