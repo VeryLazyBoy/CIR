@@ -1,5 +1,46 @@
 $(document).ready(function() {
 
+    // Defines format function
+    if(!String.format) {
+        String.format = function(format) {
+          var args = Array.prototype.slice.call(arguments, 1);
+          return format.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined'
+              ? args[number]
+              : match
+            ;
+          });
+        };
+    }
+
+    var searchRequest = null;
+    $('#conferenceInput').keyup(function() {
+        var minLength = 3;
+        var inputBar = $(this).get(0);
+        var input = $(this).get(0).value;
+        var url = 'http://localhost:8080/json/places';
+
+        if(input.length < minLength)
+            return false;
+
+        if(searchRequest != null)
+            searchRequest.abort();
+
+        searchRequest = $.getJSON(url, {
+            keyword: input,
+            limit: 8
+        }, function(data) {
+            if(input == inputBar.value) {
+                var places = '';
+                $('.confOptions').get(0).remove();
+                $.each(data.places, function(index, place) {
+                    places += '<a>' + place + '</a>';
+                });
+                $('<div class="confOptions">' + places + '</div>').appendTo('#conferenceInputContainer');
+            }
+        });
+    });
+
     var unnestDataGroup = function(data, children){
         var out = [];
         data.forEach(function(d, i){
