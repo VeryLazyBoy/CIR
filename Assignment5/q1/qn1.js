@@ -14,36 +14,40 @@ $(document).ready(function() {
     }
 
     var searchRequest = null;
-    $('#conferenceInput').keyup(function() {
-        var minLength = 3;
-        var inputBar = $(this);
-        var input = $(this).get(0).value;
-        var url = 'http://localhost:8080/json/places';
+    var getKeyupHandler = function(container) {
+        return function() {
+            var minLength = 3;
+            var inputBar = $(this);
+            var input = $(this).get(0).value;
+            var url = 'http://localhost:8080/json/places';
 
-        if(input.length < minLength)
-            return false;
+            if(input.length < minLength)
+                return false;
 
-        if(searchRequest != null)
-            searchRequest.abort();
+            if(searchRequest != null)
+                searchRequest.abort();
 
-        searchRequest = $.getJSON(url, {
-            keyword: input,
-            limit: 8
-        }, function(data) {
-            if(input == inputBar.val()) {
-                var places = '';
-                $('.confOptions').get(0).remove();
-                $.each(data.places, function(index, place) {
-                    places += '<a class="conference">' + place + '</a>';
-                });
-                $('<div class="confOptions">' + places + '</div>').appendTo('#conferenceInputContainer');
-                $('.conference').click(function() {
-                    inputBar.val($(this).get(0).innerText);
-                    $('.confOptions').css('display', 'none');
-                })
-            }
-        });
-    });
+            searchRequest = $.getJSON(url, {
+                keyword: input,
+                limit: 8
+            }, function(data) {
+                if(input == inputBar.val()) {
+                    var places = '';
+                    $('.confOptions').get(0).remove();
+                    $.each(data.places, function(index, place) {
+                        places += '<a class="conference">' + place + '</a>';
+                    });
+                    $('<div class="confOptions">' + places + '</div>').appendTo(container);
+                    $('.conference').click(function() {
+                        inputBar.val($(this).get(0).innerText);
+                        $('.confOptions').css('display', 'none');
+                    })
+                }
+            });
+        }
+    }
+
+    $('#conferenceInput').keyup(getKeyupHandler('#conferenceInputContainer'));
 
     var unnestDataGroup = function(data, children){
         var out = [];
