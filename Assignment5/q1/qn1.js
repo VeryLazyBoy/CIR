@@ -16,7 +16,7 @@ $(document).ready(function() {
     var searchRequest = null;
     $('#conferenceInput').keyup(function() {
         var minLength = 3;
-        var inputBar = $(this).get(0);
+        var inputBar = $(this);
         var input = $(this).get(0).value;
         var url = 'http://localhost:8080/json/places';
 
@@ -30,13 +30,17 @@ $(document).ready(function() {
             keyword: input,
             limit: 8
         }, function(data) {
-            if(input == inputBar.value) {
+            if(input == inputBar.val()) {
                 var places = '';
                 $('.confOptions').get(0).remove();
                 $.each(data.places, function(index, place) {
-                    places += '<a>' + place + '</a>';
+                    places += '<a class="conference">' + place + '</a>';
                 });
                 $('<div class="confOptions">' + places + '</div>').appendTo('#conferenceInputContainer');
+                $('.conference').click(function() {
+                    inputBar.val($(this).get(0).innerText);
+                    $('.confOptions').css('display', 'none');
+                })
             }
         });
     });

@@ -41,10 +41,13 @@
         <option value="1">Conferences</option>
       </select>
     </div>
-   	<div id="conferenceInputContainer">
+   	<div id="conferenceInputContainer" class="dropdown-content">
       <label>Conference: </label>
       <input autocomplete="off" class="form-control" type="text" id="conferenceInput" placeholder="e.g. 'arXiv'"/>
+      <div class="confOptions">
+      </div>
     </div>
+
     <div id="ConferenceYearsGroup" class="col">
    	<button class="btn btn-info margins" type='button' id='addButton'>Add Year</button>
     <button class="btn btn-info margins" type='button' id='removeButton'>Remove Year</button>
