@@ -9,6 +9,7 @@ import static com.mongodb.client.model.Aggregates.lookup;
 import static com.mongodb.client.model.Aggregates.match;
 import static com.mongodb.client.model.Aggregates.project;
 import static com.mongodb.client.model.Aggregates.sort;
+import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Aggregates.unwind;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
@@ -34,6 +35,7 @@ import com.cir.controllers.jsonobj.ConfLineWithLabel;
 import com.cir.controllers.jsonobj.ConfTransition;
 import com.cir.controllers.jsonobj.Link;
 import com.cir.controllers.jsonobj.PaperBar;
+import com.cir.controllers.jsonobj.Places;
 import com.cir.controllers.jsonobj.WordCloud;
 import com.cir.controllers.jsonobj.YearLineWithLabel;
 import com.cir.controllers.jsonobj.YearTransition;
@@ -498,6 +500,24 @@ public class DbHandler {
             wcs.add(wc);
         }
         return wcs;
+    }
+    
+    public static Places getPlaces(String keyword, int limit) {
+        List<String> places = new ArrayList<String>();
+        String regex = ".*" + Pattern.quote(keyword) + ".*";
+        Bson placeCondition = keyword.equals("") ? exists("venue") : regex("venue", Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+        Bson limitCondition = limit > 0 ? limit(limit) : limit(10);
+        Bson sorting = sort(ascending("venue"));
+        
+        AggregateIterable<Document> output = collection.aggregate(Arrays.asList(match(placeCondition), sorting, limitCondition));
+        
+        for (Document d : output) {
+            System.out.println(d);
+            places.add(d.getString("venue"));
+        }
+        
+        Places p = new Places(places);
+        return p;
     }
     
 }

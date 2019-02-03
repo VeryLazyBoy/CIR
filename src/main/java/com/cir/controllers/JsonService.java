@@ -16,6 +16,7 @@ import com.cir.controllers.jsonobj.AuthorBar;
 import com.cir.controllers.jsonobj.CitedAuthorBar;
 import com.cir.controllers.jsonobj.ConfLineWithLabel;
 import com.cir.controllers.jsonobj.PaperBar;
+import com.cir.controllers.jsonobj.Places;
 import com.cir.controllers.jsonobj.WordCloud;
 import com.cir.controllers.jsonobj.YearLineWithLabel;
 
@@ -310,8 +311,32 @@ public class JsonService {
         }
     }
     
-//    @GET
-//    @Path("/authors")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<AuthorBar> getTopAuthors
+    @GET
+    @Path("/places")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPlaces(@QueryParam("limit") int limit,
+            @QueryParam("keyword") String keyword) {
+        
+        try {
+            Places p = new Places();
+            if (limit == 0 || keyword == null) {
+                ;
+            } else {
+                p = DbHandler.getPlaces(keyword, limit);
+            }
+            return Response.ok()
+                    .entity(p)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS")
+                    .build();
+        } catch (Exception e) {
+            return Response.ok()
+                    .entity("")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS")
+                    .build();
+        }
+    }
 }
