@@ -155,6 +155,9 @@ $(document).ready(function() {
     var InitChart = function(urlString) {
         console.log("url string = " + urlString);
 
+        //clear chart
+        $('#custom-chart').html("");
+
         $.ajax({
             url: urlString
         }).then(function(dataGroup) {
