@@ -3,39 +3,39 @@
 <head>
   <meta charset="utf-8">
   <title>Trend 2</title>
-    <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="multiline.css">
 </head>
-<body class="container-fluid">	
-	<nav class="navbar navbar-default"> 
-    <div class="container-fluid"> 
-      <div class="navbar-header"> 
-        <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> 
-          <span class="sr-only">Toggle navigation</span> 
-          <span class="icon-bar"></span> 
-          <span class="icon-bar"></span> 
-          <span class="icon-bar"></span> 
-        </button> 
-        <a href="#" class="navbar-brand">CIR Application</a> 
-      </div> 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"> 
-        <ul class="nav navbar-nav"> 
-        <li><a href="../q1/qn1.html">Trend 1</a></li> 
-        <li class="active"><a href="#">Trend 2</a></li> 
-        <li><a href="../q3/q3.html">Trend 3</a></li> 
-        <li><a href="../q4/qn4-Network.html">Trend 4</a></li> 
-        <li><a href="../q5/q5.html">Trend 5</a></li> 
-      </ul> 
-    </div> 
-  </div> 
-</nav>
+<body class="container-fluid">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">CIR Application</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+        <ul class="nav navbar-nav">
+          <li><a href="../q1/qn1.html">Trend 1</a></li>
+          <li class="active"><a href="#">Trend 2</a></li>
+          <li><a href="../q3/q3.html">Trend 3</a></li>
+          <li><a href="../q4/qn4-Network.html">Trend 4</a></li>
+          <li><a href="../q5/q5.html">Trend 5</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <h1>Trend 2 - Multiline Chart</h1>
   <h2>Contemporary Comparison</h2>
-   <div class="form-group row container">
+  <div class="form-group row container">
 
-   	<div>
+    <div>
       <label>Comparison across:</label>
       <select id="queryTypeSelect" name="queryType">
         <option value="0" selected>Years</option>
@@ -43,7 +43,7 @@
       </select>
     </div>
 
-   	<div id="conferenceYearInputContainer">
+    <div id="conferenceYearInputContainer">
       <label>Conference Year: </label>
       <input class="form-control" type="text" id="conferenceYearInput" placeholder="e.g. '1992'" />
     </div>
@@ -59,36 +59,36 @@
     </div>
 
     <div id="ConferenceListGroup" class="col">
-   	<button class="btn btn-info margins" type='button' id='addConferenceButton'>Add Conference</button>
-    <button class="btn btn-info margins" type='button' id='removeConferenceButton'>Remove Conference</button>
-        <a href="../ListOfConferences.html" target="_blank">(view all conferences)</a>
-     <div id="ConferenceListDiv1">
-      <label>Conference 1: </label>
-      <input class="form-control" type="text" id="confListInput1" placeholder="e.g. 'arXiv'" />
-	  </div>
+      <button class="btn btn-info margins" type='button' id='addConferenceButton'>Add Conference</button>
+      <button class="btn btn-info margins" type='button' id='removeConferenceButton'>Remove Conference</button>
+      <a href="../ListOfConferences.html" target="_blank">(view all conferences)</a>
+      <div id="ConferenceListDiv1">
+        <label>Conference 1: </label>
+        <input class="form-control" type="text" id="confListInput1" placeholder="e.g. 'arXiv'" />
+      </div>
     </div>
 
     <div id="ConferenceListGroup2" class="col hidden">
-    <button class="btn btn-info margins" type='button' id='addConferenceButton2'>Add Conference</button>
-    <button class="btn btn-info margins" type='button' id='removeConferenceButton2'>Remove Conference</button>
-        <a href="../ListOfConferences.html" target="_blank">(view all conferences)</a>
-     <div id="ConferenceList2Div1">
-      <label>Conference 1: </label>
-      <input class="form-control" type="text" id="confList2Input1" placeholder="e.g. 'arXiv'" />
-    </div>
+      <button class="btn btn-info margins" type='button' id='addConferenceButton2'>Add Conference</button>
+      <button class="btn btn-info margins" type='button' id='removeConferenceButton2'>Remove Conference</button>
+      <a href="../ListOfConferences.html" target="_blank">(view all conferences)</a>
+      <div id="ConferenceList2Div1">
+        <label>Conference 1: </label>
+        <input class="form-control" type="text" id="confList2Input1" placeholder="e.g. 'arXiv'" />
+      </div>
     </div>
 
 
-</div>
+  </div>
   <button class="btn btn-primary" id="generateBtn" name="generateBtn">Generate</button>
   <div class="custom-chart-wrapper">
-  	<svg id="custom-chart" width="1000" height="500"></svg>
+    <svg id="custom-chart" width="1000" height="500"></svg>
   </div>
-   <!-- Javascript -->
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/d3.v3.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  <!-- Javascript -->
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="q2.js"></script>
+  <script src="q2.js"></script>
 </body>
 </html>
