@@ -199,7 +199,9 @@
             }, function(data) {
                 if (input == inputBar.val()) {
                     var places = '';
-                    $('.confOptions').get(0).remove();
+                    var confOptions = $('.confOptions');
+                    if (confOptions.length > 0)
+                        $('.confOptions').remove();
                     $.each(data.places, function(index, place) {
                         places += '<a class="conference">' + place + '</a>';
                     });
