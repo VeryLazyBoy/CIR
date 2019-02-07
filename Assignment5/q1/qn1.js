@@ -215,7 +215,9 @@ $(document).ready(function() {
 
             // Validates no same conferences in the conference list
             var confSet = new Set(confList);
-            if (confSet.length != conferenceCounter) {
+            if (confSet.size != conferenceCounter - 1) {
+                console.log(confSet.length);
+                console.log(conferenceCounter - 1)
                 alert("No conference code should be the same.");
                 return false;
             }
