@@ -309,7 +309,7 @@ $(document).ready(function() {
     var getConferences = function(NumOfConfs) {
         var confList = [];
         for (var t = 1; t <= NumOfConfs; t++) {
-            var conf = $('#confYearInput' + t).val();
+            var conf = $('#confListInput' + t).val();
             if (conf) {
                 confList.push(conf);
             }
