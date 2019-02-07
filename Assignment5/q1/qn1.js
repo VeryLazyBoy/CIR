@@ -1,48 +1,8 @@
 $(document).ready(function() {
 
-    var searchRequest = null;
-    var getKeyupHandler = function(container) {
-        return function() {
-            var minLength = 3;
-            var inputBar = $(this);
-            var input = $(this).get(0).value;
-            var url = 'http://localhost:8080/json/places';
-
-            if (input.length < minLength)
-                return false;
-
-            if (searchRequest != null)
-                searchRequest.abort();
-
-            searchRequest = $.getJSON(url, {
-                keyword: input,
-                limit: 8
-            }, function(data) {
-                if (input == inputBar.val()) {
-                    var places = '';
-                    $('.confOptions').get(0).remove();
-                    $.each(data.places, function(index, place) {
-                        places += '<a class="conference">' + place + '</a>';
-                    });
-                    $('<div class="confOptions">' + places + '</div>').appendTo(container);
-                    $('.conference').click(function() {
-                        inputBar.val($(this).get(0).innerText);
-                        $('.confOptions').css('display', 'none');
-                    });
-                }
-            });
-        }
-    }
-    $(document).mouseup(function (e) {
-        var divContent= $(".confOptions");
-        if(!divContent.is(e.target) && divContent.has(e.target).length === 0) {
-            $(".confOptions").hide();
-        }
-    });
-    $('#conferenceInput').keyup(getKeyupHandler('#conferenceInputContainer'));
-    $('#confListInput1').keyup(getKeyupHandler('#ConferenceListDiv1'));
-
     var multiLine = new $.MultiLine();
+    $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer'));
+    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1'));
 
     // var InitChart = multiLine.InitChart;
 
@@ -89,7 +49,7 @@ $(document).ready(function() {
 
         newTextBoxDiv.appendTo("#ConferenceListGroup");
 
-        $('#confListInput' + conferenceCounter).keyup(getKeyupHandler('#ConferenceListDiv' + conferenceCounter));
+        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + conferenceCounter));
         conferenceCounter++;
     });
 
