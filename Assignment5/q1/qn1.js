@@ -46,6 +46,12 @@ $(document).ready(function() {
         }
     }
 
+    $(document).mouseup(function (e) {
+        var divContent= $(".confOptions");
+        if(!divContent.is(e.target) && divContent.has(e.target).length === 0) {
+            $(".confOptions").hide();
+        }
+    });
     $('#conferenceInput').keyup(getKeyupHandler('#conferenceInputContainer'));
     $('#confListInput1').keyup(getKeyupHandler('#ConferenceListDiv1'));
 
