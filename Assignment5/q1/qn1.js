@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
     var multiLine = new $.MultiLine();
-    $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer'));
-    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1'));
+    $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer .dropdownContainer'));
+    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1 .dropdownContainer'));
 
     // var InitChart = multiLine.InitChart;
 
@@ -45,11 +45,12 @@ $(document).ready(function() {
 
         newTextBoxDiv.after().html('<label>Conference ' + conferenceCounter + ':</label>' +
             '<input class="form-control" type="text" ' + conferenceCounter +
-            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">');
+            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">'
+            + '<div class="dropdownContainer"></div>');
 
         newTextBoxDiv.appendTo("#ConferenceListGroup");
 
-        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + conferenceCounter));
+        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + ' .dropdownContainer'));
         conferenceCounter++;
     });
 

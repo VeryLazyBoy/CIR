@@ -130,7 +130,8 @@ $(document).ready(function() {
     // ];
 
     var multiLine = new $.MultiLine();
-    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1'));
+    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1 .dropdownContainer'));
+    $('#confList2Input1').keyup(multiLine.getKeyupHandler('#ConferenceList2Div1 .dropdownContainer'));
 
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
@@ -147,8 +148,10 @@ $(document).ready(function() {
             .attr("id", 'ConferenceListDiv' + conferenceCounter).addClass('dropdown-content');
         newTextBoxDiv.after().html('<label>Conference ' + conferenceCounter + ':</label>' +
             '<input class="form-control" type="text" ' + conferenceCounter +
-            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">');
+            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">'
+            + '<div class="dropdownContainer"></div>');
         newTextBoxDiv.appendTo("#ConferenceListGroup");
+        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + conferenceCounter + ' .dropdownContainer'));
         conferenceCounter++;
     });
 
@@ -167,13 +170,16 @@ $(document).ready(function() {
             return false;
         }
         var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'ConferenceList2Div' + conferenceCounter2);
-        newTextBoxDiv.after().html('<label>Conference ' + conferenceCounter2 + ':</label>' +
-            '<input class="form-control" type="text" ' + conferenceCounter2 +
-            '" id="confList2Input' + conferenceCounter2 + '" placeholder="e.g. ' + "'arXiv'" + '">');
+            .attr("id", 'ConferenceList2Div' + conferenceCounter2).addClass('dropdown-content');
+        newTextBoxDiv
+        .after()
+        .html('<label>Conference ' + conferenceCounter2 + ':</label>'
+            + '<input class="form-control" type="text" ' + conferenceCounter2
+            + '" id="confList2Input' + conferenceCounter2 + '" placeholder="e.g. ' + "'arXiv'" + '">'
+            + '<div class="dropdownContainer"></div>');
         newTextBoxDiv.appendTo("#ConferenceListGroup2");
 
-        $('#confList2Input' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceList2Div' + conferenceCounter));
+        $('#confList2Input' + conferenceCounter2).keyup(multiLine.getKeyupHandler('#ConferenceList2Div' + conferenceCounter2 + ' .dropdownContainer'));
         conferenceCounter2++;
     });
 
