@@ -4,8 +4,6 @@ $(document).ready(function() {
     $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer .dropdownContainer'));
     $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1 .dropdownContainer'));
 
-    // var InitChart = multiLine.InitChart;
-
     var counter = 2;
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
@@ -189,8 +187,6 @@ $(document).ready(function() {
 
             // Validates no same conferences in the conference list
             var confSet = new Set(confList);
-                console.log(confSet.length);
-                console.log(conferenceCounter - 1)
             if (confSet.size != multiLine.conferenceCounter - 1) {
                 alert("No conference code should be the same.");
                 return false;
