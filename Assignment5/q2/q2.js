@@ -136,61 +136,11 @@ $(document).ready(function() {
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
 
-    var conferenceCounter = 2;
-    var conferenceCounter2 = 2;
+    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
+    multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
-    $("#addConferenceButton").click(function() {
-        if (conferenceCounter > 10) {
-            alert("Max. of 10 Conferences allowed.");
-            return false;
-        }
-        var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'ConferenceListDiv' + conferenceCounter).addClass('dropdown-content');
-        newTextBoxDiv.after().html('<label>Conference ' + conferenceCounter + ':</label>' +
-            '<input class="form-control" type="text" ' + conferenceCounter +
-            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">'
-            + '<div class="dropdownContainer"></div>');
-        newTextBoxDiv.appendTo("#ConferenceListGroup");
-        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + conferenceCounter + ' .dropdownContainer'));
-        conferenceCounter++;
-    });
-
-    $("#removeConferenceButton").click(function() {
-        if (conferenceCounter == 2) {
-            alert("At least one conference is required.");
-            return false;
-        }
-        conferenceCounter--;
-        $("#ConferenceListDiv" + conferenceCounter).remove();
-    });
-
-    $("#addConferenceButton2").click(function() {
-        if (conferenceCounter2 > 10) {
-            alert("Max. of 10 Conferences allowed.");
-            return false;
-        }
-        var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'ConferenceList2Div' + conferenceCounter2).addClass('dropdown-content');
-        newTextBoxDiv
-        .after()
-        .html('<label>Conference ' + conferenceCounter2 + ':</label>'
-            + '<input class="form-control" type="text" ' + conferenceCounter2
-            + '" id="confList2Input' + conferenceCounter2 + '" placeholder="e.g. ' + "'arXiv'" + '">'
-            + '<div class="dropdownContainer"></div>');
-        newTextBoxDiv.appendTo("#ConferenceListGroup2");
-
-        $('#confList2Input' + conferenceCounter2).keyup(multiLine.getKeyupHandler('#ConferenceList2Div' + conferenceCounter2 + ' .dropdownContainer'));
-        conferenceCounter2++;
-    });
-
-    $("#removeConferenceButton2").click(function() {
-        if (conferenceCounter2 == 2) {
-            alert("At least one conference is required.");
-            return false;
-        }
-        conferenceCounter2--;
-        $("#ConferenceList2Div" + conferenceCounter2).remove();
-    });
+    multiLine.generateAddConfButton("addConferenceButton2", 2, "ConferenceListGroup2", "2");
+    multiLine.generateRemoveConfButton("removeConferenceButton2", 2, "2");
 
     $('#queryTypeSelect').on('change', function() {
         var confYears = false;
@@ -267,7 +217,7 @@ $(document).ready(function() {
                 return false;
             }
             var conferences = "";
-            for (t = 1; t <= conferenceCounter; t++) {
+            for (t = 1; t <= multiLine.conferenceCounter; t++) {
                 if ($('#confListInput' + t).val()) {
                     conferences += $('#confListInput' + t).val() + '$$';
                 }
@@ -297,7 +247,7 @@ $(document).ready(function() {
                 alert("Conference year is required");
                 return false;
             }
-            for (t = 1; t <= conferenceCounter; t++) {
+            for (t = 1; t <= multiLine.conferenceCounter; t++) {
                 if ($('#confListInput' + t).val()) {
                     conferences += $('#confListInput' + t).val() + '$$';
                 }
@@ -312,7 +262,7 @@ $(document).ready(function() {
                 return false;
             }
             var conferences2 = "";
-            for (t = 1; t <= conferenceCounter2; t++) {
+            for (t = 1; t <= multiLine.conferenceCounter2; t++) {
                 if ($('#confList2Input' + t).val()) {
                     conferences2 += $('#confList2Input' + t).val() + '$$';
                 }
