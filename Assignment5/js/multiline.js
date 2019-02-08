@@ -199,16 +199,16 @@
             }, function(data) {
                 if (input == inputBar.val()) {
                     var places = '';
-                    var confOptions = $('.confOptions');
+                    var confOptions = $(container).find('.confOptions');
                     if (confOptions.length > 0)
-                        $('.confOptions').remove();
+                        confOptions.remove();
                     $.each(data.places, function(index, place) {
                         places += '<a class="conference">' + place + '</a>';
                     });
                     $('<div class="confOptions">' + places + '</div>').appendTo(container);
-                    $('.conference').click(function() {
+                    $(container).find('.conference').click(function() {
                         inputBar.val($(this).get(0).innerText);
-                        $('.confOptions').css('display', 'none');
+                        $(container).css('display', 'none');
                     });
                 }
             });
