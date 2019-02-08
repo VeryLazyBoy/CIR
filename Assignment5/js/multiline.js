@@ -217,16 +217,64 @@
 
     $.MultiLine.prototype.conferenceCounter = 2;
     $.MultiLine.prototype.conferenceCounter2 = 2;
+    $.MultiLine.prototype.yearCounter = 2;
     $.MultiLine.prototype.getCounter = function(index) {
-        return index == 1 ? this.conferenceCounter : this.conferenceCounter2;
+        switch(index) {
+            case 1:
+                return this.conferenceCounter;
+            case 2:
+                return this.conferenceCounter2;
+            case 3:
+                return this.yearCounter;
+            default:
+                return this.yearCounter;
+        }
     }
 
     $.MultiLine.prototype.setCounter = function(index, value) {
         if (index == 1) {
             this.conferenceCounter = value;
-        } else {
+        } else if (index == 2) {
             this.conferenceCounter2 = value;
+        } else {
+            this.yearCounter = value;
         }
+    }
+
+    $.MultiLine.prototype.generateAddYearButton = function(buttonId, counterIndex, groupId) {
+        var self = this;
+        $('#' + buttonId).click(function() {
+            var counter = self.getCounter(counterIndex);
+            var confDivId = String.format('ConferenceYearDiv{0}', counter);
+            var inputId = String.format('confYearInput{0}', counter);
+            if (counter > 10) {
+                alert("Max. of 10 years allowed.");
+                return false;
+            }
+            var newTextBoxDiv = $(document.createElement('div'))
+                .attr("id", confDivId);
+            newTextBoxDiv.after().html('<label>Year ' + counter + ':</label>' +
+                '<input class="form-control" type="text" ' +
+                'id="' + inputId + '" placeholder="e.g. ' + "'1993'" + '">');
+            newTextBoxDiv.appendTo('#' + groupId);
+            counter++;
+            self.setCounter(counterIndex, counter);
+        });
+    }
+
+    $.MultiLine.prototype.generateRemoveYearButton = function(buttonId, counterIndex) {
+        var self = this;
+        $("#" + buttonId).click(function() {
+            var counter = self.getCounter(counterIndex);
+            if (counter == 2) {
+                alert("At least one year is required.");
+                return false;
+            }
+            counter--;
+            var confDivId = String.format('ConferenceYearDiv{0}', counter);
+            $("#" + confDivId).remove();
+            self.setCounter(counterIndex, counter);
+        });
     }
 
     $.MultiLine.prototype.generateAddConfButton = function(buttonId, counterIndex, groupId, groupLabel) {

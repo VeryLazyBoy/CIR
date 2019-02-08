@@ -4,32 +4,12 @@ $(document).ready(function() {
     $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer .dropdownContainer'));
     $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1 .dropdownContainer'));
 
-    var counter = 2;
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
 
-    $("#addButton").click(function() {
-        if (counter > 10) {
-            alert("Max. of 10 years allowed.");
-            return false;
-        }
-        var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'ConferenceYearDiv' + counter);
-        newTextBoxDiv.after().html('<label>Year ' + counter + ':</label>' +
-            '<input class="form-control" type="text" ' + counter +
-            '" id="confYearInput' + counter + '" placeholder="e.g. ' + "'1993'" + '">');
-        newTextBoxDiv.appendTo("#ConferenceYearsGroup");
-        counter++;
-    });
+    multiLine.generateAddYearButton("addButton", 3, "ConferenceYearsGroup");
+    multiLine.generateRemoveYearButton("removeButton", 3);
 
-    $("#removeButton").click(function() {
-        if (counter == 2) {
-            alert("At least one year is required.");
-            return false;
-        }
-        counter--;
-        $("#ConferenceYearDiv" + counter).remove();
-    });
 
     multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
     multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
@@ -138,7 +118,7 @@ $(document).ready(function() {
             }
 
             // Validates conf year list
-            var yearList = getConferenceYears(counter);
+            var yearList = getConferenceYears(multiLine.yearCounter);
             if (yearList.length == 0) {
                 alert("At least 1 conference year is required.");
                 return false;
@@ -171,7 +151,7 @@ $(document).ready(function() {
             }
 
             // Validates conferenece year list
-            var yearList = getConferenceYears(counter);
+            var yearList = getConferenceYears(multiLine.yearCounter);
             if (yearList.length == 0) {
                 alert("At least 1 conference year is required.");
                 return false;
