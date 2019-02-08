@@ -216,9 +216,19 @@
     };
 
     $(document).mouseup(function (e) {
-        var divContent= $(".confOptions");
-        if(!divContent.is(e.target) && divContent.has(e.target).length === 0) {
-            $(".confOptions").hide();
+        var divContent= $(".dropdownContainer");
+        var input = $("[id^=confListInput]");
+        var anotherInput = $("[id^=conferenceInput]");
+
+
+        // if somewhere except dropdown is clicked, hide all dropdown
+        if (!divContent.is(e.target) && divContent.has(e.target).length === 0) {
+            $(".dropdownContainer").hide();
+        }
+
+        // if the input for conference is clicked, show the dropdown only after this input
+        if (input.is(e.target) || anotherInput.is(e.target)) {
+            $(e.target).nextAll(".dropdownContainer").show();
         }
     });
 
