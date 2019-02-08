@@ -215,6 +215,64 @@
         }
     };
 
+    $.MultiLine.prototype.conferenceCounter = 2;
+    $.MultiLine.prototype.conferenceCounter2 = 2;
+    $.MultiLine.prototype.getCounter = function(index) {
+        return index == 1 ? this.conferenceCounter : this.conferenceCounter2;
+    }
+
+    $.MultiLine.prototype.setCounter = function(index, value) {
+        if (index == 1) {
+            this.conferenceCounter = value;
+        } else {
+            this.conferenceCounter2 = value;
+        }
+    }
+
+    $.MultiLine.prototype.generateAddConfButton = function(buttonId, counterIndex, groupId, groupLabel) {
+        var self = this;
+
+        $('#' + buttonId).click(function() {
+            var counter = self.getCounter(counterIndex);
+            var confDivId = String.format('ConferenceList{0}Div{1}', groupLabel, counter);
+            var inputId = String.format('confList{0}Input{1}', groupLabel, counter);
+
+            if (counter > 10) {
+                alert("Max. of 10 Conferences allowed.");
+                return false;
+            }
+
+            var newTextBoxDiv = $(document.createElement('div'))
+                .attr("id", confDivId).addClass('dropdown-content');
+
+            newTextBoxDiv.after().html('<label>Conference ' + counter + ':</label>' +
+                '<input class="form-control" type="text" ' +
+                'id="' + inputId + '" placeholder="e.g. ' + "'arXiv'" + '">'
+                + '<div class="dropdownContainer"></div>');
+
+            newTextBoxDiv.appendTo('#' + groupId);
+
+            $('#' + inputId).keyup(self.getKeyupHandler('#' + confDivId +  ' .dropdownContainer'));
+            counter++;
+            self.setCounter(counterIndex, counter);
+        });
+    }
+
+    $.MultiLine.prototype.generateRemoveConfButton = function(buttonId, counterIndex, groupLabel) {
+        var self = this;
+        $("#" + buttonId).click(function() {
+            var counter = self.getCounter(counterIndex);
+            if (counter == 2) {
+                alert("At least one conference is required.");
+                return false;
+            }
+            counter--;
+            var confDivId = String.format('ConferenceList{0}Div{1}', groupLabel, counter);
+            $("#" + confDivId).remove();
+            self.setCounter(counterIndex, counter);
+        });
+    }
+
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
         var input = $("[id^=confListInput]");
