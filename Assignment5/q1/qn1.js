@@ -10,8 +10,6 @@ $(document).ready(function() {
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
 
-    var conferenceCounter = 2;
-
     $("#addButton").click(function() {
         if (counter > 10) {
             alert("Max. of 10 years allowed.");
@@ -35,33 +33,8 @@ $(document).ready(function() {
         $("#ConferenceYearDiv" + counter).remove();
     });
 
-    $("#addConferenceButton").click(function() {
-        if (conferenceCounter > 10) {
-            alert("Max. of 10 Conferences allowed.");
-            return false;
-        }
-        var newTextBoxDiv = $(document.createElement('div'))
-            .attr("id", 'ConferenceListDiv' + conferenceCounter).addClass('dropdown-content');
-
-        newTextBoxDiv.after().html('<label>Conference ' + conferenceCounter + ':</label>' +
-            '<input class="form-control" type="text" ' + conferenceCounter +
-            '" id="confListInput' + conferenceCounter + '" placeholder="e.g. ' + "'arXiv'" + '">'
-            + '<div class="dropdownContainer"></div>');
-
-        newTextBoxDiv.appendTo("#ConferenceListGroup");
-
-        $('#confListInput' + conferenceCounter).keyup(multiLine.getKeyupHandler('#ConferenceListDiv' + ' .dropdownContainer'));
-        conferenceCounter++;
-    });
-
-    $("#removeConferenceButton").click(function() {
-        if (conferenceCounter == 2) {
-            alert("At least one conference is required.");
-            return false;
-        }
-        conferenceCounter--;
-        $("#ConferenceListDiv" + conferenceCounter).remove();
-    });
+    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
+    multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
     $('#queryTypeSelect').on('change', function() {
         var confYears = false;
@@ -208,7 +181,7 @@ $(document).ready(function() {
             var conferenceYears = yearList.join('$$');
 
             // Validates conference list
-            var confList = getConferences(conferenceCounter);
+            var confList = getConferences(multiLine.conferenceCounter);
             if (confList.length == 0) {
                 alert("At least one conference code is required.");
                 return false;
@@ -216,9 +189,9 @@ $(document).ready(function() {
 
             // Validates no same conferences in the conference list
             var confSet = new Set(confList);
-            if (confSet.size != conferenceCounter - 1) {
                 console.log(confSet.length);
                 console.log(conferenceCounter - 1)
+            if (confSet.size != multiLine.conferenceCounter - 1) {
                 alert("No conference code should be the same.");
                 return false;
             }
