@@ -14,35 +14,7 @@ $(document).ready(function() {
     multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
     multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
-    $('#queryTypeSelect').on('change', function() {
-        var confYears = false;
-        var confList = false;
-
-        var val = this.value;
-        // console.log(val);
-        switch (val) {
-            case '0': //over years
-                confYears = true;
-                confList = false;
-                break;
-            case '1':
-                confYears = false;
-                confList = true;
-                break;
-        }
-        if (confYears) {
-            $("#startYearInputContainer").removeClass("hidden");
-            $("#endYearInputContainer").removeClass("hidden");
-        } else {
-            $("#startYearInputContainer").addClass("hidden");
-            $("#endYearInputContainer").addClass("hidden");
-        }
-        if (confList) {
-            $("#ConferenceListGroup").removeClass("hidden");
-        } else {
-            $("#ConferenceListGroup").addClass("hidden");
-        }
-    });
+    multiLine.generateQuerySelect("");
 
     $("#generateBtn").click(function() {
 

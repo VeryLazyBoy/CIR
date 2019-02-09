@@ -345,6 +345,39 @@
         return false;
     }
 
+    $.MultiLine.prototype.generateQuerySelect = function(groupLabel) {
+        var confGroupId = String.format("ConferenceListGroup{0}", groupLabel);
+        $('#queryTypeSelect').on('change', function() {
+            var confYears = false;
+            var confList = false;
+
+            var val = this.value;
+            // console.log(val);
+            switch (val) {
+                case '0': //over years
+                    confYears = true;
+                    confList = false;
+                    break;
+                case '1':
+                    confYears = false;
+                    confList = true;
+                    break;
+            }
+            if (confYears) {
+                $("#startYearInputContainer").removeClass("hidden");
+                $("#endYearInputContainer").removeClass("hidden");
+            } else {
+                $("#startYearInputContainer").addClass("hidden");
+                $("#endYearInputContainer").addClass("hidden");
+            }
+            if (confList) {
+                $("#" + confGroupId).removeClass("hidden");
+            } else {
+                $("#" + confGroupId).addClass("hidden");
+            }
+        });
+    }
+
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
         var input = $("input[id^=confList]");

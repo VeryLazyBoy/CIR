@@ -142,35 +142,7 @@ $(document).ready(function() {
     multiLine.generateAddConfButton("addConferenceButton2", 2, "ConferenceListGroup2", "2");
     multiLine.generateRemoveConfButton("removeConferenceButton2", 2, "2");
 
-    $('#queryTypeSelect').on('change', function() {
-        var confYears = false;
-        var confList = false;
-
-        var val = this.value;
-        // console.log(val);
-        switch (val) {
-            case '0': //over years
-                confYears = true;
-                confList = false;
-                break;
-            case '1':
-                confYears = false;
-                confList = true;
-                break;
-        }
-        if (confYears) {
-            $("#startYearInputContainer").removeClass("hidden");
-            $("#endYearInputContainer").removeClass("hidden");
-        } else {
-            $("#startYearInputContainer").addClass("hidden");
-            $("#endYearInputContainer").addClass("hidden");
-        }
-        if (confList) {
-            $("#ConferenceListGroup2").removeClass("hidden");
-        } else {
-            $("#ConferenceListGroup2").addClass("hidden");
-        }
-    });
+    multiLine.generateQuerySelect("2");
 
     $("#generateBtn").click(function() {
 
