@@ -252,6 +252,12 @@ $(document).ready(function() {
                 return false;
             }
 
+            // End year should be chosen meaningfully to avoid all 0 counts.
+            if (parseInt(conferenceYear) < parseInt(endYear)) {
+                alert("Plear choose end year that are not larger than " + parseInt(conferenceYear) + " .");
+                return false;
+            }
+
             if (conferenceYear && conferences) {
                 urlString += "year=" + conferenceYear + "&";
                 urlString += "confs=" + conferences + "&";
