@@ -332,6 +332,19 @@
         return inputList;
     }
 
+    $.MultiLine.prototype.isValidYear = function(yearString) {
+        if (yearString == "") {
+            return true;
+        }
+        if (isNaN(yearString)) {
+            return false;
+        }
+        if (parseInt(yearString) < 2017 && parseInt(yearString) > 0) {
+            return true;
+        }
+        return false;
+    }
+
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
         var input = $("input[id^=confList]");

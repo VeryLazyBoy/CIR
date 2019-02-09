@@ -44,23 +44,6 @@ $(document).ready(function() {
         }
     });
 
-    var isNumeric = function(num) {
-        return !isNaN(num)
-    };
-
-    var isValidYear = function(yearString) {
-        if (yearString == "") {
-            return true;
-        }
-        if (!isNumeric(yearString)) {
-            return false;
-        }
-        if (parseInt(yearString) < 2017 && parseInt(yearString) > 0) {
-            return true;
-        }
-        return false;
-    };
-
     $("#generateBtn").click(function() {
 
         var urlString;
@@ -85,14 +68,14 @@ $(document).ready(function() {
 
             // Valides start year
             var startYear = $("#startYearInput").val();
-            if (!isValidYear(startYear)) {
+            if (!multiLine.isValidYear(startYear)) {
                 alert("Start year is invalid");
                 return false;
             }
 
             // Validate end year
             var endYear = $("#endYearInput").val();
-            if (!isValidYear(endYear)) {
+            if (!multiLine.isValidYear(endYear)) {
                 alert("End year is invalid");
                 return false;
             }
