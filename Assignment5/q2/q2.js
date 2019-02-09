@@ -159,21 +159,10 @@ $(document).ready(function() {
             return false;
         }
 
-        // Validates conference list
-        var confList = multiLine.processInputs("confListInput", multiLine.conferenceCounter);
-        if (confList.length == 0) {
-            alert("At least one conference code is required.");
-            return false;
+        var conferences = multiLine.validateAndGetConfListFromInput("confListInput", multiLine.conferenceCounter);
+        if (conferences == null) {
+                return false;
         }
-
-        // Validates no same conferences in the conference list
-        var confSet = new Set(confList);
-        if (confSet.size != multiLine.conferenceCounter - 1) {
-            alert("No conference code should be the same.");
-            return false;
-        }
-
-        var conferences = confList.join('$$');
 
         if ($('#queryTypeSelect').val() == 0) {
             urlString = apiRootUrlOverYears;
@@ -213,21 +202,10 @@ $(document).ready(function() {
         } else {
             urlString = apiRootUrlOverConferences;
 
-            // Validates conference list
-            confList = multiLine.processInputs("confList2Input", multiLine.conferenceCounter2);
-            if (confList.length == 0) {
-                alert("At least one conference code is required.");
+            var conferences2 = multiLine.validateAndGetConfListFromInput("confList2Input", multiLine.conferenceCounter2);
+            if (conferences2 == null) {
                 return false;
             }
-
-            // Validates no same conferences in the conference list
-            confSet = new Set(confList);
-            if (confSet.size != multiLine.conferenceCounter2 - 1) {
-                alert("No conference code should be the same.");
-                return false;
-            }
-
-            var conferences2 = confList.join('$$');
 
             if (conferenceYear && conferences && conferences2) {
                 urlString += "year=" + conferenceYear + "&";

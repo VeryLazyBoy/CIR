@@ -76,20 +76,10 @@ $(document).ready(function() {
         } else {
             urlString = apiRootUrlOverConferences;
 
-            // Validates conference list
-            var confList = multiLine.processInputs("confListInput", multiLine.conferenceCounter);
-            if (confList.length == 0) {
-                alert("At least one conference code is required.");
+            var conferences = multiLine.validateAndGetConfListFromInput("confListInput", multiLine.conferenceCounter);
+            if (conferences == null) {
                 return false;
             }
-
-            // Validates no same conferences in the conference list
-            var confSet = new Set(confList);
-            if (confSet.size != multiLine.conferenceCounter - 1) {
-                alert("No conference code should be the same.");
-                return false;
-            }
-            var conferenceList = confList.join('$$');
 
             // Creates the final url
             if (conference && conferenceYears && conferenceList) {

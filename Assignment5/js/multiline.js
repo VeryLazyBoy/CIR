@@ -378,6 +378,25 @@
         });
     }
 
+    $.MultiLine.prototype.validateAndGetConfListFromInput = function(inputLabel, numOfInputs) {
+        var self = this;
+        // Validates conference list
+        var confList = self.processInputs(inputLabel, numOfInputs);
+        if (confList.length == 0) {
+            alert("At least one conference code is required.");
+            return null; // null !== ""
+        }
+
+        // Validates no same conferences in the conference list
+        var confSet = new Set(confList);
+        if (confSet.size != numOfInputs - 1) {
+            alert("No conference code should be the same.");
+            return null;
+        }
+        var conferenceList = confList.join('$$');
+        return conferenceList;
+    }
+
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
         var input = $("input[id^=confList]");
