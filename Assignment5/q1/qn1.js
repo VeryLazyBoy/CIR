@@ -61,29 +61,6 @@ $(document).ready(function() {
         return false;
     };
 
-    var getConferenceYears = function(yearCounter) {
-        var yearList = [];
-        for (var t = 1; t <= yearCounter; t++) {
-            var yearString = $('#confYearInput' + t).val();
-            if (yearString) {
-                //paseInst null or '' => NaN
-                yearList.push(parseInt(yearString));
-            }
-        }
-        return yearList;
-    }
-
-    var getConferences = function(NumOfConfs) {
-        var confList = [];
-        for (var t = 1; t <= NumOfConfs; t++) {
-            var conf = $('#confListInput' + t).val();
-            if (conf) {
-                confList.push(conf);
-            }
-        }
-        return confList;
-    }
-
     $("#generateBtn").click(function() {
 
         var urlString;
@@ -96,7 +73,7 @@ $(document).ready(function() {
         }
 
         // Validates conference year list
-        var yearList = getConferenceYears(multiLine.yearCounter);
+        var yearList = (multiLine.processInputs("confYearInput", multiLine.yearCounter)).map(element => parseInt(element));
         if (yearList.length == 0) {
             alert("At least 1 conference year is required.");
             return false;
@@ -145,7 +122,7 @@ $(document).ready(function() {
             urlString = apiRootUrlOverConferences;
 
             // Validates conference list
-            var confList = getConferences(multiLine.conferenceCounter);
+            var confList = multiLine.processInputs("confListInput", multiLine.conferenceCounter);
             if (confList.length == 0) {
                 alert("At least one conference code is required.");
                 return false;

@@ -187,17 +187,6 @@ $(document).ready(function() {
         return false;
     }
 
-    var getConferences = function(inputLabel, NumOfConfs) {
-        var confList = [];
-        for (var t = 1; t <= NumOfConfs; t++) {
-            var conf = $('#' + inputLabel + t).val();
-            if (conf) {
-                confList.push(conf);
-            }
-        }
-        return confList;
-    }
-
     $("#generateBtn").click(function() {
 
         var urlString;
@@ -214,7 +203,7 @@ $(document).ready(function() {
         }
 
         // Validates conference list
-        var confList = getConferences("confListInput", multiLine.conferenceCounter);
+        var confList = multiLine.processInputs("confListInput", multiLine.conferenceCounter);
         if (confList.length == 0) {
             alert("At least one conference code is required.");
             return false;
@@ -268,7 +257,7 @@ $(document).ready(function() {
             urlString = apiRootUrlOverConferences;
 
             // Validates conference list
-            confList = getConferences("confList2Input", multiLine.conferenceCounter2);
+            confList = multiLine.processInputs("confList2Input", multiLine.conferenceCounter2);
             if (confList.length == 0) {
                 alert("At least one conference code is required.");
                 return false;

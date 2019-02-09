@@ -321,6 +321,17 @@
         });
     }
 
+    $.MultiLine.prototype.processInputs = function(inputLabel, numOfInputs) {
+        var inputList = [];
+        for (var t = 1; t <= numOfInputs; t++) {
+            var input = $('#' + inputLabel + t).val();
+            if (input) {
+                inputList.push(input);
+            }
+        }
+        return inputList;
+    }
+
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
         var input = $("input[id^=confList]");
