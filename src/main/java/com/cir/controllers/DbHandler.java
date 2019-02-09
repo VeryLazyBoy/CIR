@@ -154,7 +154,7 @@ public class DbHandler {
                 ts.add(t);
             }
             
-            t = new ConfTransition(currentPlace, d.getInteger("count"));
+            t = new ConfTransition(targetPlace, d.getInteger("count"));
             ts.add(t);
             targetPlaceIndex++;
         }
