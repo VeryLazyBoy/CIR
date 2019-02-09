@@ -186,50 +186,69 @@ $(document).ready(function() {
         }
         return false;
     }
+
+    var getConferences = function(inputLabel, NumOfConfs) {
+        var confList = [];
+        for (var t = 1; t <= NumOfConfs; t++) {
+            var conf = $('#' + inputLabel + t).val();
+            if (conf) {
+                confList.push(conf);
+            }
+        }
+        return confList;
+    }
+
     $("#generateBtn").click(function() {
 
         var urlString;
+
+        // Validates conference year
+        var conferenceYear = $("#conferenceYearInput").val();
+        if (!conferenceYear) {
+            alert("Conference year is required");
+            return false;
+        }
+        if (!isValidYear(conferenceYear)) {
+            alert("Conference year is invalid");
+            return false;
+        }
+
+        // Validates conference list
+        var confList = getConferences("confListInput", multiLine.conferenceCounter);
+        if (confList.length == 0) {
+            alert("At least one conference code is required.");
+            return false;
+        }
+
+        // Validates no same conferences in the conference list
+        var confSet = new Set(confList);
+        if (confSet.size != multiLine.conferenceCounter - 1) {
+            alert("No conference code should be the same.");
+            return false;
+        }
+
+        var conferences = confList.join('$$');
+
         if ($('#queryTypeSelect').val() == 0) {
             urlString = apiRootUrlOverYears;
 
-            var conferenceYear = $("#conferenceYearInput").val();
-            if (!conferenceYear) {
-                alert("Conference year is required");
-                return false;
-            }
-            if (!isValidYear(conferenceYear)) {
-                alert("Conference year is invalid");
-                return false;
-            }
+            // Valides start year
             var startYear = $("#startYearInput").val();
             if (!isValidYear(startYear)) {
                 alert("Start year is invalid");
                 return false;
             }
+
+            // Validate end year
             var endYear = $("#endYearInput").val();
             if (!isValidYear(endYear)) {
                 alert("End year is invalid");
                 return false;
             }
 
+            // Validate start year and end year
             if (parseInt(startYear) > parseInt(endYear)) {
                 alert("Start year must be before end year.");
-                return false;
-            }
-            var conferences = "";
-            for (t = 1; t <= multiLine.conferenceCounter; t++) {
-                if ($('#confListInput' + t).val()) {
-                    conferences += $('#confListInput' + t).val() + '$$';
-                }
-            }
-            // console.log("Before slicing: " + conferences);
-            if (conferences) {
-                // console.log("slicing ");
-                conferences = conferences.slice(0, -1); //removes the last '$' from the string
-                conferences = conferences.slice(0, -1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferences);
-            } else {
-                alert("At least 1 conference code is required.");
                 return false;
             }
 
@@ -241,41 +260,23 @@ $(document).ready(function() {
             }
         } else {
             urlString = apiRootUrlOverConferences;
-            var conferenceYear = $("#conferenceYearInput").val();
-            var conferences = "";
-            if (!conferenceYear) {
-                alert("Conference year is required");
+
+            // Validates conference list
+            confList = getConferences("confList2Input", multiLine.conferenceCounter2);
+            if (confList.length == 0) {
+                alert("At least one conference code is required.");
                 return false;
             }
-            for (t = 1; t <= multiLine.conferenceCounter; t++) {
-                if ($('#confListInput' + t).val()) {
-                    conferences += $('#confListInput' + t).val() + '$$';
-                }
-            }
-            if (conferences) {
-                // console.log("slicing ");
-                conferences = conferences.slice(0, -1); //removes the last '$' from the string
-                conferences = conferences.slice(0, -1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferences);
-            } else {
-                alert("At least 1 conference code is required.");
+
+            // Validates no same conferences in the conference list
+            confSet = new Set(confList);
+            if (confSet.size != multiLine.conferenceCounter2 - 1) {
+                alert("No conference code should be the same.");
                 return false;
             }
-            var conferences2 = "";
-            for (t = 1; t <= multiLine.conferenceCounter2; t++) {
-                if ($('#confList2Input' + t).val()) {
-                    conferences2 += $('#confList2Input' + t).val() + '$$';
-                }
-            }
-            if (conferences2) {
-                // console.log("slicing ");
-                conferences2 = conferences2.slice(0, -1); //removes the last '$' from the string
-                conferences2 = conferences2.slice(0, -1); //removes the 2nd last '$' from the string
-                // console.log("After slicing: " + conferences2);
-            } else {
-                alert("At least 1 conference code is required.");
-                return false;
-            }
+
+            var conferences2 = confList.join('$$');
+
             if (conferenceYear && conferences && conferences2) {
                 urlString += "year=" + conferenceYear + "&";
                 urlString += "confs=" + conferences + "&";
