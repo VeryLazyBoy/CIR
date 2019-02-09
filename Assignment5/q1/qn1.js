@@ -87,15 +87,24 @@ $(document).ready(function() {
     $("#generateBtn").click(function() {
 
         var urlString;
+
+        // Validates conference
+        var conference = $("#conferenceInput").val();
+        if (!conference) {
+            alert("Conference Code is required.");
+            return false;
+        }
+
+        // Validates conference year list
+        var yearList = getConferenceYears(multiLine.yearCounter);
+        if (yearList.length == 0) {
+            alert("At least 1 conference year is required.");
+            return false;
+        }
+        var conferenceYears = yearList.join('$$');
+
         if ($('#queryTypeSelect').val() == 0) {
             urlString = apiRootUrlOverYears;
-
-            // Validates conference
-            var conference = $("#conferenceInput").val();
-            if (!conference) {
-                alert("Conference Code is required.");
-                return false;
-            }
 
             // Valides start year
             var startYear = $("#startYearInput").val();
@@ -117,14 +126,6 @@ $(document).ready(function() {
                 return false;
             }
 
-            // Validates conf year list
-            var yearList = getConferenceYears(multiLine.yearCounter);
-            if (yearList.length == 0) {
-                alert("At least 1 conference year is required.");
-                return false;
-            }
-            var conferenceYears = yearList.join('$$');
-
             // End year should be chosen meaningfully to avoid all 0 counts.
             yearList.sort((a, b) => b - a);
             var maxConferenceYear = yearList[0];
@@ -143,21 +144,6 @@ $(document).ready(function() {
         } else {
             urlString = apiRootUrlOverConferences;
 
-            // Validates conference
-            var conference = $("#conferenceInput").val();
-            if (!conference) {
-                alert("Conference Code is required.");
-                return false;
-            }
-
-            // Validates conferenece year list
-            var yearList = getConferenceYears(multiLine.yearCounter);
-            if (yearList.length == 0) {
-                alert("At least 1 conference year is required.");
-                return false;
-            }
-            var conferenceYears = yearList.join('$$');
-
             // Validates conference list
             var confList = getConferences(multiLine.conferenceCounter);
             if (confList.length == 0) {
@@ -171,7 +157,6 @@ $(document).ready(function() {
                 alert("No conference code should be the same.");
                 return false;
             }
-
             var conferenceList = confList.join('$$');
 
             // Creates the final url
