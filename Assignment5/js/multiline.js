@@ -323,7 +323,7 @@
 
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
-        var input = $("[id^=confListInput]");
+        var input = $("input[id^=confList]");
         var anotherInput = $("[id^=conferenceInput]");
 
 
