@@ -197,10 +197,6 @@ $(document).ready(function() {
         });
     }
 
-    var isNumeric = function(num) {
-        return !isNaN(num)
-    }
-
     multiLine = new MultiLine();
 
     var generateAPIUrl = function() {
