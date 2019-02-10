@@ -61,9 +61,10 @@
       <label>Year: </label>
       <input class="form-control" type="text" id="yearValue" name="yearInput" placeholder="e.g. '2015'">
     </div>
-    <div class="hidden" id="confInputContainer">
+    <div class="hidden dropdown-content" id="confInputContainer">
       <label>Conference: </label>
       <input class="form-control" type="text" id="confValue" name="confInput" placeholder="e.g. 'arXiv'">
+      <div class="dropdownContainer"></div>
     </div>
     <div class="hidden" id="authorInputContainer">
       <label>Author: <a href="../ListOfAuthor.html" target="_blank">(view all authors)</a></label>
@@ -78,6 +79,7 @@
     <!-- Javascript -->
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/d3.v3.min.js"></script>
+    <script src="../js/multiline.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
 
     <script src="q3.js"></script>

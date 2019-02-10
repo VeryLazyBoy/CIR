@@ -401,6 +401,7 @@
         var divContent= $(".dropdownContainer");
         var input = $("input[id^=confList]");
         var anotherInput = $("[id^=conferenceInput]");
+        var trend3Input = $("input[id^=confValue]");
 
 
         // if somewhere except dropdown is clicked, hide all dropdown
@@ -409,7 +410,7 @@
         }
 
         // if the input for conference is clicked, show the dropdown only after this input
-        if (input.is(e.target) || anotherInput.is(e.target)) {
+        if (input.is(e.target) || anotherInput.is(e.target) || trend3Input.is(e.target)) {
             $(e.target).nextAll(".dropdownContainer").show();
         }
     });

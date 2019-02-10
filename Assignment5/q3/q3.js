@@ -197,7 +197,8 @@ $(document).ready(function() {
         });
     }
 
-    multiLine = new MultiLine();
+    multiLine = new $.MultiLine();
+    $('#confValue').keyup(multiLine.getKeyupHandler('#confInputContainer .dropdownContainer'));
 
     var generateAPIUrl = function() {
         var urlString = apiRoot;
