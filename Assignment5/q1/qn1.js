@@ -11,7 +11,7 @@ $(document).ready(function() {
     multiLine.generateRemoveYearButton("removeButton", 3);
 
 
-    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
+    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListContainer", "");
     multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
     multiLine.generateQuerySelect("");

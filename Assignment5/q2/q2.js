@@ -136,10 +136,10 @@ $(document).ready(function() {
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
 
-    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListGroup", "");
+    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListContainer", "");
     multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
-    multiLine.generateAddConfButton("addConferenceButton2", 2, "ConferenceListGroup2", "2");
+    multiLine.generateAddConfButton("addConferenceButton2", 2, "ConferenceListContainer2", "2");
     multiLine.generateRemoveConfButton("removeConferenceButton2", 2, "2");
 
     multiLine.generateQuerySelect("2");
