@@ -130,8 +130,8 @@ $(document).ready(function() {
     // ];
 
     var multiLine = new $.MultiLine();
-    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
-    $('#confList2Input1').keyup(multiLine.getKeyupHandler('#Conference2Container1 .dropdownContainer'));
+    $('#confCodeInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
+    $('#confCode2Input1').keyup(multiLine.getKeyupHandler('#Conference2Container1 .dropdownContainer'));
 
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
@@ -159,7 +159,7 @@ $(document).ready(function() {
             return false;
         }
 
-        var conferences = multiLine.validateAndGetConfListFromInput("confListInput", multiLine.conferenceCounter);
+        var conferences = multiLine.validateAndGetConfListFromInput("confCodeInput", multiLine.conferenceCounter);
         if (conferences == null) {
                 return false;
         }

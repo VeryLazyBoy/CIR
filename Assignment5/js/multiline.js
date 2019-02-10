@@ -295,7 +295,7 @@
         $('#' + buttonId).click(function() {
             var counter = self.getCounter(counterIndex);
             var confDivId = String.format('Conference{0}Container{1}', groupLabel, counter);
-            var inputId = String.format('confList{0}Input{1}', groupLabel, counter);
+            var inputId = String.format('confCode{0}Input{1}', groupLabel, counter);
 
             if (counter > 10) {
                 alert("Max. of 10 Conferences allowed.");
@@ -411,9 +411,8 @@
 
     $(document).mouseup(function (e) {
         var divContent= $(".dropdownContainer");
-        var input = $("input[id^=confList]");
+        var input = $("input[id^=confCode]");
         var anotherInput = $("[id^=conferenceInput]");
-        var trend3Input = $("input[id^=confValue]");
 
 
         // if somewhere except dropdown is clicked, hide all dropdown
@@ -422,7 +421,7 @@
         }
 
         // if the input for conference is clicked, show the dropdown only after this input
-        if (input.is(e.target) || anotherInput.is(e.target) || trend3Input.is(e.target)) {
+        if (input.is(e.target) || anotherInput.is(e.target)) {
             $(e.target).nextAll(".dropdownContainer").show();
         }
     });

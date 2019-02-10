@@ -198,7 +198,7 @@ $(document).ready(function() {
     }
 
     multiLine = new $.MultiLine();
-    $('#confValue').keyup(multiLine.getKeyupHandler('#confInputContainer .dropdownContainer'));
+    $('#confCodeInput').keyup(multiLine.getKeyupHandler('#confInputContainer .dropdownContainer'));
 
     var generateAPIUrl = function() {
         var urlString = apiRoot;

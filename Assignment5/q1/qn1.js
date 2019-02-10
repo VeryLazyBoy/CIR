@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var multiLine = new $.MultiLine();
     $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer .dropdownContainer'));
-    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
+    $('#confCodeInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
 
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
@@ -76,7 +76,7 @@ $(document).ready(function() {
         } else {
             urlString = apiRootUrlOverConferences;
 
-            var conferences = multiLine.validateAndGetConfListFromInput("confListInput", multiLine.conferenceCounter);
+            var conferences = multiLine.validateAndGetConfListFromInput("confCodeInput", multiLine.conferenceCounter);
             if (conferences == null) {
                 return false;
             }
