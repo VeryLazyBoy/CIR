@@ -200,18 +200,8 @@ $(document).ready(function() {
     var isNumeric = function(num) {
         return !isNaN(num)
     }
-    var isValidYear = function(yearString) {
-        if (yearString == "") {
-            return true;
-        }
-        if (!isNumeric(yearString)) {
-            return false;
-        }
-        if (parseInt(yearString) < 2017 && parseInt(yearString) > 0) {
-            return true;
-        }
-        return false;
-    }
+
+    multiLine = new MultiLine();
 
     var generateAPIUrl = function() {
         var urlString = apiRoot;
@@ -248,7 +238,7 @@ $(document).ready(function() {
             }
         }
         if ($('#yearInputContainer').is(":visible")) {
-            if (!isValidYear($('#yearValue').val())) {
+            if (!multiLine.isValidYear($('#yearValue').val())) {
                 alert("Year is invalid");
                 return false;
             }
