@@ -7,7 +7,7 @@ $(document).ready(function() {
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";
 
-    multiLine.generateAddYearButton("addButton", 3, "ConferenceYearsGroup");
+    multiLine.generateAddYearButton("addButton", 3, "conferenceYearListContainer");
     multiLine.generateRemoveYearButton("removeButton", 3);
 
 

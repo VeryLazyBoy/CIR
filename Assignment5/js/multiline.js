@@ -257,7 +257,7 @@
         var self = this;
         $('#' + buttonId).click(function() {
             var counter = self.getCounter(counterIndex);
-            var confDivId = String.format('ConferenceYearDiv{0}', counter);
+            var confDivId = String.format('conferenceYearContainer{0}', counter);
             var inputId = String.format('confYearInput{0}', counter);
             if (counter > 10) {
                 alert("Max. of 10 years allowed.");
@@ -283,7 +283,7 @@
                 return false;
             }
             counter--;
-            var confDivId = String.format('ConferenceYearDiv{0}', counter);
+            var confDivId = String.format('conferenceYearContainer{0}', counter);
             $("#" + confDivId).remove();
             self.setCounter(counterIndex, counter);
         });
