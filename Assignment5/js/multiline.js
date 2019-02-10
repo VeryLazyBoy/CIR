@@ -147,6 +147,15 @@
                 return d + moveToLeft + firstHalfCircle + secondHalfCircle;
             }
 
+            var escapeDots = function(str) {
+                return str.replace(/\./g, '\\.');
+            }
+
+            var removeSpaces = function(str) {
+                return str.replace(/\s+/g, '');
+            }
+
+
             dataGroup.forEach(function(d, i) {
                 // console.log("d is " + Object.keys(d));
                 if (d[dataGroupKeys[1]].length == 1) {
@@ -154,23 +163,26 @@
                 } else {
                     path = lineGen(d[dataGroupKeys[1]]);
                 }
+                var linePathId = 'line_' + removeSpaces(d[dataGroupKeys[0]]);
+                var cssSelectorForLine = escapeDots(linePathId);
+
                 vis.append('svg:path')
                     .attr('d', path)
                     .attr('stroke', function(d, j) {
                         return "hsl(" + Math.random() * 360 + ",100%,50%)";
                     })
                     .attr('stroke-width', 2)
-                    .attr('id', 'line_' + d[dataGroupKeys[0]])
+                    .attr('id', linePathId)
                     .attr('fill', 'none');
                 vis.append("text")
                     .attr("x", (lSpace / 3))
                     .attr("y", 50 + i * 50)
-                    .style("fill", d3.select("#line_" + d[dataGroupKeys[0]]).attr('stroke'))
+                    .style("fill", d3.select("#" + cssSelectorForLine).attr('stroke'))
                     .attr("class", "legend")
                     .on('click', function() {
                         var active = d.active ? false : true;
                         var opacity = active ? 0 : 1;
-                        d3.select("#line_" + d[dataGroupKeys[0]]).style("opacity", opacity);
+                        d3.select("#" + cssSelectorForLine).style("opacity", opacity);
                         d.active = active;
                     })
                     .text(d[dataGroupKeys[0]]);
