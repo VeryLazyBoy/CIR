@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var multiLine = new $.MultiLine();
     $('#conferenceInput').keyup(multiLine.getKeyupHandler('#conferenceInputContainer .dropdownContainer'));
-    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceListDiv1 .dropdownContainer'));
+    $('#confListInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
 
     var apiRootUrlOverYears = "http://localhost:8080/json/yeartransitions?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/conftransitions?";

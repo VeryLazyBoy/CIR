@@ -294,7 +294,7 @@
 
         $('#' + buttonId).click(function() {
             var counter = self.getCounter(counterIndex);
-            var confDivId = String.format('ConferenceList{0}Div{1}', groupLabel, counter);
+            var confDivId = String.format('Conference{0}Container{1}', groupLabel, counter);
             var inputId = String.format('confList{0}Input{1}', groupLabel, counter);
 
             if (counter > 10) {
@@ -327,7 +327,7 @@
                 return false;
             }
             counter--;
-            var confDivId = String.format('ConferenceList{0}Div{1}', groupLabel, counter);
+            var confDivId = String.format('Conference{0}Container{1}', groupLabel, counter);
             $("#" + confDivId).remove();
             self.setCounter(counterIndex, counter);
         });
