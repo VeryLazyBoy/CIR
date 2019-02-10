@@ -130,8 +130,8 @@ $(document).ready(function() {
     // ];
 
     var multiLine = new $.MultiLine();
-    $('#confCodeInput1').keyup(multiLine.getKeyupHandler('#ConferenceContainer1 .dropdownContainer'));
-    $('#confCode2Input1').keyup(multiLine.getKeyupHandler('#Conference2Container1 .dropdownContainer'));
+    $('#confCodeInput1').keyup(multiLine.getKeyupHandler('#conferenceContainer1 .dropdownContainer'));
+    $('#confCode2Input1').keyup(multiLine.getKeyupHandler('#conference2Container1 .dropdownContainer'));
 
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
