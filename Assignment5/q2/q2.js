@@ -136,10 +136,10 @@ $(document).ready(function() {
     var apiRootUrlOverYears = "http://localhost:8080/json/yearcontemporaries?";
     var apiRootUrlOverConferences = "http://localhost:8080/json/confcontemporaries?";
 
-    multiLine.generateAddConfButton("addConferenceButton", 1, "ConferenceListContainer", "");
+    multiLine.generateAddConfButton("addConferenceButton", 1, "conferenceListContainer", "");
     multiLine.generateRemoveConfButton("removeConferenceButton", 1, "");
 
-    multiLine.generateAddConfButton("addConferenceButton2", 2, "ConferenceListContainer2", "2");
+    multiLine.generateAddConfButton("addConferenceButton2", 2, "conferenceListContainer2", "2");
     multiLine.generateRemoveConfButton("removeConferenceButton2", 2, "2");
 
     multiLine.generateQuerySelect("2");
@@ -202,7 +202,7 @@ $(document).ready(function() {
         } else {
             urlString = apiRootUrlOverConferences;
 
-            var conferences2 = multiLine.validateAndGetConfListFromInput("confList2Input", multiLine.conferenceCounter2);
+            var conferences2 = multiLine.validateAndGetConfListFromInput("confCode2Input", multiLine.conferenceCounter2);
             if (conferences2 == null) {
                 return false;
             }

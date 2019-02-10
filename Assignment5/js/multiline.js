@@ -358,7 +358,7 @@
     }
 
     $.MultiLine.prototype.generateQuerySelect = function(groupLabel) {
-        var confGroupId = String.format("ConferenceListContainer{0}", groupLabel);
+        var confGroupId = String.format("conferenceListContainer{0}", groupLabel);
         $('#queryTypeSelect').on('change', function() {
             var confYears = false;
             var confList = false;
